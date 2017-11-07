@@ -11,5 +11,11 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require turbolinks
+//= require materialize-sprockets
 //= require_tree .
+
+$( document ).on('turbolinks:load', () => {
+  $(".button-collapse").sideNav();
+});
