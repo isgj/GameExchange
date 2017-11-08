@@ -2,15 +2,25 @@
   <nav>
     <div class="nav-wrapper row">
       <div class="col s12">
-	<a href="#!" class="brand-logo">GameExchange</a>
-	<a href="#!" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-	<ul class="right hide-on-med-and-down">
-          <li><a href="#!">Login</a></li>
-	</ul>  
+        <a href="#!" class="brand-logo">GameExchange</a>
+        <a href="#!" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <% if user_signed_in? %>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+            <li><%= link_to 'Log in', new_user_session_path %></li>
+          <% end %>
+        </ul>
       </div>
-      
+
       <ul class="side-nav" id="mobile-menu">
-        <li><a href="#!">Login</a></li>
+        <% if user_signed_in? %>
+          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <li><%= link_to 'Log in', new_user_session_path %></li>
+        <% end %>
       </ul>
     </div>
   </nav>

@@ -60,4 +60,9 @@ group :test, :development do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner'
+  # show html page when running tests with cucumber-rails
+  gem 'launchy'
 end
+
+# Authentication
+gem 'devise'

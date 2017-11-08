@@ -13,9 +13,26 @@
   <body>
     <%= render 'layouts/header' %>
 
+    <div class="row">
+      <div class="col s12">
+        <% if notice %>
+        <div class="chip center-align">
+          <%= notice %>
+          <i class="close material-icons">close</i>
+        </div>
+        <% end %>
+        <% if alert %>
+        <div class="chip center-align">
+          <%= alert %>
+          <i class="close material-icons">close</i>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
     <main>
       <div class="row">
-	<%= yield %>	
+	<%= yield %>
       </div>
     </main>
 
