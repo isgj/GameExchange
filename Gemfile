@@ -66,3 +66,5 @@ end
 
 # Authentication
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'

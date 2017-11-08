@@ -31,6 +31,17 @@ module NavigationHelpers
       end
     end
   end
+  # Test OmniAuth
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
+    :provider => 'google',
+    :uid => '123545',
+    :info => {
+      :email => 'example@example.com'
+    }
+    # etc.
+  })
+
 end
 
 World(NavigationHelpers)

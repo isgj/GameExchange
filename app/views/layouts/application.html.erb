@@ -14,15 +14,15 @@
     <%= render 'layouts/header' %>
 
     <div class="row">
-      <div class="col s12">
+      <div class="alert">
         <% if notice %>
-        <div class="chip center-align">
+        <div class="chip green white-text z-depth-3">
           <%= notice %>
           <i class="close material-icons">close</i>
         </div>
         <% end %>
         <% if alert %>
-        <div class="chip center-align">
+        <div class="chip red white-text z-depth-3">
           <%= alert %>
           <i class="close material-icons">close</i>
         </div>

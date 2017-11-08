@@ -15,3 +15,11 @@
  */
 
 @import 'materialize';
+
+.alert {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  position: fixed;
+}
