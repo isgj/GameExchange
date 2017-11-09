@@ -6,10 +6,10 @@ Feature: Authentication
     When I click the "Sign up" "link"
     Then I should be on the "sign up" page
     When I fill in "Email" with "user@example.com"
-    And I fill in "Password" with "password"
+    And I fill in "user_password" with "password"
     And I fill in "Password confirmation" with "password"
     And I click the "Sign up" "button"
-    And I should be on the "home" page
+    Then I should be on the "home" page
     And I should see the "Log out" button
 
   Scenario: Log in user

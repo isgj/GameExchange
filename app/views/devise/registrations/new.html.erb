@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row center-align"><h3>Sign up</h3></div>
+  <div class="row">
+    <div class="col s12 l6">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="row">
+          <div class="input-field">
+            <%= f.email_field :email, class: 'validate' %>
+            <%= f.label :email, "data-error": "Please insert a valid e-mail" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field">
+            <%= f.password_field :password, autocomplete: "off" %>
+            <%= f.label :password do %>
+              Password
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field">
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            <%= f.label :password_confirmation %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="actions">
+            <%= f.submit "Sign up", class: 'waves-effect waves-light btn-large' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col s12 l6 center-align">
+      <div class="row col s12"><h5><em>Or</em></h5></div>
+      <div class="row col s12">
+        <%= link_to 'Sign in with Google', user_google_omniauth_authorize_path, class: 'waves-effect waves-light btn-large red' %>
+      </div>
+    </div>
+  </div>
+</div>

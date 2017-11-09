@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row center-align"><h3>Log in</h3></div>
+  <div class="row">
+    <div class="col s12 l6">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="row">
+        <div class="input-field">
+          <%= f.email_field :email, class: 'validate' %>
+          <%= f.label :email, "data-error": "Please insert a valid e-mail" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <%= f.password_field :password, autocomplete: "off" %>
+          <%= f.label :password do %>
+            Password
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="row">
+          <p>
+            <%= f.check_box :remember_me, class: 'filled-in' %>
+            <%= f.label :remember_me %>
+          </p>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="actions">
+          <%= f.submit "Log in", class: 'waves-effect waves-light btn-large' %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="col s12 l6 center-align">
+      <div class="row col s12"><h5><em>Or</em></h5></div>
+      <div class="row col s12">
+        <%= link_to 'Sign in with Google', user_google_omniauth_authorize_path, class: 'waves-effect waves-light btn-large red' %>
+      </div>
+    </div>
+  </div>
+</div>
