@@ -16,6 +16,6 @@
 //= require materialize-sprockets
 //= require_tree .
 
-$( document ).on('turbolinks:load', () => {
+$( document ).on('turbolinks:load', function() {
   $(".button-collapse").sideNav();
 });
