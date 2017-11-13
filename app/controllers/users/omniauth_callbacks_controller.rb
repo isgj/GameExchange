@@ -13,7 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    set_flash_message(:alert, :failure, :kind => "Google") if is_navigational_format?
+    set_flash_message(:alert, :failure, :kind => "Google", reason: failure_message) if is_navigational_format?
     redirect_to root_path
   end
 end
