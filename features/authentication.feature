@@ -28,3 +28,10 @@ Feature: Authentication
     When I click the "Sign in with Google" "link"
     Then I should be on the "home" page
     And I should see the "Log out" button
+
+  Scenario: OAuth with Facebook
+    When I click the "Log in" "link"
+    Then I should be on the "sign in" page
+    When I click the "Sign in with Facebook" "link"
+    Then I should be on the "home" page
+    And I should see the "Log out" button

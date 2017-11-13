@@ -42,6 +42,15 @@ module NavigationHelpers
     # etc.
   })
 
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+    :provider => 'facebook',
+    :uid => '123545',
+    :info => {
+      :email => 'example@example.com'
+    }
+    # etc.
+  })
+
 end
 
 World(NavigationHelpers)

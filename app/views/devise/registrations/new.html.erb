@@ -37,11 +37,8 @@
         </div>
       <% end %>
     </div>
-    <div class="col s12 l6 center-align">
-      <div class="row col s12"><h5><em>Or</em></h5></div>
-      <div class="row col s12">
-        <%= link_to 'Sign in with Google', user_google_omniauth_authorize_path, class: 'waves-effect waves-light btn-large red' %>
-      </div>
-    </div>
+
+    <%= render 'layouts/oauth' %>
+
   </div>
 </div>
