@@ -5,8 +5,8 @@ Given("I have a user with email address {string}") do |email|
   user.save!
 end
 
-Given("I am on the homepage") do
-  visit root_path
+Given("I am on the {string} page") do |page|
+  visit path_to(page)
 end
 
 When("I click the {string} {string}") do |link, type|
@@ -26,6 +26,15 @@ When("I fill in {string} with {string}") do |field, value|
   fill_in field, :with => value
 end
 
-Then("I should see the {string} button") do |content|
+Then("I should see the {string}") do |content|
   assert page.has_content?(content)
+end
+
+Then("I should not see the {string}") do |content|
+  assert_not page.has_content?(content)
+end
+
+# Check the current page
+Then("open the page") do
+  save_and_open_page
 end

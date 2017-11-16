@@ -1,0 +1,41 @@
+// Place all the styles related to the Gamer controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "materialize";
+.card-profile-image {
+  width: 60px;
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  left: 20px;
+}
+
+.card-profile {
+  padding: 6px 24px;
+
+  p {
+    margin: 4px;
+  }
+
+  div a {
+    position: absolute;
+    right: 30px;
+  }
+}
+
+.card-reveal {
+
+  .valign-wrapper {
+    margin-bottom: 10px;
+
+    i {
+      margin-right: 8px;
+    }
+  }
+}
+
+@media #{$medium-and-down} {
+  .row > .input-field > .btn {
+    width: 100%;
+  }
+}

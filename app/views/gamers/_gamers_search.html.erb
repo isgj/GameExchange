@@ -1,0 +1,27 @@
+<div class="row center-hor">
+  <div class="col s12 l10">
+
+  <%= form_tag "/gamers", method: "get", class: "col s12" do %>
+    <div class="row">
+      <div class="input-field col s6 l4">
+        <i class="material-icons prefix">people</i>
+        <%= search_field_tag :name %>
+        <%= label_tag :name %>
+      </div>
+
+      <div class="input-field col s6 l4">
+        <i class="material-icons prefix">location_searching</i>
+        <%= search_field_tag :city %>
+        <%= label_tag :city %>
+      </div>
+
+      <div class="input-field col s12 l3">
+        <%= button_tag class: "btn waves-effect waves-light" do %>
+          Search
+          <i class="material-icons right">search</i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>
