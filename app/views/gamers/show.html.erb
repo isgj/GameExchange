@@ -1,8 +1,49 @@
-<%= @gamer.email %>
+<div class="container">
 
-<!-- Check if current_user == @user -->
-<%=link_to 'Update your profile', edit_gamer_path(@gamer)%>
+<div class="row">
+  <div class="col s12 l6">
+    <div class="info">
+      Nome: <%= @gamer.name.split(" ")[0] %> <br>
+      Cognome: <%= @gamer.name.split(" ")[1] %> <br>
+      Età: <%= @gamer.age %> <br>
+      Sesso: <%= @gamer.gender %> <br>
+      Città: <%= @gamer.city %> <br>
+      Cellulare: <%= @gamer.phone %> <br>
+      E-mail: <%= @gamer.email %> <br>
+      <!-- Check if current_user == @user -->
+      <% if user_signed_in? && @gamer.id == current_user.id %>
+      <%=link_to 'Modifica il tuo profilo', edit_gamer_path(@gamer)%> <br>
+      <% end %>
+      <br>
+      <div class="valutazione">
+        Gamer Points: <%= @gamer.points %> <br>
+        Valutazione: <%= @gamer.votes %> <br>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 l6">
+    foto
+    <div class="foto" >
+      <%= @gamer.photo %>
+      <img src="<%= @gamer.photo %>"/>
+    </div>
+  </div>
+</div>
 
-<% if user_signed_in? && @gamer.id == current_user.id %>
-  It's you
-<% end %>
+<div class="row">
+
+    <div class="col s12 l6">
+        <div class="row">
+          giochi
+        </div>
+
+        <div class="row">
+           commenti
+         </div>
+    </div>
+
+    <div class="col s12 l6">
+      amici
+    </div>
+  </div>
+</div>
