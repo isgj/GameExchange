@@ -3,47 +3,46 @@
 <div class="row">
   <div class="col s12 l6">
     <div class="info">
-      Nome: <%= @gamer.name.split(" ")[0] %> <br>
-      Cognome: <%= @gamer.name.split(" ")[1] %> <br>
-      Età: <%= @gamer.age %> <br>
-      Sesso: <%= @gamer.gender %> <br>
-      Città: <%= @gamer.city %> <br>
-      Cellulare: <%= @gamer.phone %> <br>
+      Name: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[0] %>  <% end %> <br>
+      Surname: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[1] %><% end %> <br>
+      Age: <%= @gamer.age %> <br>
+      Gender: <%= @gamer.gender %> <br>
+      City: <%= @gamer.city %> <br>
+      Cell: <%= @gamer.phone %> <br>
       E-mail: <%= @gamer.email %> <br>
       <!-- Check if current_user == @user -->
       <% if user_signed_in? && @gamer.id == current_user.id %>
-      <%=link_to 'Modifica il tuo profilo', edit_gamer_path(@gamer)%> <br>
+      <%=link_to 'Edit your profile', edit_gamer_path(@gamer)%> <br>
       <% end %>
       <br>
       <div class="valutazione">
-        Gamer Points: <%= @gamer.points %> <br>
-        Valutazione: <%= @gamer.votes %> <br>
+        Gamer Points: <%= @gamer.points %>
+         <br>
+        Valutation: <%= @gamer.votes %> pts<br>
       </div>
     </div>
   </div>
   <div class="col s12 l6">
-    foto
-    <div class="foto" >
-      <%= @gamer.photo %>
-      <img src="<%= @gamer.photo %>"/>
-    </div>
+      <img class="responsive-img s12 l6" src="<%= @gamer.photo %>"/>
   </div>
 </div>
 
 <div class="row">
-
     <div class="col s12 l6">
         <div class="row">
-          giochi
+          Games you posses: <br>
+          <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
+          <i class="material-icons">add</i>
+          </a>
         </div>
 
         <div class="row">
-           commenti
-         </div>
+           Comments:
+        </div>
     </div>
 
     <div class="col s12 l6">
-      amici
+      Friends
     </div>
   </div>
 </div>
