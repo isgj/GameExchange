@@ -16,30 +16,30 @@
       <% end %>
       <br>
       <div class="valutazione">
-        Gamer Points: <%= @gamer.points %> <br>
-        Valutazione: <%= @gamer.votes %> <br>
+        Gamer Points: <%= @gamer.points %>
+         <br>
+        Valutazione: <%= @gamer.votes %> pti<br>
       </div>
     </div>
   </div>
   <div class="col s12 l6">
-    foto
-    <div class="foto" >
-      <%= @gamer.photo %>
       <img src="<%= @gamer.photo %>"/>
-    </div>
   </div>
 </div>
 
 <div class="row">
-
     <div class="col s12 l6">
         <div class="row">
-          giochi
+          Giochi Posseduti: <br>
+          <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
+          <i class="material-icons">add</i>
+          </a>
         </div>
 
         <div class="row">
-           commenti
-         </div>
+           Commenti:
+
+        </div>
     </div>
 
     <div class="col s12 l6">
