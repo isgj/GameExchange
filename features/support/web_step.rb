@@ -14,6 +14,8 @@ module NavigationHelpers
       new_user_session_url
     when /sign up/
       new_user_registration_url
+    when /gamers/
+      gamers_url
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

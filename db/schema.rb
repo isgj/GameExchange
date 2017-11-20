@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108172103) do
+ActiveRecord::Schema.define(version: 20171120111843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20171108172103) do
     t.string "name"
     t.string "provider"
     t.string "uid"
+    t.string "photo"
+    t.string "city"
+    t.integer "phone"
+    t.integer "points", default: 0
+    t.integer "votes", default: 0
+    t.float "avg_vote", default: 0.0
+    t.boolean "visibility", default: true
+    t.integer "age"
+    t.string "gender", limit: 1
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

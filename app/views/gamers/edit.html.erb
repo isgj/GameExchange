@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row center-align"><h3>Edit profile</h3></div>
+  <div class="row">
+    <div class="col s12 l6">
+      <%= form_for(@gamer, as: :gamer, method: :patch, url: gamer_path(@gamer)) do |f| %>
+
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :photo %>
+          <%= f.label :photo, "Insert photo URL" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :name%>
+          <%= f.label :name %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <%= f.number_field :age%>
+          <%= f.label :age, "Insert your age"%>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <%= f.text_field :city %>
+          <%= f.label :city, "Insert your city"%>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field">
+          <%= f.number_field :phone%>
+          <%= f.label :phone, "Insert your phone number"%>
+        </div>
+      </div>
+
+      <div class="row">
+        <p>
+          <%= f.check_box :visibility, class: 'filled-in' %>
+          <%= f.label :visibility, "Visibile?" %>
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="actions">
+          <%= f.submit "Save changes", class: 'waves-effect waves-light btn-large' %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    Materialize.updateTextFields();
+  });
+</script>

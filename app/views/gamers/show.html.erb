@@ -1,0 +1,48 @@
+<div class="container">
+
+<div class="row">
+  <div class="col s12 l6">
+    <div class="info">
+      Name: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[0] %>  <% end %> <br>
+      Surname: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[1] %><% end %> <br>
+      Age: <%= @gamer.age %> <br>
+      Gender: <%= @gamer.gender %> <br>
+      City: <%= @gamer.city %> <br>
+      Cell: <%= @gamer.phone %> <br>
+      E-mail: <%= @gamer.email %> <br>
+      <!-- Check if current_user == @user -->
+      <% if user_signed_in? && @gamer.id == current_user.id %>
+      <%=link_to 'Edit your profile', edit_gamer_path(@gamer)%> <br>
+      <% end %>
+      <br>
+      <div class="valutazione">
+        Gamer Points: <%= @gamer.points %>
+         <br>
+        Valutation: <%= @gamer.votes %> pts<br>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 l6">
+      <img class="responsive-img s12 l6" src="<%= @gamer.photo %>"/>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col s12 l6">
+        <div class="row">
+          Games you posses: <br>
+          <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
+          <i class="material-icons">add</i>
+          </a>
+        </div>
+
+        <div class="row">
+           Comments:
+        </div>
+    </div>
+
+    <div class="col s12 l6">
+      Friends
+    </div>
+  </div>
+</div>

@@ -6,6 +6,10 @@
 #
 one:
   email: one@example.com
+  name: "Marcus Aurelius"
+  city: "Rome"
 
 two:
   email: two@example.com
+  name: "Commodus"
+  city: "Rome"
