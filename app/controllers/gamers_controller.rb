@@ -17,5 +17,18 @@ class GamersController < ApplicationController
   end
 
   def update
+    @gamer = User.find_by_id(params[:id])
+    if @gamer.update_attributes(gamer_params)
+      redirect_to gamer_path(@gamer), notice: 'User was succesfully updated'
+    else
+      render :edit
+    end
   end
+
+  private
+
+    def gamer_params
+      params.require(:gamer).permit(:name, :city, :phone, :visibility, :photo, :age)
+    end
+
 end
