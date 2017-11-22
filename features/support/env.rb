@@ -56,3 +56,10 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+# Add devise helpers to cucumber
+include Warden::Test::Helpers
+World(Devise::Test::IntegrationHelpers)
+
+After do
+  Warden.test_reset!
+end

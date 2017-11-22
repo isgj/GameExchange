@@ -13,5 +13,5 @@ before_script:
   - cp config/database.yml.travis config/database.yml
 
 script:
-  - bin/rake test
+  - rails test
   - bundle exec cucumber
