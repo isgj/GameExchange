@@ -33,6 +33,16 @@ module NavigationHelpers
       end
     end
   end
+
+  def model_page(page, user)
+    case page
+    when /^gamer/
+      gamer_url(user)
+    when /edit gamer/
+      edit_gamer_url(user)
+    end
+  end
+
   # Test OmniAuth
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
