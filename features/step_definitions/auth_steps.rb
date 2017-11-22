@@ -38,3 +38,15 @@ end
 Then("open the page") do
   save_and_open_page
 end
+
+Given("I am the user {string}") do |user|
+  sign_in users(user.to_sym)
+end
+
+Given("I am on the {string} {string} page") do |page, user|
+  visit model_page(page, users(user.to_sym))
+end
+
+Then("I should be on the {string} page of {string}") do |page, user|
+  assert_equal model_page(page, users(user.to_sym)), current_url
+end
