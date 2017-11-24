@@ -1,6 +1,7 @@
 class GamersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :get_gamer, except: [:index]
+  before_action :same_gamer, only: [:edit, :update]
 
   def index
     name = params[:name]
@@ -36,5 +37,9 @@ class GamersController < ApplicationController
     def get_gamer
       @gamer = User.find_by_id(params[:id])
       redirect_to gamers_path , alert: "Gamer not found" unless @gamer
+    end
+
+    def same_gamer
+      redirect_to gamers_path, alert: "You are not allowed to do this action." if current_user != @gamer
     end
 end
