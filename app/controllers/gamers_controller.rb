@@ -1,5 +1,6 @@
 class GamersController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :get_gamer, except: [:index]
 
   def index
     name = params[:name]
@@ -12,15 +13,12 @@ class GamersController < ApplicationController
   end
 
   def show
-    @gamer = User.find_by_id(params[:id])
   end
 
   def edit
-    @gamer = User.find_by_id(params[:id])
   end
 
   def update
-    @gamer = User.find_by_id(params[:id])
     if @gamer.update_attributes(gamer_params)
       redirect_to gamer_path(@gamer), notice: 'User was succesfully updated'
     else
@@ -35,4 +33,8 @@ class GamersController < ApplicationController
         :visibility, :photo, :age, :gender)
     end
 
+    def get_gamer
+      @gamer = User.find_by_id(params[:id])
+      redirect_to gamers_path , alert: "Gamer not found" unless @gamer
+    end
 end
