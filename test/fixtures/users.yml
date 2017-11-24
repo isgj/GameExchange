@@ -13,3 +13,8 @@ two:
   email: two@example.com
   name: "Commodus"
   city: "Rome"
+
+test:
+  email: pass@test.com
+  name: "Anon"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'testpassword') %>

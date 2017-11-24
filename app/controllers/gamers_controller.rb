@@ -28,7 +28,8 @@ class GamersController < ApplicationController
   private
 
     def gamer_params
-      params.require(:gamer).permit(:name, :city, :phone, :visibility, :photo, :age)
+      params.require(:gamer).permit(:name, :city, :phone,
+        :visibility, :photo, :age, :gender)
     end
 
 end

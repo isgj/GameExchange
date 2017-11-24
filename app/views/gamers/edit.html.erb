@@ -6,6 +6,7 @@
 
       <div class="row">
         <div class="input-field">
+          <i class="material-icons prefix">add_a_photo</i>
           <%= f.text_field :photo %>
           <%= f.label :photo, "Insert photo URL" %>
         </div>
@@ -13,6 +14,7 @@
 
       <div class="row">
         <div class="input-field">
+          <i class="material-icons prefix">face</i>
           <%= f.text_field :name%>
           <%= f.label :name %>
         </div>
@@ -20,13 +22,24 @@
 
       <div class="row">
         <div class="input-field">
+          <i class="material-icons prefix">cake</i>
           <%= f.number_field :age%>
           <%= f.label :age, "Insert your age"%>
         </div>
       </div>
 
       <div class="row">
+        <p>
+          <%= f.radio_button 'gender', 'f', class: 'with-gap' %>
+          <%= f.label :gender, "Female", value: 'f' %>
+          <%= f.radio_button 'gender', 'm' , class: 'with-gap'%>
+          <%= f.label :gender, "Male", value: 'm'%>
+        </p>
+      </div>
+
+      <div class="row">
         <div class="input-field">
+          <i class="material-icons prefix">location_city</i>
           <%= f.text_field :city %>
           <%= f.label :city, "Insert your city"%>
         </div>
@@ -34,6 +47,7 @@
 
       <div class="row">
         <div class="input-field">
+          <i class="material-icons prefix">local_phone</i>
           <%= f.number_field :phone%>
           <%= f.label :phone, "Insert your phone number"%>
         </div>
@@ -42,7 +56,7 @@
       <div class="row">
         <p>
           <%= f.check_box :visibility, class: 'filled-in' %>
-          <%= f.label :visibility, "Visibile?" %>
+          <%= f.label :visibility, "Visibile profile?" %>
         </p>
       </div>
 
@@ -58,7 +72,7 @@
 </div>
 
 <script>
-  $(document).ready(function(){
+  $(document).on('turbolinks:load', function(){
     Materialize.updateTextFields();
   });
 </script>
