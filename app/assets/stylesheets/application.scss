@@ -23,3 +23,31 @@
   margin-top: 5px;
   position: fixed;
 }
+
+.center-hor {
+  display: flex;
+  justify-content: center;
+}
+
+.hidden{
+  display: none;
+}
+
+.error {
+  color: red !important;
+}
+
+#error_explanation {
+  margin-bottom: 30px;
+
+  h2 {
+    font-size: 18px;
+  }
+
+  ul {@extend .browser-default;}
+  li {font-size: 14px; color: red;list-style-type:initial;}
+}
+
+#sidenav-overlay {
+  z-index: 10;
+}

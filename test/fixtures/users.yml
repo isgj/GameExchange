@@ -6,6 +6,20 @@
 #
 one:
   email: one@example.com
+  name: "Marcus Aurelius"
+  city: "Rome"
 
 two:
   email: two@example.com
+  name: "Commodus"
+  city: "Rome"
+
+test:
+  email: pass@test.com
+  name: "Anon"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'testpassword') %>
+
+private:
+  email: private@email.email
+  name: "No name"
+  visibility: 'f'

@@ -1,35 +1,23 @@
 <header>
-  <nav>
-    <div class="nav-wrapper row">
-      <div class="col s12">
+  <div class="navbar-fixed">
+    <% if user_signed_in? %>
+      <%= render 'layouts/profile_links', data: 'profile-menu' %>
+      <%= render 'layouts/profile_links', data: 'mob-profile-menu' %>
+    <% end %>
+
+    <nav>
+      <div class="nav-wrapper">
         <%= link_to 'GameExchange', root_path, class: 'brand-logo' %>
         <a href="#!" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-          <% if user_signed_in? %>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          <% else %>
-            <% if request.fullpath != new_user_registration_path %>
-              <li><%= link_to 'Sign up', new_user_registration_path %></li>
-            <% end %>
-            <% if request.fullpath != new_user_session_path %>
-              <li><%= link_to 'Log in', new_user_session_path %></li>
-            <% end %>
-          <% end %>
-        </ul>
-      </div>
 
-      <ul class="side-nav" id="mobile-menu">
-        <% if user_signed_in? %>
-          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-        <% else %>
-          <% if request.fullpath != new_user_registration_path %>
-            <li><%= link_to 'Sign up', new_user_registration_path %></li>
-          <% end %>
-          <% if request.fullpath != new_user_session_path %>
-            <li><%= link_to 'Log in', new_user_session_path %></li>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
+        <ul class="right hide-on-med-and-down">
+          <%= render 'layouts/menu_links', data: 'profile-menu' %>
+        </ul>
+        <ul class="side-nav" id="mobile-menu">
+          <%= render 'layouts/menu_links', data: 'mob-profile-menu' %>
+        </ul>
+
+      </div>
+    </nav>
+  </div>
 </header>

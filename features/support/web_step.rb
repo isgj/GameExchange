@@ -14,6 +14,10 @@ module NavigationHelpers
       new_user_session_url
     when /sign up/
       new_user_registration_url
+    when /gamers/
+      gamers_url
+    when /edit user/
+      edit_user_registration_url
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -31,6 +35,16 @@ module NavigationHelpers
       end
     end
   end
+
+  def model_page(page, user)
+    case page
+    when /^gamer/
+      gamer_url(user)
+    when /edit gamer/
+      edit_gamer_url(user)
+    end
+  end
+
   # Test OmniAuth
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({

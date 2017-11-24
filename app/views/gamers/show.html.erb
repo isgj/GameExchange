@@ -1,0 +1,68 @@
+<div class="container">
+  <% same_user = user_signed_in? && @gamer.id == current_user.id %>
+
+<div class="row">
+  <div class="col s12 l6">
+      <div class="col s3">
+        <p>Name:</p>
+        <p>Age</p>
+        <p>Gender</p>
+        <p>City</p>
+        <p>Cell:</p>
+        <p>E-mail:</p>
+      </div>
+      <div class="col s9">
+        <% if same_user || @gamer.visibility %>
+          <p><%= @gamer.name.blank? ? "______" : @gamer.name.split.map(&:capitalize).join(" ") %></p>
+          <p><%= @gamer.age.blank? ? "_" : @gamer.age %></p>
+          <p><%= @gamer.gender.blank? ? "_" : @gamer.gender == "m" ? "Male" : "Female" %></p>
+          <p><%= @gamer.city.blank? ? "______" : @gamer.city.split.map(&:capitalize).join(" ")%></p>
+          <p><%= @gamer.phone.blank? ? "_________" : @gamer.phone %></p>
+          <p><%= @gamer.email %></p>
+        <% else %>
+          <p>_____</p>
+          <p>_</p>
+          <p>_</p>
+          <p>______</p>
+          <p>_________</p>
+          <p>_________</p>
+        <% end %>
+      </div>
+
+      <div class="col s3">
+        <p>Gamer Points:</p>
+        <p>Valutation:</p>
+      </div>
+      <div class="col s9">
+        <p><%= @gamer.points %></p>
+        <p><%= @gamer.votes %> pts</p>
+      </div>
+  </div>
+  <div class="col s12 l6">
+      <img class="responsive-img s12 l6" src="<%= @gamer.photo %>"/>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col s12 l6">
+        <div class="row">
+          Games <%= same_user ? "you posses:" : "" %> <br>
+          <% if same_user %>
+            <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
+            <i class="material-icons">add</i>
+          <% end %>
+          </a>
+        </div>
+
+        <div class="row">
+           Comments:
+        </div>
+    </div>
+
+    <div class="col s12 l6">
+      Friends:
+      <!--temporary link to-->
+      <%=link_to 'gamers', gamers_path%>
+    </div>
+  </div>
+</div>

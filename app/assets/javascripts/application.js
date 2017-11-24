@@ -18,5 +18,29 @@
 
 $( document ).on('turbolinks:load', function() {
   $(".button-collapse").sideNav();
-  gf
+  $(".dropdown-button").dropdown({
+    belowOrigin: true,
+    alignment: 'left',
+    inDuration: 200,
+    outDuration: 150,
+    constrain_width: true,
+    hover: false,
+    gutter: 1
+  });
+});
+
+$(function() {
+  $('a#delete').click(function(event){
+    event.preventDefault();
+    $('div#confirm').show();
+    $(this).hide();
+  });
+});
+
+$(function() {
+  $('a#cancel').click(function(event){
+    event.preventDefault();
+    $('div#confirm').hide();
+    $('a#delete').show();
+  });
 });
