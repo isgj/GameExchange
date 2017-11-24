@@ -1,26 +1,45 @@
 <div class="container">
+  <% same_user = user_signed_in? && @gamer.id == current_user.id %>
 
 <div class="row">
   <div class="col s12 l6">
-    <div class="info">
-      Name: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[0].capitalize %>  <% end %> <br>
-      Surname: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[1].capitalize %><% end %> <br>
-      Age: <%= @gamer.age %> <br>
-      Gender: <% if (@gamer.gender!=nil && @gamer.gender=='m') then %> Male <%elsif(@gamer.gender!=nil && @gamer.gender=='f')%> Female <% end %> <br>
-      City: <% if (@gamer.city!=nil) then %><%= @gamer.city.capitalize %><% end %> <br>
-      Cell: <%= @gamer.phone %> <br>
-      E-mail: <%= @gamer.email %> <br>
+      <div class="col s3">
+        <p>Name:</p>
+        <p>Age</p>
+        <p>Gender</p>
+        <p>City</p>
+        <p>Cell:</p>
+        <p>E-mail:</p>
+      </div>
+      <div class="col s9">
+        <% if same_user || @gamer.visibility %>
+          <p><%= @gamer.name.blank? ? "______" : @gamer.name.split.map(&:capitalize).join(" ") %></p>
+          <p><%= @gamer.age.blank? ? "_" : @gamer.age %></p>
+          <p><%= @gamer.gender.blank? ? "_" : @gamer.gender == "m" ? "Male" : "Female" %></p>
+          <p><%= @gamer.city.blank? ? "______" : @gamer.city.split.map(&:capitalize).join(" ")%></p>
+          <p><%= @gamer.phone.blank? ? "_________" : @gamer.phone %></p>
+          <p><%= @gamer.email %></p>
+        <% else %>
+          <p>_____</p>
+          <p>_</p>
+          <p>_</p>
+          <p>______</p>
+          <p>_________</p>
+          <p>_________</p>
+        <% end %>
+      </div>
       <!-- Check if current_user == @user -->
-      <% if user_signed_in? && @gamer.id == current_user.id %>
+      <% if same_user %>
       <%=link_to 'Edit your profile', edit_gamer_path(@gamer)%> <br>
       <% end %>
-      <br>
-      <div class="valutazione">
-        Gamer Points: <%= @gamer.points %>
-         <br>
-        Valutation: <%= @gamer.votes %> pts<br>
-      </div>
-    </div>
+        <div class="col s3">
+          <p>Gamer Points:</p>
+          <p>Valutation:</p>
+        </div>
+        <div class="col s9">
+          <p><%= @gamer.points %></p>
+          <p><%= @gamer.votes %> pts</p>
+        </div>
   </div>
   <div class="col s12 l6">
       <img class="responsive-img s12 l6" src="<%= @gamer.photo %>"/>
@@ -30,9 +49,11 @@
 <div class="row">
     <div class="col s12 l6">
         <div class="row">
-          Games you posses: <br>
-          <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
-          <i class="material-icons">add</i>
+          Games <%= same_user ? "you posses:" : "" %> <br>
+          <% if same_user %>
+            <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
+            <i class="material-icons">add</i>
+          <% end %>
           </a>
         </div>
 

@@ -1,4 +1,6 @@
 class GamersController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+
   def index
     name = params[:name]
     city = params[:city]
@@ -6,6 +8,7 @@ class GamersController < ApplicationController
     @gamers = User.all
     @gamers = @gamers.where("lower(name) ~ ?", name.downcase) unless name.blank?
     @gamers = @gamers.where("lower(city) ~ ?", city.downcase) unless city.blank?
+    @gamers = @gamers.where("visibility = 't'")
   end
 
   def show
