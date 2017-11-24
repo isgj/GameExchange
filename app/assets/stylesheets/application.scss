@@ -47,3 +47,7 @@
   ul {@extend .browser-default;}
   li {font-size: 14px; color: red;list-style-type:initial;}
 }
+
+#sidenav-overlay {
+  z-index: 10;
+}
