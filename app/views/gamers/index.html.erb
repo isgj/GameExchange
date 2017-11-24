@@ -21,7 +21,7 @@
         <% hideProfile = (current_user != gamer) && !gamer.visibility %>
         <div class="valign-wrapper">
           <% if gamer.photo.blank? %>
-            <%= image_tag "no_photo", class: "circle responsive-img activator card-profile-image" %>
+            <%= image_tag "no_photo.jpg", class: "circle responsive-img activator card-profile-image" %>
           <% else %>
             <img src="<%= gamer.photo %>" alt="Profile photo" class="circle responsive-img activator card-profile-image">
           <% end %>
