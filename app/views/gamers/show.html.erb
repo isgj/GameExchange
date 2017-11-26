@@ -3,11 +3,11 @@
 <div class="row">
   <div class="col s12 l6">
     <div class="info">
-      Name: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[0] %>  <% end %> <br>
-      Surname: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[1] %><% end %> <br>
+      Name: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[0].capitalize %>  <% end %> <br>
+      Surname: <% if (@gamer.name!=nil) then %> <%= @gamer.name.split(" ")[1].capitalize %><% end %> <br>
       Age: <%= @gamer.age %> <br>
-      Gender: <%= @gamer.gender %> <br>
-      City: <%= @gamer.city %> <br>
+      Gender: <% if (@gamer.gender!=nil && @gamer.gender=='m') then %> Male <%elsif(@gamer.gender!=nil && @gamer.gender=='f')%> Female <% end %> <br>
+      City: <% if (@gamer.city!=nil) then %><%= @gamer.city.capitalize %><% end %> <br>
       Cell: <%= @gamer.phone %> <br>
       E-mail: <%= @gamer.email %> <br>
       <!-- Check if current_user == @user -->
@@ -43,6 +43,11 @@
 
     <div class="col s12 l6">
       Friends:
+<<<<<<< current
+      <!--temporary link to-->
+      <%=link_to 'gamers', gamers_path%>
+=======
+>>>>>>> before discard
     </div>
   </div>
 </div>

@@ -18,5 +18,20 @@
 
 $( document ).on('turbolinks:load', function() {
   $(".button-collapse").sideNav();
-  gf
+});
+
+$(function() {
+  $('a#delete').click(function(event){
+    event.preventDefault();
+    $('div#confirm').show();
+    $(this).hide();
+  });
+});
+
+$(function() {
+  $('a#cancel').click(function(event){
+    event.preventDefault();
+    $('div#confirm').hide();
+    $('a#delete').show();
+  });
 });
