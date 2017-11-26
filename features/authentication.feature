@@ -13,10 +13,11 @@ Feature: Authentication
     And I should see the "Log out"
 
   Scenario: Log in user
+    Given I have a user with email address "user@example.com"
     When I click the "Log in" "link"
     Then I should be on the "sign in" page
-    When I fill in "Email" with "pass@test.com"
-    And I fill in "Password" with "testpassword"
+    When I fill in "Email" with "user@example.com"
+    And I fill in "Password" with "password"
     And I click the "Log in" "button"
     Then I should be on the "home" page
     And I should see the "Log out"

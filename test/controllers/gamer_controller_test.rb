@@ -17,7 +17,7 @@ class GamerControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should put update" do
-    patch gamer_path(users(:one)), params:{gamer: {name: "Mattew", city: "Milan"}}
-    assert_redirected_to gamer_path(users(:one))
+    put gamer_path id: users(:one)
+    assert_response :redirect
   end
 end
