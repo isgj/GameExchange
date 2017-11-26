@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'comments/show'
+
+  get 'comments/new'
+
+  get 'comments/edit'
+
+  get 'comments/delete'
+
   resources :gamers, only: [:index, :show, :update, :edit]
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
