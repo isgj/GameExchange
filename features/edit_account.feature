@@ -14,7 +14,7 @@ Scenario: Edit credential
 
 Scenario: Delete profile
   Given I am the user "test"
-  And I am on the "edit user" page
+  And I am on the "edit account" page
   When I click the "delete" "link"
   And I click the "Confirm" "button"
   Then I should be on the "home" page

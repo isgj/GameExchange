@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  friender: 1
+  friended: 1
+  status: 
+
+two:
+  friender: 1
+  friended: 1
+  status: 
