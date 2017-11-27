@@ -29,18 +29,20 @@ $( document ).on('turbolinks:load', function() {
   });
 });
 
-$(function() {
-  $('a#delete').click(function(event){
-    event.preventDefault();
-    $('div#confirm').show();
-    $(this).hide();
+$(document).on('turbolinks:load', function(){
+  $(function() {
+    $('a#delete').click(function(event){
+      event.preventDefault();
+      $('div#confirm').show();
+      $(this).hide();
+    });
   });
-});
 
-$(function() {
-  $('a#cancel').click(function(event){
-    event.preventDefault();
-    $('div#confirm').hide();
-    $('a#delete').show();
+  $(function() {
+    $('a#cancel').click(function(event){
+      event.preventDefault();
+      $('div#confirm').hide();
+      $('a#delete').show();
+    });
   });
 });

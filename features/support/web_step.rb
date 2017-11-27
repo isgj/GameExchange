@@ -16,7 +16,7 @@ module NavigationHelpers
       new_user_registration_url
     when /gamers/
       gamers_url
-    when /edit user/
+    when /edit account/
       edit_user_registration_url
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

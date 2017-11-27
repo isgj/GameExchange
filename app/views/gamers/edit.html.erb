@@ -2,6 +2,17 @@
   <div class="row center-align"><h3>Edit profile</h3></div>
   <div class="row">
     <div class="col s12 l6">
+    <% if @gamer.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@gamer.errors.count, "error") %>. Your profile has not been updated because:</h2>
+
+        <ul>
+        <% @gamer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
       <%= form_for(@gamer, as: :gamer, method: :patch, url: gamer_path(@gamer)) do |f| %>
 
       <div class="row">
@@ -49,7 +60,7 @@
         <div class="input-field">
           <i class="material-icons prefix">local_phone</i>
           <%= f.number_field :phone%>
-          <%= f.label :phone, "Insert your phone number"%>
+          <%= f.label :phone, "Insert your phone number" %>
         </div>
       </div>
 

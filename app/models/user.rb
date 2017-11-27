@@ -4,6 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :omniauthable,
          :rememberable, :trackable, :validatable, :lockable
 
+  validates_length_of :phone, is: 10, :allow_blank => true
+  validates_length_of :age, is: 2, :allow_blank => true
+  validates :photo, :format => URI::regexp(%w(http https)), :allow_blank => true
+
+
   def self.from_omniauth(auth)
    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
      user.email = auth.info.email
