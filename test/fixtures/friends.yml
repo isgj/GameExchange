@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  friender: 1
-  friended: 1
-  status: 
+  friender_id: 1
+  friended_id: 2
+  status: "Friends"
 
 two:
-  friender: 1
-  friended: 1
-  status: 
+  friender_id: 4
+  friended_id: 2
+  status: "Blocked"

@@ -1,0 +1,28 @@
+<div class="row center-align">
+  <em>
+    <h4>
+      <% if @friend.blank? %>
+      No gamers
+    </h4>
+  </em>
+</div>
+      <% else %>
+      Gamers
+    </h4>
+  </em>
+</div>
+
+<% for friends in @friend %>
+
+<div class="col s12 l4">
+  <div class="card blie-grey darken-1">
+    <div class="card-profile white-text">
+      <div class="valing-wrapper">
+        <p><%= friends.friended_id %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+<% end %>

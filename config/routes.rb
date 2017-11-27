@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'comments/delete'
 
+  resources :friends, only: [:show]
+
   resources :gamers, only: [:index, :show, :update, :edit]
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
