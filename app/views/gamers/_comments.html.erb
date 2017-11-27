@@ -1,0 +1,10 @@
+<% if same_user %>
+  <div class="row"><%= link_to 'My comments', gamer_comments_path(current_user) %></div>
+<% else %>
+  <div class="row"><%= link_to 'User\'s comments', gamer_comments_path(@gamer) %></div>
+  <% if @have_commented.any? %>
+    <div class="row"><%= link_to 'Edit review', edit_gamer_comment_path(@gamer) %></div>
+  <% else %>
+    <div class="row"><%= link_to 'Review user', new_gamer_comment_path(@gamer) %></div>
+  <% end %>
+<% end %>

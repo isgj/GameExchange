@@ -1,0 +1,40 @@
+<%= form_with(url: gamer_comments_path(gamer), local: true) do |form| %>
+  <% if comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field s12 l6" align="center" >
+    *****
+  <!--
+    <%= form.label :mark %>
+    <%= form.text_field :mark, id: :comment_mark %>
+  -->
+  </div>
+<!--
+  <div class="field">
+    <%= form.label :commentator_id %>
+    <%= form.text_field :commentator_id, id: :comment_commentator_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :commented_id %>
+    <%= form.text_field :commented_id, id: :comment_commented_id %>
+  </div>
+-->
+  <div class="field s12 l6">
+    <%= form.label :review %>
+    <%= form.text_field :review, id: :comment_review %>
+  </div>
+
+  <div class="actions" align="center">
+    <%= form.submit %>
+  </div>
+<% end %>
