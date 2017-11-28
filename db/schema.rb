@@ -15,6 +15,17 @@ ActiveRecord::Schema.define(version: 20171127141047) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "comments", force: :cascade do |t|
+    t.float "mark"
+    t.bigint "commentator_id"
+    t.bigint "commented_id"
+    t.string "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentator_id"], name: "index_comments_on_commentator_id"
+    t.index ["commented_id"], name: "index_comments_on_commented_id"
+  end
+
   create_table "friends", force: :cascade do |t|
     t.bigint "friender_id", null: false
     t.bigint "friended_id", null: false
@@ -53,6 +64,8 @@ ActiveRecord::Schema.define(version: 20171127141047) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "users", column: "commentator_id"
+  add_foreign_key "comments", "users", column: "commented_id"
   add_foreign_key "friends", "users", column: "friended_id"
   add_foreign_key "friends", "users", column: "friender_id"
 end
