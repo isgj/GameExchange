@@ -10,10 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123114937) do
+ActiveRecord::Schema.define(version: 20171127101303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "game_infos", force: :cascade do |t|
+    t.integer "api_id"
+    t.string "name"
+    t.string "url"
+    t.text "summary"
+    t.integer "platforms", array: true
+    t.date "release_date"
+    t.string "cover"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_game_infos_on_api_id", unique: true
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.bigint "game_info_id", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "holder_id", null: false
+    t.bigint "platform_id", null: false
+    t.integer "state"
+    t.date "expire"
+    t.date "start_holding"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_info_id"], name: "index_games_on_game_info_id"
+    t.index ["holder_id"], name: "index_games_on_holder_id"
+    t.index ["owner_id"], name: "index_games_on_owner_id"
+    t.index ["platform_id"], name: "index_games_on_platform_id"
+  end
+
+  create_table "platforms", force: :cascade do |t|
+    t.integer "api_id"
+    t.string "name"
+    t.string "photo"
+    t.string "url"
+    t.integer "generation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_platforms_on_api_id", unique: true
+  end
+
+  create_table "queries", force: :cascade do |t|
+    t.string "query"
+    t.integer "games", array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["query"], name: "index_queries_on_query", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,4 +92,8 @@ ActiveRecord::Schema.define(version: 20171123114937) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "games", "game_infos"
+  add_foreign_key "games", "platforms"
+  add_foreign_key "games", "users", column: "holder_id"
+  add_foreign_key "games", "users", column: "owner_id"
 end

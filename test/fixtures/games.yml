@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_info: one
+  owner: one
+  holder: one
+  platform: one
+  state: 0
+  expire: 2017-11-27
+  start_holding: 2017-11-27
+  note: MyString
+
+two:
+  game_info: two
+  owner: two
+  holder: two
+  platform: two
+  state: 0
+  expire: 2017-11-27
+  start_holding: 2017-11-27
+  note: MyString
