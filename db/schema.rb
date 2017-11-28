@@ -54,6 +54,4 @@ ActiveRecord::Schema.define(version: 20171126173040) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "comments", "users", column: "commentator_id"
-  add_foreign_key "comments", "users", column: "commented_id"
 end

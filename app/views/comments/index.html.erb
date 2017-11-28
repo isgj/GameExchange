@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Mark</th>
-      <th>Commentator</th>
+    <!--  <th>Commentator</th> -->
       <th>Commentator name</th>
+      <th>Mark</th>
       <th>Review</th>
       <th colspan="3"></th>
     </tr>
@@ -16,9 +16,9 @@
   <tbody>
     <% @comments.each do |comment| %>
       <tr>
+      <!--  <td><%= comment.commentator_id %></td> -->
+        <td><%= comment.commentator.name %></td>
         <td><%= comment.mark %></td>
-        <td><%= comment.commentator_id %></td>
-        <td><%= comment.users.name %></td>
         <td><%= comment.review %></td>
       </tr>
     <% end %>
