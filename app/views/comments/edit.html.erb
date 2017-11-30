@@ -1,5 +1,5 @@
 <h1 align="center">Editing Comment</h1>
-<%= render 'form', {comment: @comment.id} %>
+<%= render 'form0', {comment: @comment.id} %>
 <div class="link" align=center>
-<%= link_to 'Back', gamer_comments_path %>
+<%= link_to 'Back', gamer_path(params[:gamer_id]) %>
 </div>
