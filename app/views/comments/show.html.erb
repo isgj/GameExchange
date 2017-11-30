@@ -1,18 +1,19 @@
 <p id="notice"><%= notice %></p>
-
+<h1 align="center">Show Comment</h1>
+<div align="center">
 <p>
   <strong>Mark:</strong>
   <%= @comment.mark %>
 </p>
-
+<!--
 <p>
   <strong>Commentator:</strong>
   <%= @comment.commentator_id %>
 </p>
-
+-->
 <p>
   <strong>Commented:</strong>
-  <%= @comment.commented_id %>
+  <%= @comment.commented.name %>
 </p>
 
 <p>
@@ -20,5 +21,8 @@
   <%= @comment.review %>
 </p>
 
-<%= link_to 'Edit', edit_gamer_comment_path(@comment) %> |
-<%= link_to 'Back', gamer_comments_path %>
+<%= link_to 'Edit', edit_gamer_comment_path(params[:gamer_id]) %> |
+<%= link_to 'Back', gamer_path(params[:gamer_id]) %> |
+<%= link_to 'Delete', gamer_comment_path(params[:gamer_id]),
+      { :confirm => 'Are you sure?', :method => :delete, :remote => true}  %>
+</div>
