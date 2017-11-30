@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20171127101303) do
     t.bigint "game_info_id", null: false
     t.bigint "owner_id", null: false
     t.bigint "holder_id", null: false
-    t.bigint "platform_id", null: false
+    t.bigint "platform_id"
     t.integer "state"
     t.date "expire"
     t.date "start_holding"
