@@ -43,10 +43,10 @@ Given("I am the user {string}") do |user|
   sign_in users(user.to_sym)
 end
 
-Given("I am on the {string} {string} page") do |page, user|
-  visit model_page(page, users(user.to_sym))
+Given("I am on the {string} {string} page") do |page, id|
+  visit model_page(page, id)
 end
 
-Then("I should be on the {string} page of {string}") do |page, user|
-  assert_equal model_page(page, users(user.to_sym)), current_url
+Then("I should be on the {string} page of {string}") do |page, id|
+  assert_equal model_page(page, id), current_url
 end

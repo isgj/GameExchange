@@ -3,18 +3,18 @@ module QueryHelper
 
   # IGDB key to make api calls
   @@api_key = ENV['IGDB_KEY']
-  
+
   def search_query(query)
     fields = 'id,name,url,summary,first_release_date,cover,platforms'
     uri = "https://api-2445582011268.apicast.io/games/?search=#{query.query}&fields=#{fields}"
-    resp = HTTParty.get(uri, headers: {"Accept" => "application/json", "user-key" => @@api_key})
     begin
+      resp = HTTParty.get(uri, headers: {"Accept" => "application/json", "user-key" => @@api_key})
       resp.inspect
 
       (new_games, all_games) = filter_existing_games(resp)
-      save_platforms_of new_games
+      save_platforms_of new_games.select{ |p| !p.nil? }
       query.games = all_games
-      
+
       new_games.each do |g|
         game_info = GameInfo.new(
           api_id: g["id"],
@@ -25,7 +25,7 @@ module QueryHelper
         )
         game_info.release_date = Time.at(g["first_release_date"]/1000) if g["first_release_date"]
         game_info.cover = g["cover"]["url"] if g["cover"]
-            
+
         if !game_info.save
           game_info.errors.full_messages.each {|m| query.errors.add(:games, "==> #{m}")}
         end
@@ -47,7 +47,7 @@ module QueryHelper
     missing.each do |p|
       new_platform = Platform.new
       new_platform = search_platform(new_platform, p)
-     
+
       if !new_platform.save
         logger.error "Cannot save platform: #{p}"
       end

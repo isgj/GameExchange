@@ -1,0 +1,21 @@
+<%= render 'query_search' %>
+
+<div class="row center-align">
+  <div class="col s12 l8">
+    <% if @queries.blank? %>
+      <em><h4>No queries to show.</h4></em>
+    <% else %>
+      <em><h4>Showing <%= pluralize(@queries.count, "query") %>.</h4></em>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <% @queries.each do |q| %>
+    <%= link_to query_path(q) do %>
+      <div class="chip">
+	<%= q.query %>
+      </div>
+    <% end %>
+  <% end%>
+</div>

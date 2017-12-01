@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col s12 l8">
+  <%= form_tag "/queries", method: "get", class: "col s12" do %>
+    <div class="row">
+      <div class="input-field col s8">
+        <i class="material-icons prefix">query_builder</i>
+        <%= search_field_tag :query %>
+        <%= label_tag :query %>
+      </div>
+
+      <div class="input-field col s4">
+        <%= button_tag class: "btn waves-effect waves-light" do %>
+          Search
+          <i class="material-icons right">search</i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div class="col s12 l4">
+    <%= link_to 'Make a new search', new_query_path, class: 'btn waves-effect waves-light' %>
+  </div>
+</div>
