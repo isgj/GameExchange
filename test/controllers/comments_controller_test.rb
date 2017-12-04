@@ -4,6 +4,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
     @u = users(:one)
+    @u1 = users(:two)
     @comment = comments(:one)
     sign_in users(:one)
   end
@@ -20,10 +21,10 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post comments_url, params: { comment: { commentator_id: @comment.commentator_id, commented_id: @comment.commented_id, mark: @comment.mark, review: @comment.review } }
+      post gamer_comments_url(@u.id), params: { comment: { commentator_id: @u.id, commented_id: @u1.id, mark: @comment.mark, review: @comment.review } }
     end
 
-    assert_redirected_to comment_url(Comment.last)
+    assert_redirected_to gamer_comments_url(@u)
   end
 
   test "should show comment" do
@@ -32,13 +33,13 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get edit" do
-    get edit_gamer_comment_url(@comment)
+    get edit_gamer_comment_url(@u,@comment)
     assert_response :success
   end
 
   test "should update comment" do
-    patch comment_url(@comment), params: { comment: { commentator_id: @comment.commentator_id, commented_id: @comment.commented_id, mark: @comment.mark, review: @comment.review } }
-    assert_redirected_to comment_url(@comment)
+    patch gamer_comment_url(@u,@comment), params: { comment: { commentator_id: @u.id, commented_id: @u.id, mark: @comment.mark, review: @comment.review } }
+    assert_redirected_to gamer_url(@u)
   end
 
   test "should destroy comment" do
@@ -46,6 +47,6 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
       delete gamer_comment_url(@u,@comment)
     end
 
-    assert_redirected_to comments_url
+    assert_redirected_to gamer_url(@u)
   end
 end

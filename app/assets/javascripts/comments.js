@@ -5,7 +5,7 @@ var $star_rating = $('.star-rating .fa');
 
 var SetRatingStar = function() {
   return $star_rating.each(function() {
-    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+    if (parseInt($(this).siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
       console.log("add star");
       return $(this).html('star');
     } else {

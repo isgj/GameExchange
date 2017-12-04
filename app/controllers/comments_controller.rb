@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
   def show
 
     @comment = Comment.where("commented_id = ? AND commentator_id = ?",params[:gamer_id],current_user).reduce
-    if(@comment.empty?)
+    if(@comment.blank?)
       redirect_to gamer_path(params[:gamer_id]), notice: 'You haven\'t commented this user.'
     end
   end
