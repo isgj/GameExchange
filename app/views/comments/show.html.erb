@@ -1,16 +1,21 @@
 <p id="notice"><%= notice %></p>
 <h1 align="center">Show Comment</h1>
 <div align="center">
-<p>
-  <strong>Mark:</strong>
-  <%= @comment.mark %>
-</p>
-<!--
-<p>
-  <strong>Commentator:</strong>
-  <%= @comment.commentator_id %>
-</p>
--->
+<!-- star rating system -->
+      <div class="star-rating" align="center">
+        <i class="material-icons fa" data-rating="0">star_border</i>
+        <i class="material-icons fa" data-rating="1">star_border</i>
+        <i class="material-icons fa" data-rating="2">star_border</i>
+        <i class="material-icons fa" data-rating="3">star_border</i>
+        <i class="material-icons fa" data-rating="4">star_border</i>
+        <i class="material-icons fa" data-rating="5">star_border</i>
+        <i class="material-icons fa" data-rating="6">star_border</i>
+        <i class="material-icons fa" data-rating="7">star_border</i>
+        <i class="material-icons fa" data-rating="8">star_border</i>
+        <i class="material-icons fa" data-rating="9">star_border</i>
+        <input type="hidden" name="comment[mark]" class="rating-value" value="<%= @comment.mark %>">
+      </div>
+<!-- End star rating system-->
 <p>
   <strong>Commented:</strong>
   <%= @comment.commented.name %>
@@ -21,8 +26,8 @@
   <%= @comment.review %>
 </p>
 
-<%= link_to 'Edit', edit_gamer_comment_path(params[:gamer_id]) %> |
+<%= link_to 'Edit', edit_gamer_comment_path(params[:gamer_id],@comment) %> |
 <%= link_to 'Back', gamer_path(params[:gamer_id]) %> |
-<%= link_to 'Delete', gamer_comment_path(params[:gamer_id]),
+<%= link_to 'Delete', gamer_comment_path(params[:gamer_id],@comment),
       { :confirm => 'Are you sure?', :method => :delete, :remote => true}  %>
 </div>

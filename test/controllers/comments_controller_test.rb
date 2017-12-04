@@ -1,17 +1,20 @@
 require 'test_helper'
 
 class CommentsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
   setup do
+    @u = users(:one)
     @comment = comments(:one)
+    sign_in users(:one)
   end
 
   test "should get index" do
-    get comments_url
+    get gamer_comments_url(@u)
     assert_response :success
   end
 
   test "should get new" do
-    get new_comment_url
+    get new_gamer_comment_url(@u)
     assert_response :success
   end
 
@@ -24,12 +27,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show comment" do
-    get comment_url(@comment)
+    get gamer_comment_url(@u,@comment)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_comment_url(@comment)
+    get edit_gamer_comment_url(@comment)
     assert_response :success
   end
 
@@ -40,7 +43,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy comment" do
     assert_difference('Comment.count', -1) do
-      delete comment_url(@comment)
+      delete gamer_comment_url(@u,@comment)
     end
 
     assert_redirected_to comments_url

@@ -3,6 +3,13 @@ class CommentsController < ApplicationController
 
   # GET /comments
   # GET /comments.json
+
+  def my_action
+    respond_to do |format|
+      format.js { render :js => "star_rating();" }
+    end
+  end
+
   def index
     @comments = Comment.where("commented_id=?",params[:gamer_id])
   end
@@ -11,6 +18,10 @@ class CommentsController < ApplicationController
   # GET /comments/1.json
   def show
 
+    @comment = Comment.where("commented_id = ? AND commentator_id = ?",params[:gamer_id],current_user).reduce
+    if(@comment.empty?)
+      redirect_to gamer_path(params[:gamer_id]), notice: 'You haven\'t commented this user.'
+    end
   end
 
   # GET /comments/new
@@ -21,18 +32,6 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
-    @comment.update(comment_params)
-
-=begin
-    respond_to do |format|
-      if !@edited.save
-        format.html { redirect_to gamer_comments_path, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-=end
   end
 
   # POST /comments
@@ -57,8 +56,11 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
-    @comment.mark=comment_params.mark
-    @comment.review=comment_params.review
+    if @comment.update(comment_params)
+      redirect_to gamer_path(params[:gamer_id]), notice: 'Comment was successfully updated.'
+    else
+      render :edit, alert: 'Errore editing comment.'
+    end
   end
 
   # DELETE /comments/1
@@ -77,11 +79,11 @@ def destroy
 private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find_by("commentator_id=?",current_user)
+      @comment = Comment.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.permit(:mark, :review)
+      params.require(:comment).permit(:mark, :review)
     end
 end

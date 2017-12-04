@@ -18,7 +18,23 @@
       <tr>
       <!--  <td><%= comment.commentator_id %></td> -->
         <td><%= comment.commentator.name %></td>
-        <td><%= comment.mark %></td>
+        <td>
+          <!-- star rating system -->
+                <div class="star-rating" align="center">
+                  <i class="material-icons fa" data-rating="0">star_border</i>
+                  <i class="material-icons fa" data-rating="1">star_border</i>
+                  <i class="material-icons fa" data-rating="2">star_border</i>
+                  <i class="material-icons fa" data-rating="3">star_border</i>
+                  <i class="material-icons fa" data-rating="4">star_border</i>
+                  <i class="material-icons fa" data-rating="5">star_border</i>
+                  <i class="material-icons fa" data-rating="6">star_border</i>
+                  <i class="material-icons fa" data-rating="7">star_border</i>
+                  <i class="material-icons fa" data-rating="8">star_border</i>
+                  <i class="material-icons fa" data-rating="9">star_border</i>
+                  <input type="hidden" name="comment[mark]" class="rating-value" value="<%= comment.mark %>">
+                </div>
+          <!-- End star rating system-->
+        </td>
         <td><%= comment.review %></td>
       </tr>
     <% end %>
