@@ -1,0 +1,37 @@
+<div class="row center-align">
+  <em>
+    <h4>
+      <% if @gamer.friends.blank? %>
+      No friends to show
+    </h4>
+  </em>
+</div>
+      <% else %>
+      Friends
+    </h4>
+  </em>
+</div>
+
+  <% for friends in @gamer.friends %>
+    <% if @gamer.id == friends.friender_id %>
+      <% friend = User.find_by_id(friends.friended_id) %>
+    <% else %>
+      <% friend = User.find_by_id(friends.friender_id) %>
+    <% end %>
+
+    <div class="chip">
+      <% if friend.photo.blank? %>
+        <%= image_tag "no_photo.jpg" %>
+      <% else %>
+        <img src="<%= friend.photo %>" alt="Profile photo">
+      <% end %>
+      <a href= "<%= gamer_path(friend) %>">
+        <%= friend.name.blank? ? friend.email : friend.name.split.map(&:capitalize).join(" ") %>
+      </a>
+    </div>
+  <% end %>
+  <div class="row center-align">
+    <%= link_to 'Show all friends', friends_path( params:{ gamer: @gamer } )%>
+  </div>
+
+<% end %>

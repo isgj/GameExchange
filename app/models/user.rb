@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :friended, class_name: "Friend", foreign_key: "friended_id"
+  has_many :friender, class_name: "Friend", foreign_key: "friender_id"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -16,5 +18,9 @@ class User < ApplicationRecord
      user.name = auth.info.name
      user.photo = auth.info.image
    end
+  end
+
+  def friends
+    Friend.where("(friender_id = ? or friended_id = ?) and status = ?", self.id, self.id, "Friends")
   end
 end

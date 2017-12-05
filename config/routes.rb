@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'comments/delete'
 
-  resources :friends, only: [:show]
+  resources :friends, only: [:index]
 
   resources :gamers, only: [:index, :show, :update, :edit]
 
