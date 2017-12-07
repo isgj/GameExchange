@@ -5,6 +5,14 @@ class User < ApplicationRecord
   has_many :passive_friendships, class_name: "Friendship",
                           foreign_key: "friended_id",
                           dependent: :destroy
+  has_many :active_requests, class_name: "Request",
+                           foreign_key: "applier_id",
+                           dependent: :destroy
+  has_many :requesting, through: :active_requests, source: :recevier
+  has_many :passive_requests, class_name: "Request",
+                            foreign_key: "recevier_id",
+                            dependent: :destroy
+  has_many :requests, through: :passive_requests, source: :applier
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -24,8 +32,28 @@ class User < ApplicationRecord
    end
   end
 
-  #Da perfezionare con il fatto dell'accetazione della richiesta
+  def send_request(other_user)
+    requesting << (other_user)
+  end
 
+  def requests?(other_user)
+    requesting.include?(other_user)
+  end
+
+  def remove_request(other_user)
+    requesting.delete(other_user)
+  end
+
+  def accept_request(other_user)
+    self.add_friend(other_user)
+    requests.delete(other_user)
+  end
+
+  def refuses_request(other_user)
+    requests.delete(other_user)
+  end
+
+  #Da perfezionare con il fatto dell'accetazione della richiesta
   def friends
      Friendship.where("friender_id = ? or friended_id = ?", self.id, self.id)
   end

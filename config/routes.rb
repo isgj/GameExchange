@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :gamers, only: [:index, :show, :update, :edit]
   resources :friendships,       only: [:create, :destroy]
+  resources :requests, only: [:create, :destroy]
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root to: 'welcome#index'
