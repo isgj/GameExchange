@@ -1,7 +1,7 @@
 <div class="row center-align">
   <em>
     <h4>
-      <% if @friend.blank? %>
+      <% if @friends.blank? %>
       No friends
     </h4>
   </em>
@@ -12,12 +12,10 @@
   </em>
 </div>
 
-<% for friend in @friend %>
-  <% if params[:gamer].to_i == friend.friender_id %>
-    Friend 1
+<% for friend in @friends %>
+  <% if params[:id].to_i == friend.friender_id %>
     <% friend = User.find_by_id(friend.friended_id) %>
   <% else %>
-    Friend 2
     <% friend = User.find_by_id(friend.friender_id) %>
   <% end %>
 

@@ -52,4 +52,9 @@ class GamerControllerTest < ActionDispatch::IntegrationTest
     patch gamer_path(users(:one)), params:{gamer: {name: "Mattew", city: "Milan"}}
     assert_redirected_to new_user_session_path
   end
+
+  test "should redirect friends when not logged in" do
+    get friends_gamer_path(users(:one))
+    assert_redirected_to new_user_session_path
+  end
 end

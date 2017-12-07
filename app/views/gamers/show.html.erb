@@ -60,7 +60,11 @@
     </div>
 
     <div class="col s12 l6">
-      <%= render 'friends/friends_show_min' %>
+        <div class="row center-align">
+          <%= render 'shared/stats' %>
+        </div>
+        <%= render 'friend_form' %>
+        <%= render 'friends_show_min' %>
     </div>
   </div>
 </div>

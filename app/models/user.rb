@@ -1,6 +1,10 @@
 class User < ApplicationRecord
-  has_many :friended, class_name: "Friend", foreign_key: "friended_id"
-  has_many :friender, class_name: "Friend", foreign_key: "friender_id"
+  has_many :active_friendships, class_name: "Friendship",
+                          foreign_key: "friender_id",
+                          dependent: :destroy
+  has_many :passive_friendships, class_name: "Friendship",
+                          foreign_key: "friended_id",
+                          dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -20,7 +24,30 @@ class User < ApplicationRecord
    end
   end
 
+  #Da perfezionare con il fatto dell'accetazione della richiesta
+
   def friends
-    Friend.where("(friender_id = ? or friended_id = ?) and status = ?", self.id, self.id, "Friends")
+     Friendship.where("friender_id = ? or friended_id = ?", self.id, self.id)
+  end
+
+  #Add a friends
+  def add_friend(other_user)
+    self.active_friendships.create(friended_id: other_user.id)
+  end
+
+  #Remove a friends
+  def unfriend(other_user)
+    @friendship = Friendship.find_by_friender_id(self) && Friendship.find_by_friended_id(other_user)
+    if @friendship == nil
+      @friendship = Friendship.find_by_friender_id(other_user) && Friendship.find_by_friended_id(self)
+    end
+    if @friendship != nil
+      Friendship.delete(@friendship.id)
+    end
+  end
+
+  #Returns true if the users are friends
+  def friends?(other_user)
+    self.friends.find_by_friended_id(other_user) != nil || self.friends.find_by_friender_id(other_user) != nil
   end
 end

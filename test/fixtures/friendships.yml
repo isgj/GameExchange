@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  friender: michael
+  friended: lana
+
+two:
+  friender: michael
+  friended: malory
+
+three:
+  friender: lana
+  friended: michael
+
+four:
+  friender: archer
+  friended: michael

@@ -11,7 +11,6 @@
     </h4>
   </em>
 </div>
-
   <% for friends in @gamer.friends %>
     <% if @gamer.id == friends.friender_id %>
       <% friend = User.find_by_id(friends.friended_id) %>
@@ -30,8 +29,4 @@
       </a>
     </div>
   <% end %>
-  <div class="row center-align">
-    <%= link_to 'Show all friends', friends_path( params:{ gamer: @gamer } )%>
-  </div>
-
 <% end %>
