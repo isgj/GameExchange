@@ -24,6 +24,8 @@ module NavigationHelpers
       new_query_url
     when /last query/
       query_url(Query.last)
+    when /titles/
+      titles_url
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
