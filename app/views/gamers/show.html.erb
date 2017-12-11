@@ -57,7 +57,7 @@
       <div class="row">
         <% games.each do |game| %>
           <a href="<%= game_path(game) %>">
-            <div class="chip col game-title">
+            <div class="chip col game-title" style="min-width: max-content;">
               <div class="truncate">
                 <%= game.game_info.name %>
               </div>
