@@ -1,0 +1,54 @@
+<h1 align="center">Showing Your Comment For:</h1>
+<div align="center">
+  <div class="chip" style="max-width: max-content;">
+    <img src="<%=@comment.commented.photo %>" alt="Contact Person"><%= @comment.commented.name %>
+  </div>
+<!-- star rating system -->
+      <div class="star-rating" align="center">
+        <i class="material-icons fa" data-rating="0">star_border</i>
+        <i class="material-icons fa" data-rating="1">star_border</i>
+        <i class="material-icons fa" data-rating="2">star_border</i>
+        <i class="material-icons fa" data-rating="3">star_border</i>
+        <i class="material-icons fa" data-rating="4">star_border</i>
+        <i class="material-icons fa" data-rating="5">star_border</i>
+        <i class="material-icons fa" data-rating="6">star_border</i>
+        <i class="material-icons fa" data-rating="7">star_border</i>
+        <i class="material-icons fa" data-rating="8">star_border</i>
+        <i class="material-icons fa" data-rating="9">star_border</i>
+        <input type="hidden" name="comment[mark]" class="rating-value" value="<%= @comment.mark %>">
+      </div>
+<!-- End star rating system-->
+<p>
+  <b style="color:#ee6e73">Review:</b>
+  <%= @comment.review %>
+</p>
+
+<%= link_to edit_gamer_comment_path(params[:gamer_id],@comment),class: "btn waves-effect waves-light" do %>
+Edit
+<i class='material-icons right'>edit</i>
+<% end %> |
+<%= link_to  gamer_path(params[:gamer_id]),class: "btn waves-effect waves-light" do %>
+Back
+<i class='material-icons right'>backspace</i>
+<% end %> |
+
+  <button class="btn delete-button red">Delete<i class='material-icons right'>delete_forever</i></button>
+
+  <div id="delete-confirmation" class="modal">
+    <div class="modal-content red lighten-3">
+      <h4>Are you sure?</h4>
+      <p>If you press the DELETE button this comment will be deleted definitly from our databse and it will be impossible to show it again.</p>
+    </div>
+    <div class="modal-footer red lighten-2">
+      <button type="button" class="modal-action modal-close waves-effect waves-green btn">Cancel</button>
+      <%= link_to 'Delete', gamer_comment_path(params[:gamer_id],@comment), class: 'modal-action modal-close waves-effect waves-green btn red',data:{ method: :delete} %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.modal').modal();
+    $('.delete-button').off('click').on('click', function() {
+      console.log('callsda sda sd');
+      $('#delete-confirmation').modal('open');
+    });
+</script>

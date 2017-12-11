@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mark: 1.5
+  commentator: one
+  commented: one
+  review: MyString
+
+two:
+  mark: 1.5
+  commentator: two
+  commented: two
+  review: MyString

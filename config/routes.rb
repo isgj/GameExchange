@@ -1,15 +1,7 @@
 Rails.application.routes.draw do
-  get 'comments/show'
-
-  get 'comments/new'
-
-  get 'comments/edit'
-
-  get 'comments/delete'
-
   resources :gamers, only: [:index, :show, :update, :edit]
   resources :gamers do
-    get 'games/:id', to: 'games#index'
+    resources :comments
   end
   resources :games
   resources :titles, only: [:index, :show]

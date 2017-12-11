@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
+  has_many :comments, foreign_key: "commented_id",dependent: :destroy
+  has_many :comments1, foreign_key: "commentator_id",dependent: :destroy
+
+    # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
          :rememberable, :trackable, :validatable, :lockable
