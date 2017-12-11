@@ -21,8 +21,8 @@ class RequestTest < ActiveSupport::TestCase
   end
 
   test "should send and remove request" do
-    one = users(:one)
-    two = users(:two)
+    one = users(:three)
+    two = users(:four)
     assert_not one.requests?(two)
     assert_not one.friends?(two)
     one.send_request(two)
@@ -32,8 +32,8 @@ class RequestTest < ActiveSupport::TestCase
   end
 
   test "should send and refuse request" do
-    one = users(:one)
-    two = users(:two)
+    one = users(:three)
+    two = users(:four)
     assert_not one.requests?(two)
     assert_not one.friends?(two)
     one.send_request(two)
@@ -44,8 +44,8 @@ class RequestTest < ActiveSupport::TestCase
   end
 
   test "should send and accept request" do
-    one = users(:one)
-    two = users(:two)
+    one = users(:three)
+    two = users(:four)
     assert_not one.requests?(two)
     assert_not one.friends?(two)
     one.send_request(two)

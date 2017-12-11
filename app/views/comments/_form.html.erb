@@ -1,0 +1,46 @@
+<%= form_with(model: @comment,url: gamer_comments_path(), local: true) do |form| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <!-- old version
+  <div class="field s12 l6" align="center" >
+    <%= form.label :mark %>
+    <%= form.text_field :mark, id: :comment_mark %>
+  </div>
+-->
+
+<div class="container">
+<!-- star rating system -->
+      <div class="star-rating edit-rating" align="center">
+        <i class="material-icons fa" data-rating="0">star_border</i>
+        <i class="material-icons fa" data-rating="1">star_border</i>
+        <i class="material-icons fa" data-rating="2">star_border</i>
+        <i class="material-icons fa" data-rating="3">star_border</i>
+        <i class="material-icons fa" data-rating="4">star_border</i>
+        <i class="material-icons fa" data-rating="5">star_border</i>
+        <i class="material-icons fa" data-rating="6">star_border</i>
+        <i class="material-icons fa" data-rating="7">star_border</i>
+        <i class="material-icons fa" data-rating="8">star_border</i>
+        <i class="material-icons fa" data-rating="9">star_border</i>
+        <input type="hidden" name="comment[mark]" class="rating-value" value="<%= @comment.mark %>">
+      </div>
+<!-- End star rating system-->
+
+  <div class="field s12 l6" align="center"  >
+    <%= form.label :review do %> <b style="color:#ee6e73">Review:</b> <% end %>
+    <%= form.text_field :review, id: :comment_review %>
+  </div>
+
+  <div class="actions" align="center">
+    <%= form.submit 'Create Comment' ,class: "btn waves-effect waves-light"%>
+  </div>
+</div>
+
+<% end %>

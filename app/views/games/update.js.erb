@@ -1,0 +1,10 @@
+setTimeout(function() {
+  $('form input[name="commit"]').val('Change state');
+}, 400);
+
+if (<%= @game.errors.count %>) {
+  Materialize.toast('Some errors happend', 4000);
+} else {
+  $('form input[name="state"]').val(<%= @game.state %>);
+  Materialize.toast('The status of the game was updated', 4000);
+}

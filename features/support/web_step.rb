@@ -18,7 +18,20 @@ module NavigationHelpers
       gamers_url
     when /edit account/
       edit_user_registration_url
-
+    when /queries/
+      queries_url
+    when /new query/
+      new_query_url
+    when /last query/
+      query_url(Query.last)
+    when /titles/
+      titles_url
+    when /games/
+      games_url
+    when /^new game$/
+      new_game_url(params: {game_info: game_infos(:one).id})
+    when /^last game$/
+      game_url(Game.last)
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -37,16 +50,22 @@ module NavigationHelpers
     end
   end
 
-  def model_page(page, user)
+  def model_page(page, model)
     case page
-    when /^gamer/
-      gamer_url(user)
+    when /^gamer$/
+      gamer_url(users(model.to_sym))
     when /edit gamer/
-      edit_gamer_url(user)
+      edit_gamer_url(users(model.to_sym))
     when /friends/
-      friends_gamer_url(user)
+      friends_gamer_url(users(model.to_sym))
     when /blocks/
-      blocks_gamer_url(user)
+      blocks_gamer_url(users(model.to_sym))
+    when /query/
+      query_url(queries(model.to_sym))
+    when /^game$/
+      game_url(games(model.to_sym))
+    when /title/
+      title_url(game_infos(model.to_sym))
     end
   end
 
@@ -70,6 +89,8 @@ module NavigationHelpers
     # etc.
   })
 
+  # Testing API with mock-response
+  require 'webmock/cucumber'
 end
 
 World(NavigationHelpers)

@@ -64,6 +64,8 @@ group :test, :development do
   gem 'database_cleaner'
   # show html page when running tests with cucumber-rails
   gem 'launchy'
+  # Mock API requests
+  gem 'webmock'
 end
 
 # Authentication
@@ -71,3 +73,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+
+# API requests
+gem 'httparty'
+
+# Authorization library
+gem 'cancancan'

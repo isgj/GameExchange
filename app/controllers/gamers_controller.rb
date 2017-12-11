@@ -14,6 +14,8 @@ class GamersController < ApplicationController
   end
 
   def show
+    @comments = Comment.where("commented_id = ?",@gamer).limit(3)
+    @have_commented = Comment.where("commented_id = ? AND commentator_id = ?",@gamer,current_user)
   end
 
   def edit

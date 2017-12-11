@@ -1,9 +1,8 @@
-<div class="container">
   <% same_user = user_signed_in? && @gamer.id == current_user.id %>
 
-<div class="row">
+<div class="z-depth-1 col s8 row">
   <div class="col s12 l6">
-      <div class="col s3">
+      <div class="col s4">
         <p>Name:</p>
         <p>Age</p>
         <p>Gender</p>
@@ -11,7 +10,7 @@
         <p>Cell:</p>
         <p>E-mail:</p>
       </div>
-      <div class="col s9">
+      <div class="col s8">
         <% if same_user || @gamer.visibility %>
           <p><%= @gamer.name.blank? ? "______" : @gamer.name.split.map(&:capitalize).join(" ") %></p>
           <p><%= @gamer.age.blank? ? "_" : @gamer.age %></p>
@@ -29,35 +28,59 @@
         <% end %>
       </div>
 
-      <div class="col s3">
+      <div class="col s5">
         <p>Gamer Points:</p>
         <p>Valutation:</p>
       </div>
-      <div class="col s9">
+      <div class="col s7">
         <p><%= @gamer.points %></p>
         <p><%= @gamer.votes %> pts</p>
       </div>
   </div>
-  <div class="col s12 l6">
-      <img class="responsive-img s12 l6" src="<%= @gamer.photo %>"/>
+  <div class="col s10 l5">
+      <img class="responsive-img s10 l5" src="<%= @gamer.photo %>"/>
   </div>
 </div>
 
 <div class="row">
-    <div class="col s12 l6">
-        <div class="row">
-          Games <%= same_user ? "you posses:" : "" %> <br>
-          <% if same_user %>
-            <a id="scale-demo" href="#!" class="btn-floating btn-large scale-transition">
-            <i class="material-icons">add</i>
-          <% end %>
+  <div class="col s12 l6">
+    <% games = @gamer.hold_games.last(5) %>
+    <% if games.blank? %>
+      <div class="row">No games to show</div>
+      <div class="row">
+        <% if same_user %>
+          <%= link_to "Start adding a new game", titles_path %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="row">Games <%= same_user ? "you posses" : "" %></div>
+      <div class="row">
+        <% games.each do |game| %>
+          <a href="<%= game_path(game) %>">
+            <div class="chip col game-title">
+              <div class="truncate">
+                <%= game.game_info.name %>
+              </div>
+            </div>
           </a>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <%= link_to "Show collection", games_path(gamer: @gamer.id) %>
         </div>
-
-        <div class="row">
-           Comments:
+        <div class="col s6">
+          <% if same_user %>
+            <%= link_to "Add a new game", titles_path %>
+          <% end %>
         </div>
+      </div>
+    <% end %>
+    <div class="row">
+       Comments:
+        <%= render "comments", same_user: same_user %>
     </div>
+  </div>
 
     <div class="col s12 l6">
         <div class="row center-align">
@@ -79,4 +102,3 @@
         </div>
     </div>
   </div>
-</div>

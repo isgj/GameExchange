@@ -32,10 +32,16 @@
     </div>
 
     <main>
-      <div class="row">
+      <div class="container">
         <%= yield %>
       </div>
     </main>
-
+    <script type="text/javascript">
+    $(document).on('turbolinks:load', function(){
+      setTimeout(function(){
+        $('.alert').remove();
+      }, 5000);
+     })
+    </script>
   </body>
 </html>

@@ -22,8 +22,8 @@ class FriendshipTest < ActiveSupport::TestCase
   end
 #da completare per la parte di accettazione etc
   test "should friend and unfriend a user" do
-    one = users(:one)
-    two = users(:two)
+    one = users(:three)
+    two = users(:four)
     assert_not one.friends?(two)
     one.add_friend(two)
     assert one.friends?(two)

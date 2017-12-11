@@ -24,6 +24,9 @@ class User < ApplicationRecord
                           dependent: :destroy
   has_many :blockers, through: :passive_blocks, source: :blocker
 
+  has_many :comments, class_name: "Comment", foreign_key: "commented_id", dependent: :destroy
+  has_many :comments1, class_name: "Comment", foreign_key: "commentator_id", dependent: :destroy
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
@@ -33,6 +36,9 @@ class User < ApplicationRecord
   validates_length_of :age, is: 2, :allow_blank => true
   validates :photo, :format => URI::regexp(%w(http https)), :allow_blank => true
 
+  has_many :hold_games, class_name: 'Game', foreign_key: 'holder_id'
+  has_many :own_games, class_name: 'Game', foreign_key: 'owner_id', dependent: :destroy
+  has_many :rented, -> { where("state = ?", 4) }, class_name: 'Game', foreign_key:'owner_id'
 
   def self.from_omniauth(auth)
    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

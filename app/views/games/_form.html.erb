@@ -1,0 +1,49 @@
+<%= form_with(model: game, local: true) do |form| %>
+  <% if !@new && game.errors.any?%>
+  <div id="error_explanation">
+    <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+    <ul>
+      <% game.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <input type="hidden" name="game_info" value="<%= @g_i.id %>">
+  <% if !@platforms.blank? %>
+    <div class="input-field col s12">
+      <%= form.select :platform, class: 'icons' do %>
+        <option value="" disabled selected>Platforms</option>
+        <% @platforms.each do |p| %>
+          <option value="<%= p.id %>" class="left circle"
+            <% if p.photo.blank? %>
+              data-icon="http://materializecss.com/images/sample-1.jpg"
+            <% else %>
+              data-icon="<%= "https://" + p.photo %>"
+            <% end %>
+          > <%= p.name %></option>
+        <% end %>
+      <% end %>
+      <label>Please select a platform</label>
+    </div>
+  <% end %>
+  <div class="row">
+    <label>Conditions</label>
+    <div class="switch">
+      <label>
+        Used
+        <input type="hidden" name="game[note]" value="used">
+        <input type="checkbox" name="game[note]" value="new">
+        <span class="lever"></span>
+        New
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="actions">
+      <%= form.submit "Add", class: 'waves-effect waves-light btn-large' %>
+    </div>
+  </div>
+<% end %>

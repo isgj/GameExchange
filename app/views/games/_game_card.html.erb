@@ -1,0 +1,42 @@
+<% card_color = ['green darken-3', 'teal darken-2', 'pink lighten-1', 'blue-grey darken-1', 'orange darken-4'] %>
+
+<% games.each do |game| %>
+  <div class="col s12 l4">
+    <div class="card small">
+      <div class="card-image waves-effect waves-block waves-light">
+        <% if game.game_info.cover.blank? %>
+        <%= image_tag "game_no_cover.jpg", class: "activator" %>
+        <% else %>
+        <img src="<%= game.game_info.cover.gsub(/t_thumb/, 't_720p') %>" alt="Photo of the game" class="activator"/>
+        <% end %>
+      </div>
+      <div class="card-content <%= card_color[game.state] %>">
+        <span class="card-title activator grey-text text-darken-4 truncate">
+          <div class="col s10 truncate activator">
+            <%= game.game_info.name %>
+          </div>
+          <div class="col s2">
+            <i class="material-icons">more_vert</i>
+          </div>
+        </span>
+      </div>
+      <div class="card-action <%= card_color[game.state] %>">
+        <% if can? :read, game %>
+          <%= link_to 'Show the game', game_path(game) %>
+        <% else %>
+          <%= link_to 'Signin for more', new_user_session_path %>  
+        <% end %>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">
+          <%= game.game_info.name %>
+          <i class="material-icons right">close</i>
+        </span>
+        <p> <%= get_status(game.state) %></p>
+        <p>From <%= format_date(game.start_holding) %></p>
+        <p> <%= link_to cap_name(game.holder), gamer_path(game.holder) %></p>
+        <p> <%= cap_city(game.holder) %></p>
+      </div>
+    </div>
+  </div>
+<% end %>

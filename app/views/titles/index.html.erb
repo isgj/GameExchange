@@ -1,0 +1,27 @@
+<div class="row valign-middle">
+  <div class="col s12 l8">
+  <%= form_tag "/titles", method: "get", class: "col s12" do %>
+    <div class="row">
+      <div class="input-field col s8">
+        <i class="material-icons prefix">query_builder</i>
+        <%= search_field_tag :name_of_the_game %>
+        <%= label_tag :name_of_the_game %>
+      </div>
+
+      <div class="input-field col s4">
+        <%= button_tag class: "btn waves-effect waves-light" do %>
+          Search
+          <i class="material-icons right">search</i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div class="col s12 l4 right-align">
+    <%= link_to 'Make a new search', new_query_path %>
+  </div>
+</div>
+
+<div class="row">
+  <%= render 'queries/games_grid', size: 'l4' %>
+</div>

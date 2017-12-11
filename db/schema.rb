@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20171211095323) do
     t.index ["blocker_id"], name: "index_blocks_on_blocker_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.float "mark"
+    t.bigint "commentator_id", null: false
+    t.bigint "commented_id", null: false
+    t.string "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commentator_id"], name: "index_comments_on_commentator_id"
+    t.index ["commented_id"], name: "index_comments_on_commented_id"
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.integer "friender_id"
     t.integer "friended_id"
@@ -33,6 +44,55 @@ ActiveRecord::Schema.define(version: 20171211095323) do
     t.index ["friended_id"], name: "index_friendships_on_friended_id"
     t.index ["friender_id", "friended_id"], name: "index_friendships_on_friender_id_and_friended_id", unique: true
     t.index ["friender_id"], name: "index_friendships_on_friender_id"
+  end
+
+  create_table "game_infos", force: :cascade do |t|
+    t.integer "api_id"
+    t.string "name"
+    t.string "url"
+    t.text "summary"
+    t.integer "platforms", array: true
+    t.date "release_date"
+    t.string "cover"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_game_infos_on_api_id", unique: true
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.bigint "game_info_id", null: false
+    t.bigint "owner_id", null: false
+    t.bigint "holder_id", null: false
+    t.bigint "platform_id"
+    t.integer "state"
+    t.date "expire"
+    t.date "start_holding"
+    t.string "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_info_id"], name: "index_games_on_game_info_id"
+    t.index ["holder_id"], name: "index_games_on_holder_id"
+    t.index ["owner_id"], name: "index_games_on_owner_id"
+    t.index ["platform_id"], name: "index_games_on_platform_id"
+  end
+
+  create_table "platforms", force: :cascade do |t|
+    t.integer "api_id"
+    t.string "name"
+    t.string "photo"
+    t.string "url"
+    t.integer "generation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_platforms_on_api_id", unique: true
+  end
+
+  create_table "queries", force: :cascade do |t|
+    t.string "query"
+    t.integer "games", array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["query"], name: "index_queries_on_query", unique: true
   end
 
   create_table "requests", force: :cascade do |t|
@@ -73,4 +133,10 @@ ActiveRecord::Schema.define(version: 20171211095323) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "users", column: "commentator_id"
+  add_foreign_key "comments", "users", column: "commented_id"
+  add_foreign_key "games", "game_infos"
+  add_foreign_key "games", "platforms"
+  add_foreign_key "games", "users", column: "holder_id"
+  add_foreign_key "games", "users", column: "owner_id"
 end
