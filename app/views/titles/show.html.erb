@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col s12 l6">
+    <div class="row">
+      <% if @game.cover.blank? %>
+        <%= image_tag "game_no_cover.jpg", class: "game-info-img" %>
+      <% else %>
+        <img src="<%= @game.cover.gsub(/t_thumb/, 't_cover_big') %>" alt="photo of the game" class="game-info-img">
+      <% end %>
+    </div>
+    <div class="row">
+      <h5> <%= @game.name %> </h5>
+    </div>
+  </div>
+  <div class="col s12 l6">
+    <div class="row">
+      <% if !@game.release_date.blank? %>
+        <div class="col s3">Released:</div>
+        <div class="col s9"> <%= @game.release_date.to_formatted_s(:rfc822) %></div>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if !@platforms.blank? %>
+        <div class="col s3">Available for:</div>
+        <div class="col s9"> <%= @platforms.map {|p| p.name }.join(", ") %></div>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if !@game.url.blank? %>
+        <div class="col s3">More info:</div>
+        <div class="col s9"> <a href="<%= @game.url %>">@IGDB</a></div>
+      <% end %>
+    </div>
+    <div class="row">
+      <%= link_to 'Add to your collection', new_game_path(game_info: @game), class: 'btn waves-effect waves-light' %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <p class="flow-text"> <%= @game.summary %></p>
+</div>
+<div class="row">
+  <%= link_to 'Back to all titles', titles_path %>
+</div>

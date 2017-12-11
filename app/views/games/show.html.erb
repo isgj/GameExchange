@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col s12 l6">
+    <div class="row">
+      <% if @game.game_info.cover.blank? %>
+        <%= image_tag "game_no_cover.jpg", class: "game-info-img" %>
+      <% else %>
+        <img src="<%= @game.game_info.cover.gsub(/t_thumb/, 't_cover_big') %>" alt="photo of the game" class="game-info-img">
+      <% end %>
+    </div>
+    <div class="row">
+      <h5> <%= @game.game_info.name %> </h5>
+    </div>
+  </div>
+  <div class="col s12 l6">
+    <%= render 'game_info', game: @game %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var switchFn = function() {
+    var select = $('select');
+    var state = $('form input[name="state"]');
+    var btn = $('form .btn');
+    return function () {
+      if (select.val() == state.val()) {
+        btn.addClass('disabled');
+      } else {
+        btn.removeClass('disabled');
+      }
+    }
+  }
+
+  $(document).on('turbolinks:load', function() {
+    var fn = switchFn();
+    fn();
+    $('select').on('change', fn);
+    $('form').on('submit', (function() {
+      var input = $('form input[name="commit"]');
+      var btn = $('form .btn');
+      return function() {
+        input.val('Updating ...')
+        btn.addClass('disabled');
+      }
+    })());
+    $('.modal').modal();
+    $('.delete-button').off('click').on('click', function() {
+      console.log('callsda sda sd');
+      $('#delete-confirmation').modal('open');
+    });
+  });
+</script>

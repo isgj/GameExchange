@@ -1,0 +1,17 @@
+<div class="row">
+  <%= form_with(model: @query, local: true) do |f| %>
+  <div class="input-field col s12 l6 offset-l2">
+    <i class="material-icons prefix">query_builder</i>
+    <%= f.text_field :query, id: 'query' %>
+    <%= f.label :query %>
+  </div>
+  <div class="input-field col s6 l2 offset-s3">
+    <%= button_tag class: "btn waves-effect waves-light" do %>
+    Search
+    <i class="material-icons right">search</i>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<%= render 'query_grid', title: 'Recently added games' %>
