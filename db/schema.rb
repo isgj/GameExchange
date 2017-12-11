@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127101303) do
+ActiveRecord::Schema.define(version: 20171211095323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "blocker_id"
+    t.integer "blocked_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blocked_id"], name: "index_blocks_on_blocked_id"
+    t.index ["blocker_id", "blocked_id"], name: "index_blocks_on_blocker_id_and_blocked_id", unique: true
+    t.index ["blocker_id"], name: "index_blocks_on_blocker_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.float "mark"
@@ -24,6 +34,16 @@ ActiveRecord::Schema.define(version: 20171127101303) do
     t.datetime "updated_at", null: false
     t.index ["commentator_id"], name: "index_comments_on_commentator_id"
     t.index ["commented_id"], name: "index_comments_on_commented_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "friender_id"
+    t.integer "friended_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friended_id"], name: "index_friendships_on_friended_id"
+    t.index ["friender_id", "friended_id"], name: "index_friendships_on_friender_id_and_friended_id", unique: true
+    t.index ["friender_id"], name: "index_friendships_on_friender_id"
   end
 
   create_table "game_infos", force: :cascade do |t|
@@ -73,6 +93,16 @@ ActiveRecord::Schema.define(version: 20171127101303) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["query"], name: "index_queries_on_query", unique: true
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer "applier_id"
+    t.integer "recevier_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["applier_id", "recevier_id"], name: "index_requests_on_applier_id_and_recevier_id", unique: true
+    t.index ["applier_id"], name: "index_requests_on_applier_id"
+    t.index ["recevier_id"], name: "index_requests_on_recevier_id"
   end
 
   create_table "users", force: :cascade do |t|

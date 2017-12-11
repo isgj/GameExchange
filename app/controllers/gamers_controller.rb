@@ -29,6 +29,17 @@ class GamersController < ApplicationController
     end
   end
 
+  def friends
+    @friends = @gamer.friends
+    @requests = @gamer.requests
+    render 'show_friend'
+  end
+
+  def blocks
+    @blocked = @gamer.blocking
+    render 'show_block'
+  end
+
   private
 
     def gamer_params

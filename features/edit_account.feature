@@ -3,7 +3,9 @@ Feature: Logged user can edit his profile
 #This scenario is not complete
 Scenario: Edit credential
   Given I am the user "test"
-  And I am on the "edit user" page
+  And I am on the "home" page
+  When I click the "Edit account" "link"
+  Then I should be on the "edit account" page
   When I fill in "New password" with "newpassword"
   And I fill in "Password confirmation" with "newpassword"
   And I fill in "Current password" with "testpassword"
@@ -12,7 +14,7 @@ Scenario: Edit credential
 
 Scenario: Delete profile
   Given I am the user "test"
-  And I am on the "edit user" page
+  And I am on the "edit account" page
   When I click the "delete" "link"
   And I click the "Confirm" "button"
   Then I should be on the "home" page

@@ -6,6 +6,28 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+#Users
+User.create!(name: "GameExchange Example",
+             email: "GameExchange@example.com",
+             password:              "example",
+             password_confirmation: "example")
+
+20.times do |n|
+  name = Faker::Name.name
+  email = "GameExchange-#{n+1}@example.com"
+  password = "password"
+  User.create!(name: name,
+               email: email,
+               password:              password,
+               password_confirmation: password)
+end
+
+# Friends relationships
+users = User.all
+user  = users.first
+friending = users[2..20]
+friending.each { |friended| user.add_friend(friended) }
+
 Platform.create([
   {
     "api_id": 3,

@@ -16,7 +16,7 @@ module NavigationHelpers
       new_user_registration_url
     when /gamers/
       gamers_url
-    when /edit user/
+    when /edit account/
       edit_user_registration_url
     when /queries/
       queries_url
@@ -56,6 +56,10 @@ module NavigationHelpers
       gamer_url(users(model.to_sym))
     when /edit gamer/
       edit_gamer_url(users(model.to_sym))
+    when /friends/
+      friends_gamer_url(users(model.to_sym))
+    when /blocks/
+      blocks_gamer_url(users(model.to_sym))
     when /query/
       query_url(queries(model.to_sym))
     when /^game$/

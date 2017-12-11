@@ -3,11 +3,11 @@
 one:
   mark: 1.5
   commentator: one
-  commented: one
+  commented: two
   review: MyString
 
 two:
   mark: 1.5
   commentator: two
-  commented: two
+  commented: one
   review: MyString

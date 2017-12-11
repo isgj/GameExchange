@@ -30,6 +30,10 @@ Then("I should see the {string}") do |content|
   assert page.has_content?(content)
 end
 
+Then("I should see {string} button") do |content|
+  page.has_button?(content)
+end
+
 Then("I should not see the {string}") do |content|
   assert_not page.has_content?(content)
 end

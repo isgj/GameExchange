@@ -83,8 +83,22 @@
   </div>
 
     <div class="col s12 l6">
-      Friends:
-      <!--temporary link to-->
-      <%=link_to 'gamers', gamers_path%>
+        <div class="row center-align">
+          <%= render 'shared/stats' %>
+        </div>
+        <div class="row center-align">
+          <% if current_user == @gamer %>
+            <%= render 'shared/blocked_stats' %>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <%= render 'friend_form' %>
+          </div>
+          <div class="col s6">
+            <%= render 'block_form' %>
+          </div>
+          <%= render 'friends_show_min' %>
+        </div>
     </div>
   </div>

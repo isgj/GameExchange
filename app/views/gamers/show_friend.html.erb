@@ -1,0 +1,70 @@
+<% if current_user == @gamer %>
+  <%= render 'show_requests' %>
+<% end %>
+
+<div class="row center-align">
+  <em>
+    <h4>
+      <% if @friends.blank? %>
+      No friends
+    </h4>
+  </em>
+</div>
+      <% else %>
+      Friends
+    </h4>
+  </em>
+</div>
+
+<% for friend in @friends %>
+  <% if params[:id].to_i == friend.friender_id %>
+    <% friend = User.find_by_id(friend.friended_id) %>
+  <% else %>
+    <% friend = User.find_by_id(friend.friender_id) %>
+  <% end %>
+
+<div class="col s12 l4">
+  <div class="card blue-grey darken-1">
+    <div class="card-profile white-text">
+      <div class="valing-wrapper">
+        <% if friend.photo.blank? %>
+          <%= image_tag "no_photo.jpg", class: "circle responsive-img activator card-profile-image" %>
+        <% else %>
+          <img src="<%= friend.photo %>" alt="Profile photo" class="circle responsive-img activator card-profile-image">
+        <% end %>
+        <a class="btn-floating activator waves-effect waves-light darken-2 right">
+          <i class="material-icons">expand_less</i>
+        </a>
+      </div>
+      <span class="card-title activator white-text darken-3">
+        <%= friend.name.blank? ? "Anomymous" : friend.name.split.map(&:capitalize).join(" ") %>
+      </span>
+      <p><%= friend.email %></p>
+      <p><%= friend.city.blank? ? "World" : friend.city %></p>
+    </div>
+
+    <div class="card-reveal">
+      <span class="card-title grey-text">
+        <%= friend.name.blank? ? "Anomymous" : friend.name.split.map(&:capitalize).join(" ") %>
+        <a class="btn-floating activator waves-effect waves-light darken-2 right">
+          <i class="material-icons">expand_more</i>
+        </a>
+      </span>
+      <div class="valign-wrapper"><i class="material-icons">email</i> <%= friend.email %> </div>
+      <div class="valign-wrapper">
+        <i class="material-icons">phone</i>
+        <%= friend.phone.blank? ? "_________" : friend.phone %>
+      </div>
+      <div class="valign-wrapper">
+        <i class="material-icons">star_half</i>
+        <%= friend.avg_vote %>
+      </div>
+    </div>
+    <div class="card-action">
+      <%= link_to "Visit profile", gamer_path(friend) %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% end %>

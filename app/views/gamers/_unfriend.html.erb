@@ -1,0 +1,11 @@
+<% if current_user.active_friendships.find_by(friended_id: @gamer.id) != nil %>
+  <%= form_for(current_user.active_friendships.find_by(friended_id: @gamer.id),
+    html: { method: :delete }) do |f| %>
+    <%= f.submit "unfriend", class: "btn" %>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.passive_friendships.find_by(friender_id: @gamer.id),
+    html: { method: :delete }) do |f| %>
+    <%= f.submit "unfriend", class: "btn" %>
+  <% end %>
+<% end %>
