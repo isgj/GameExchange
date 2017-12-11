@@ -16,7 +16,7 @@
   </div>
 -->
 
-
+<div class="container">
 <!-- star rating system -->
       <div class="star-rating edit-rating" align="center">
         <i class="material-icons fa" data-rating="0">star_border</i>
@@ -33,14 +33,14 @@
       </div>
 <!-- End star rating system-->
 
-  <div class="field s12 l6" align="center" >
-    <%= form.label :review %>
+  <div class="field s12 l6" align="center"  >
+    <%= form.label :review do %> <b style="color:#ee6e73">Review:</b> <% end %>
     <%= form.text_field :review, id: :comment_review %>
   </div>
 
   <div class="actions" align="center">
-    <%= form.submit %>
+    <%= form.submit 'Create Comment' ,class: "btn waves-effect waves-light"%>
   </div>
-
+</div>
 
 <% end %>

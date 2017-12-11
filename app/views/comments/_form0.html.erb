@@ -9,6 +9,12 @@
       </ul>
     </div>
   <% end %>
+<div class="container">
+  <div align="center">
+
+    <div class="chip" style="max-width: max-content;">
+      <img src="<%=@comment.commented.photo %>" alt="Contact Person"><%= @comment.commented.name %>
+    </div>
 <!-- star rating system -->
       <div class="star-rating edit-rating" align="center">
         <i class="material-icons fa" data-rating="0">star_border</i>
@@ -26,12 +32,14 @@
 <!-- End star rating system <input type="hidden" name="edit_stars" class="rating-value" value="0.00">-->
 
 
-  <div class="field s12 l6" align="center" >
+  <div class="field s12 l6"  >
     <%= form.label :review %>
     <%= form.text_field :review, id: :comment_review %>
   </div>
-
-  <div class="actions" align="center">
-    <%= form.submit %>
+  <div>
+    <%= form.submit "Submit",:class=>"btn waves-effect waves-light" %>
   </div>
+  <br>
+</div>
+</div>
 <% end %>
