@@ -30,7 +30,12 @@ class GamersController < ApplicationController
   def friends
     @friends = @gamer.friends
     @requests = @gamer.requests
-    render 'show_friends'
+    render 'show_friend'
+  end
+
+  def blocks
+    @blocked = @gamer.blocking
+    render 'show_block'
   end
 
   private

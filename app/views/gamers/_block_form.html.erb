@@ -1,0 +1,9 @@
+<% unless current_user == (@gamer) %>
+  <div id="block_form">
+  <% if current_user.blocking?(@gamer) %>
+    <%= render 'unblock' %>
+  <% else %>
+    <%= render 'block' %>
+  <% end %>
+  </div>
+<% end %>

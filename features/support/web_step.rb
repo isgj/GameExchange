@@ -18,6 +18,7 @@ module NavigationHelpers
       gamers_url
     when /edit account/
       edit_user_registration_url
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -42,6 +43,10 @@ module NavigationHelpers
       gamer_url(user)
     when /edit gamer/
       edit_gamer_url(user)
+    when /friends/
+      friends_gamer_url(user)
+    when /blocks/
+      blocks_gamer_url(user)
     end
   end
 

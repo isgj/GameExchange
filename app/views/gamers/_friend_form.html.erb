@@ -4,6 +4,8 @@
     <%= render 'unfriend' %>
   <% elsif !current_user.requests?(@gamer) %>
     <%= render 'request' %>
+  <% else %>
+    Your request is pending
   <% end %>
   </div>
 <% end %>

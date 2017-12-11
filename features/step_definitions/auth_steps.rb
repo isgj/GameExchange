@@ -30,6 +30,10 @@ Then("I should see the {string}") do |content|
   assert page.has_content?(content)
 end
 
+Then("I should see {string} button") do |content|
+  page.has_button?(content)
+end
+
 Then("I should not see the {string}") do |content|
   assert_not page.has_content?(content)
 end
@@ -45,6 +49,10 @@ end
 
 Given("I am on the {string} {string} page") do |page, user|
   visit model_page(page, users(user.to_sym))
+end
+
+Then("I should be on the {string} {string} page") do |page, user|
+    assert_equal model_page(page, users(user.to_sym)), current_url
 end
 
 Then("I should be on the {string} page of {string}") do |page, user|

@@ -57,4 +57,9 @@ class GamerControllerTest < ActionDispatch::IntegrationTest
     get friends_gamer_path(users(:one))
     assert_redirected_to new_user_session_path
   end
+
+  test "should redirect blocks when not logged in" do
+    get blocks_gamer_path(users(:one))
+    assert_redirected_to new_user_session_path
+  end
 end

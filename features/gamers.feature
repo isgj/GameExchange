@@ -38,3 +38,10 @@ Feature: Users can search
   Scenario: Search won't show private profile
     Then I should not see the "No name"
     And I should not see the "Anonymous"
+
+  Scenario: Send friend request
+    Given I am the user "one"
+    And I am on the "gamers" "three" page
+    When I click the "Ask friendship" "button"
+    Then I should be on the "gamers" "three" page
+    And I should see the "Your request is pending"

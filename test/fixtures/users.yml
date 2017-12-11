@@ -14,6 +14,16 @@ two:
   name: "Commodus"
   city: "Rome"
 
+three:
+    email: three@example.com
+    name: "Pierus"
+    city: "Rome"
+
+four:
+    email: four@example.com
+    name: "Marius"
+    city: "Rome"
+
 test:
   email: pass@test.com
   name: "Anon"
