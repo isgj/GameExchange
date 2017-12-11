@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col s12">
+  <%= form_tag "/games", method: "get", class: "col s12" do %>
+    <% if !@gamer.blank? %>
+      <input type="hidden" name="gamer" value="<%= @gamer.id %>">
+    <% end %>
+    <div class="row">
+      <div class="input-field col s12 m6 l4">
+        <i class="material-icons prefix">query_builder</i>
+        <%= search_field_tag :name_of_the_game %>
+        <%= label_tag :name_of_the_game %>
+      </div>
+
+      <div class="input-field col s12 m6 l4">
+        <i class="material-icons prefix">archive</i>
+        <select name="state" multiple>
+          <option value="" disabled selected>All statuses</option>
+          <option value="0">Owned</option>
+          <option value="1">For sale</option>
+          <option value="2">For gift</option>
+          <option value="3">For rent</option>
+          <option value="4">Rented</option>
+        </select>
+        <label>The status</label>
+      </div>
+
+      <div class="col s12 m6 l4 input-field">
+        <i class="material-icons prefix">location_searching</i>
+        <%= search_field_tag :city %>
+        <%= label_tag :city %>
+      </div>
+
+      <div class="input-field col s12 m6 l4">
+        <%= button_tag class: "btn waves-effect waves-light" do %>
+          Search
+          <i class="material-icons right">search</i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <h6>Results: <em> <%= pluralize(@games.count, 'game') %></em></h6>
+</div>
+<div class="row">
+  <%= render 'game_card', games: @games %>
+</div>
+
+<% if !@gamer.blank? %>
+  <div class="row">
+    <h6>Results: <em> <%= pluralize(@rented.count, 'game') %></em> rented</h6>
+  </div>
+  <div class="row">
+    <%= render 'game_card', games: @rented %>
+  </div>
+<% end %>

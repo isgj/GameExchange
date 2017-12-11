@@ -2,14 +2,14 @@
 
 one:
   api_id: 1
-  name: MyString
+  name: Platform1
   photo: MyString
   url: MyString
   generation: 1
 
 two:
   api_id: 2
-  name: MyString
+  name: Platform2
   photo: MyString
   url: MyString
   generation: 1

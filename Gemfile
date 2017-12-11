@@ -74,3 +74,6 @@ gem 'omniauth-facebook'
 
 # API requests
 gem 'httparty'
+
+# Authorization library
+gem 'cancancan'

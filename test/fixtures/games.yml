@@ -6,7 +6,6 @@ one:
   holder: one
   platform: one
   state: 0
-  expire: 2017-11-27
   start_holding: 2017-11-27
   note: MyString
 
@@ -15,7 +14,15 @@ two:
   owner: two
   holder: two
   platform: two
-  state: 0
-  expire: 2017-11-27
+  state: 1
+  start_holding: 2017-11-27
+  note: MyString
+
+three:
+  game_info: delete
+  owner: test
+  holder: test
+  platform: two
+  state: 2
   start_holding: 2017-11-27
   note: MyString

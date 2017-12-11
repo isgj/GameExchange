@@ -1,4 +1,5 @@
 <ul id="<%= data %>" class="dropdown-content">
+  <li><%= link_to 'Add a game', titles_path %></li>
   <li><%= link_to 'Show profile', gamer_path(current_user) %></li>
   <li><%= link_to 'Edit profile', edit_gamer_path(current_user)%></li>
   <li class="divider"></li>

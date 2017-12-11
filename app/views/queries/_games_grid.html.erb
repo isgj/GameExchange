@@ -1,17 +1,21 @@
 <% @games.each do |g| %>
-<div class="col s12 l4">
+<div class="col s12 <%= size %>">
   <div class="card small">
     <div class="card-image waves-effect waves-block waves-light">
       <% if g.cover.blank? %>
       <%= image_tag "game_no_cover.jpg", class: "activator" %>
       <% else %>
-      <img src="<%= g.cover.gsub(/t_thumb/, 't_720p') %>" alt="Photo of <th></th>e game" class="activator"/>
+      <img src="<%= g.cover.gsub(/t_thumb/, 't_720p') %>" alt="Photo of the game" class="activator"/>
       <% end %>
     </div>
     <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4 truncate">
-        <%= g.name %>
-        <i class="material-icons right">more_vert</i>
+      <span class="card-title activator grey-text text-darken-4">
+        <div class="col s11 truncate">
+          <%= g.name %>
+        </div>
+        <div class="col s1">
+          <i class="material-icons">more_vert</i>
+        </div>
       </span>
     </div>
     <div class="card-action">

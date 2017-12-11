@@ -50,3 +50,11 @@ end
 Then("I should be on the {string} page of {string}") do |page, id|
   assert_equal model_page(page, id), current_url
 end
+
+When("I select {string} from {string}") do |option, selection|
+  select option, :from => selection
+end
+
+Given("I am on the {string} page of {string}") do |page, id|
+  visit model_page(page, id)
+end

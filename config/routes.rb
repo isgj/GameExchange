@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'comments/delete'
 
   resources :gamers, only: [:index, :show, :update, :edit]
+  resources :gamers do
+    get 'games/:id', to: 'games#index'
+  end
+  resources :games
   resources :titles, only: [:index, :show]
   resources :queries, only: [:index, :show, :new, :create]
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

@@ -20,7 +20,7 @@ module QueryHelper
           api_id: g["id"],
           name: g["name"],
           summary: g["summary"],
-          url: g[:url],
+          url: g["url"],
           platforms: g["platforms"]
         )
         game_info.release_date = Time.at(g["first_release_date"]/1000) if g["first_release_date"]

@@ -9,8 +9,8 @@ Feature: Add new query
     When I fill in "query" with "new_query"
     And I click the "Search" "button"
     Then I should be on the "last query" page
-    And I should see the "Game1"
-    And I should not see the "Game2"
+    And I should see the "Super game 1"
+    And I should not see the "Funny play"
 
   Scenario: Search a query with existing platform
     Given I have the API mock for query-game

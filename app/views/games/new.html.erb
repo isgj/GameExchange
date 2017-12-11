@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col s12 l6">
+    <div class="row">
+      <% if @g_i.cover.blank? %>
+        <%= image_tag "game_no_cover.jpg", class: "game-info-img" %>
+      <% else %>
+        <img src="<%= @g_i.cover.gsub(/t_thumb/, 't_cover_big') %>" alt="photo of the game" class="game-info-img">
+      <% end %>
+    </div>
+    <div class="row">
+      <h5> <%= @g_i.name %> </h5>
+    </div>
+  </div>
+  <div class="col s12 l6">
+    <%= render 'form', game: @game %>
+  </div>
+</div>
+
+<div class="row">
+  <%= link_to 'Back', title_path(params[:game_info]) %>
+</div>
