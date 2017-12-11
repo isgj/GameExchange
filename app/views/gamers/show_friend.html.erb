@@ -16,6 +16,7 @@
   </em>
 </div>
 
+<div class="row">
 <% for friend in @friends %>
   <% if params[:id].to_i == friend.friender_id %>
     <% friend = User.find_by_id(friend.friended_id) %>
@@ -26,7 +27,7 @@
 <div class="col s12 l4">
   <div class="card blue-grey darken-1">
     <div class="card-profile white-text">
-      <div class="valing-wrapper">
+      <div class="valign-wrapper">
         <% if friend.photo.blank? %>
           <%= image_tag "no_photo.jpg", class: "circle responsive-img activator card-profile-image" %>
         <% else %>
@@ -66,5 +67,5 @@
   </div>
 </div>
 <% end %>
-
+</div>
 <% end %>
