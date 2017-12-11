@@ -1,9 +1,9 @@
 <div class="container">
   <% same_user = user_signed_in? && @gamer.id == current_user.id %>
 
-<div class="row">
+<div class="z-depth-1 col s8 row">
   <div class="col s12 l6">
-      <div class="col s3">
+      <div class="col s4">
         <p>Name:</p>
         <p>Age</p>
         <p>Gender</p>
@@ -11,7 +11,7 @@
         <p>Cell:</p>
         <p>E-mail:</p>
       </div>
-      <div class="col s9">
+      <div class="col s8">
         <% if same_user || @gamer.visibility %>
           <p><%= @gamer.name.blank? ? "______" : @gamer.name.split.map(&:capitalize).join(" ") %></p>
           <p><%= @gamer.age.blank? ? "_" : @gamer.age %></p>
@@ -29,17 +29,17 @@
         <% end %>
       </div>
 
-      <div class="col s3">
+      <div class="col s5">
         <p>Gamer Points:</p>
         <p>Valutation:</p>
       </div>
-      <div class="col s9">
+      <div class="col s7">
         <p><%= @gamer.points %></p>
         <p><%= @gamer.votes %> pts</p>
       </div>
   </div>
-  <div class="col s12 l6">
-      <img class="responsive-img s12 l6" src="<%= @gamer.photo %>"/>
+  <div class="col s10 l5">
+      <img class="responsive-img s10 l5" src="<%= @gamer.photo %>"/>
   </div>
 </div>
 
@@ -53,10 +53,7 @@
           <% end %>
           </a>
         </div>
-
-        <div class="row">
-           Comments:
-        </div>
+        <%= render "comments", same_user: same_user %>
     </div>
 
     <div class="col s12 l6">
