@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def cap_city(user)
     if user == current_user
-      return 'World' if user.name.blank?
+      return 'World' if user.city.blank?
       user.city.titleize
     else
       if !user.visibility || user.city.blank?
