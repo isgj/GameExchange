@@ -1,0 +1,53 @@
+<div class="row center-align"><h5>Edit platform info</h5></div>
+<div class="row">
+  <div class="col s12 l6">
+    <% if @platform.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@platform.errors.count, "error") %> occured while updating infos</h2>
+        <ul>
+          <% @platform.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_for(@platform, method: :patch) do |f| %>
+      <div class="row">
+        <div class="input-field">
+          <i class="material-icons prefix">add_a_photo</i>
+          <%= f.text_field :photo %>
+          <%= f.label :photo, "Insert photo URL" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <i class="material-icons prefix">devices</i>
+          <%= f.text_field :name %>
+          <%= f.label :name, "Insert the name" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <i class="material-icons prefix">link</i>
+          <%= f.text_field :url %>
+          <%= f.label :url, "Insert URL" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <i class="material-icons prefix">developer_board</i>
+          <%= f.number_field :generation %>
+          <%= f.label :generation, "Insert the generation" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="actions">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Update
+            <i class="material-icons right">update</i>
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -18,11 +18,11 @@ module NavigationHelpers
       gamers_url
     when /edit account/
       edit_user_registration_url
-    when /queries/
+    when /^queries$/
       queries_url
-    when /new query/
+    when /^new query$/
       new_query_url
-    when /last query/
+    when /^last query$/
       query_url(Query.last)
     when /titles/
       titles_url
@@ -64,8 +64,12 @@ module NavigationHelpers
       query_url(queries(model.to_sym))
     when /^game$/
       game_url(games(model.to_sym))
-    when /title/
+    when /^title$/
       title_url(game_infos(model.to_sym))
+    when /^platform$/
+      platform_url(platforms(model.to_sym))
+    when /^edit platform$/
+      edit_platform_url(platforms(model.to_sym))
     end
   end
 

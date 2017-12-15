@@ -33,3 +33,7 @@ private:
   email: private@email.email
   name: "No name"
   visibility: 'f'
+
+admin:
+  email: admin@mail.com
+  admin: t

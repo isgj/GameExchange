@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :platforms, only: [:show, :edit, :update]
   resources :games
   resources :titles, only: [:index, :show]
   resources :queries, only: [:index, :show, :new, :create]
