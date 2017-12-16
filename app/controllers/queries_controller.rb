@@ -11,7 +11,10 @@ class QueriesController < ApplicationController
 
   def show
     @query = Query.find_by_id(params[:id])
-    redirect_to queries_path, alert: "Query not found" unless @query
+    if @query.blank?
+      redirect_to queries_path, alert: "Query not found"
+      return
+    end
     @games = GameInfo.where("api_id IN (?)", @query.games)
     last_queries
   end
@@ -30,7 +33,7 @@ class QueriesController < ApplicationController
       # Make query to api => set of games_info
       @query = search_query(@query)
       @query.query.downcase!
-      if @query.save
+      if !@query.errors.any? && @query.save
         redirect_to @query, notice: 'A new query was added to the database'
       else
         last_info

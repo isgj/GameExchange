@@ -41,6 +41,10 @@ class Ability
       can [:update, :destroy], Game do |game|
         game.holder_id == user.id
       end
+
+      can :read, User do
+        !user.id.blank?
+      end
     end
   end
 end

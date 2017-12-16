@@ -3,24 +3,12 @@ class PlatformsController < ApplicationController
   load_and_authorize_resource
 
   def show
-    if @platform.blank?
-      redirect_to gamer_path(current_user), alert: 'Platform does not exist'
-      return
-    end
   end
 
   def edit
-    if @platform.blank?
-      redirect_to gamer_path(current_user), alert: 'Platform does not exist'
-      return
-    end
   end
 
   def update
-    if @platform.blank?
-      redirect_to gamer_path(current_user), alert: 'Platform does not exist'
-      return
-    end
     if @platform.update(update_params)
       redirect_to platform_path(@platform), notice: 'The platform was updated'
     else
@@ -31,6 +19,7 @@ class PlatformsController < ApplicationController
   private
     def set_platform
       @platform = Platform.find_by_id(params[:id])
+      redirect_to gamer_path(current_user), alert: 'Platform does not exist' unless @platform
     end
 
     def update_params

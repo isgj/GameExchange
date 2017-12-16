@@ -17,7 +17,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
   test "should not get index of gamer if logged out" do
     sign_out @user
     get games_url, params: {gamer: @user.id}
-    assert_redirected_to new_user_session_url
+    assert_redirected_to root_url
   end
 
   test "should get new" do
