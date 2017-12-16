@@ -70,6 +70,8 @@ module NavigationHelpers
       platform_url(platforms(model.to_sym))
     when /^edit platform$/
       edit_platform_url(platforms(model.to_sym))
+    when /^edit title$/
+      edit_title_url(game_infos(model.to_sym))
     end
   end
 
