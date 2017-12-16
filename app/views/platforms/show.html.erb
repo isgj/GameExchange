@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col s12 l6">
+    <div class="row">
+      <% if @platform.photo.blank? %>
+        <%= image_tag "game_no_cover.jpg", class: "game-info-img" %>
+      <% else %>
+        <img src="//<%= @platform.photo.gsub(/t_thumb/, 't_cover_big') %>" alt="photo of the console" class="game-info-img">
+      <% end %>
+    </div>
+    <div class="row">
+      <h5> <%= @platform.name %> </h5>
+    </div>
+  </div>
+  <div class="col s12 l6">
+    <% if !@platform.api_id.blank? %>
+      <div class="row">
+        <div class="col s3">API ID</div>
+        <div class="col s9"> <%= @platform.id %> </div>
+      </div>
+    <% end %>
+    <% if !@platform.generation.blank? %>
+      <div class="row">
+        <div class="col s3">Generation</div>
+        <div class="col s9"> <%= @platform.generation %> </div>
+      </div>
+    <% end %>
+    <% if !@platform.url.blank? %>
+      <div class="row">
+        <div class="col s3">More</div>
+        <div class="col s9"> <%= link_to '@IGDB', @platform.url %> </div>
+      </div>
+    <% end %>
+
+    <%= link_to 'Update info', edit_platform_path(@platform), class: 'btn waves-effect waves-light' %>
+  </div>
+</div>

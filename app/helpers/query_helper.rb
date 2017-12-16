@@ -50,6 +50,7 @@ module QueryHelper
 
       if !new_platform.save
         logger.error "Cannot save platform: #{p}"
+        new_platform.errors.full_messages.each {|m| logger.error m}
       end
     end
   end

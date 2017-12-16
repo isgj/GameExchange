@@ -55,7 +55,7 @@
       </div>
 
       <div class="card-action">
-        <% if user_signed_in? %>
+        <% if can? :read, gamer %>
           <%= link_to "Visit profile", gamer_path(gamer) %>
         <% else %>
           <%= link_to "Log in to view more", new_user_session_path %>
