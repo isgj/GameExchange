@@ -27,7 +27,7 @@
               <%= link_to(val.name, platform_path(val.id)) %> <%= ind < (@platforms.size - 1) ? ',' : ''  %>
             <% end %>
           <% else %>
-            <%= @platforms.map {|p| p.name }.join(", ") %></div>
+            <%= @platforms.map {|p| p.name }.join(", ") %>
           <% end %>
         </div>
       </div>
