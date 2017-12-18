@@ -40,6 +40,8 @@ class User < ApplicationRecord
   has_many :own_games, class_name: 'Game', foreign_key: 'owner_id', dependent: :destroy
   has_many :rented, -> { where("state = ?", 4) }, class_name: 'Game', foreign_key:'owner_id'
 
+  has_many :desires, dependent: :destroy
+
   def self.from_omniauth(auth)
    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
      user.email = auth.info.email
