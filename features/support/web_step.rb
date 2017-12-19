@@ -32,6 +32,8 @@ module NavigationHelpers
       new_game_url(params: {game_info: game_infos(:one).id})
     when /^last game$/
       game_url(Game.last)
+    when /^requests$/
+      desires_url
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

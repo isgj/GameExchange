@@ -3,7 +3,7 @@ require 'test_helper'
 class DesireTest < ActiveSupport::TestCase
 
   def setup
-    @d = Desire.new({user: users(:one), game: games(:two), statuses: [1]})
+    @d = Desire.new({user: users(:one), game: games(:three), statuses: [1]})
   end
 
   test "should not save without user" do
@@ -34,5 +34,5 @@ class DesireTest < ActiveSupport::TestCase
     assert_not @d.save
     assert @d.errors.count == 2
   end
-  
+
 end

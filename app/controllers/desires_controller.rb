@@ -3,6 +3,10 @@ class DesiresController < ApplicationController
   before_action :set_desire, only: [:update, :destroy]
   before_action :form_statuses, only: [:update, :create]
 
+  def index
+    @desires = current_user.desires.includes(:game)
+  end
+
   def create
     set_game
     authorize! :desire, @game
@@ -28,7 +32,11 @@ class DesiresController < ApplicationController
   def destroy
     authorize! :destroy, @desire
     @desire.destroy
-    redirect_to game_path(params[:game_id]), notice: 'Your request was successfully destroyed'
+    if params[:game_id]
+      redirect_to game_path(params[:game_id]), notice: 'Your request was successfully destroyed'
+    else
+      redirect_to desires_path, notice: 'Your request was successfully destroyed'
+    end
   end
 
   private

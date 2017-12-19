@@ -7,6 +7,11 @@ class DesiresControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
   end
 
+  test "should get index" do
+    get desires_url
+    assert_response :success
+  end
+
   test "should create requeste" do
     @game = games(:three)
     assert_difference('Desire.count') do
