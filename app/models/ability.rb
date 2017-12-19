@@ -42,6 +42,18 @@ class Ability
         game.holder_id == user.id
       end
 
+      can :desire, Game do |game|
+        game.owner != user && game.holder != user
+      end
+
+      can :update, Desire do |desire|
+        desire.user == user
+      end
+
+      can :destroy, Desire do |desire|
+        desire.user == user || desire.game.owner == user
+      end
+      
       can :read, User do
         !user.id.blank?
       end

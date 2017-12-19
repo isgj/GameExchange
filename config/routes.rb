@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   end
 
   resources :platforms, only: [:show, :edit, :update]
-  resources :games
+  resources :games do
+    resources :desires, only: [:create, :update, :destroy]
+  end
   resources :titles, only: [:index, :show, :edit, :update]
   resources :queries, only: [:index, :show, :new, :create]
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

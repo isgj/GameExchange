@@ -36,6 +36,7 @@ class GamesController < ApplicationController
 
 
   def show
+    @desires = @game.desires.includes(:user)
   end
 
   def new
