@@ -4,6 +4,7 @@ class Desire < ApplicationRecord
 
   validates :user, :game, :statuses, presence: true
   validate :check_user, :check_state
+  validate :check_uniq, on: :create
 
   private
     def check_user
@@ -24,6 +25,12 @@ class Desire < ApplicationRecord
         if statuses.select{|s| s>3 || s<1}.any?
           errors.add(:statuses, 'found unknow states')
         end
+      end
+    end
+
+    def check_uniq
+      if Desire.where('user_id = ? AND game_id = ?', user, game).any?
+        errors.add(:base, 'Duplicate not allowed')
       end
     end
 end
