@@ -1,8 +1,4 @@
 <div class="row">
-  <div class="col s3"></div>
-  <div class="col s9"></div>
-</div>
-<div class="row">
   <div class="col s3">Owner:</div>
   <div class="col s9"> <%= cap_name(game.owner) %> </div>
 </div>
@@ -15,44 +11,62 @@
   <div class="col s9"> <%= format_date(game.start_holding) %> </div>
 </div>
 <% if game.state == 4 %>
-<div class="row">
-  <div class="col s3">State:</div>
-  <div class="col s9"> Rented</div>
-</div>
-<div class="row">
-  <div class="col s3">Until:</div>
-  <div class="col s9"> <%= format_date(game.expire) %></div>
-</div>
+  <div class="row">
+    <div class="col s3">State:</div>
+    <div class="col s9"> Rented</div>
+  </div>
+  <div class="row">
+    <div class="col s3">Until:</div>
+    <div class="col s9"> <%= format_date(game.expire) %></div>
+  </div>
+  <% if Time.now >= game.expire %>
+    <div class="row red-text">
+      <div class="col s12">
+        Delay of <em><%= distance_of_time_in_words(Time.now, game.expire) %></em>
+      </div>
+    </div>
+  <% else %>
+    <div class="row green-text">
+      <div class="col s12">
+        To return in <em><%= distance_of_time_in_words(Time.now, game.expire) %></em>
+      </div>
+    </div>
+  <% end %>
 <% else %>
-<% states = ["Owned", "For sale", "For gift", "For rent"] %>
-<div class="row">
-  <div class="col s3">Status:</div>
-  <div class="col s12 m9">
+  <div class="row">
+    <div class="col s3">Note:</div>
+    <div class="col s9"> <%= game.note.capitalize %> </div>
+  </div>
+  <div class="row">
+    <div class="col s3">Status:</div>
     <% if can? :update, game %>
-      <%= form_with(model: game, remote: true, method: :patch) do |form| %>
-      <input type="hidden" name="state" value="<%= game.state %>">
-      <div class=" input-field col s6">
-        <%= form.select :state do %>
-        <option value="" disabled>Choose the new state</option>
-        <% states.each_with_index do |val, index| %>
-        <option value="<%= index %>" <%= "selected" if game.state == index %> > <%= val %></option>
-        <% end %>
+      <div class="col s12 m9" id="up-form">
+        <%= form_with(model: game, remote: true, method: :patch) do |form| %>
+          <input type="hidden" name="state" value="<%= game.state %>">
+          <div class=" input-field col s6">
+            <%= form.select :state do %>
+              <option value="" disabled>Choose the new state</option>
+              <% for i in 0..3 %>
+                <option value="<%= i %>" <%= "selected" if game.state == i %> > <%= get_status(i) %></option>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="input-field col s6">
+            <%= form.submit "Change status", class: 'btn waves-effect waves-light disabled' %>
+          </div>
         <% end %>
       </div>
-      <div class="input-field col s6">
-        <%= form.submit "Change status", class: 'btn waves-effect waves-light disabled' %>
-      </div>
-      <% end %>
     <% else %>
-      <%= get_status(game.state) %>
+      <div class="col s9">
+        <%= get_status(game.state) %>
+      </div>
     <% end %>
   </div>
-</div>
 <% end %>
 
 <% if can? :destroy, game %>
   <div class="row">
-    <div class="col offset-s3">
+    <div class="col">
       <button class="btn delete-button red">Delete</button>
     </div>
     <div id="delete-confirmation" class="modal">

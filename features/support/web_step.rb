@@ -32,6 +32,8 @@ module NavigationHelpers
       new_game_url(params: {game_info: game_infos(:one).id})
     when /^last game$/
       game_url(Game.last)
+    when /^requests$/
+      desires_url
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -72,6 +74,8 @@ module NavigationHelpers
       edit_platform_url(platforms(model.to_sym))
     when /^edit title$/
       edit_title_url(game_infos(model.to_sym))
+    when /^desire$/
+      desire_url(desires(model.to_sym))
     end
   end
 

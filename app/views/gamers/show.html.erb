@@ -41,6 +41,11 @@
       <img class="responsive-img s10 l5" src="<%= @gamer.photo %>"/>
   </div>
 </div>
+<% if same_user %>
+  <div class="row">
+    <%= link_to 'Show your game requests', desires_path %>
+  </div>
+<% end %>
 
 <div class="row">
   <div class="col s12 l6">

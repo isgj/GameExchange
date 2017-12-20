@@ -62,3 +62,11 @@ end
 Given("I am on the {string} page of {string}") do |page, id|
   visit model_page(page, id)
 end
+
+When("I check {string}") do |check_box|
+  check check_box
+end
+
+When("I choose {string}") do |radio|
+  choose radio
+end

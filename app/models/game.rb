@@ -4,6 +4,8 @@ class Game < ApplicationRecord
   belongs_to :holder, class_name: "User"
   belongs_to :platform, optional: true
 
+  has_many :desires, dependent: :destroy
+
   validates :state, inclusion: {in: 0..4}
   validates :start_holding, presence: true
   validate :expire_after_hold, :expire_in_rented, :has_platforms
@@ -11,7 +13,7 @@ class Game < ApplicationRecord
   private
   def expire_after_hold
     if !expire.blank?
-      errors.add(:expire, "should be after you hold the game") if expire >= start_holding
+      errors.add(:expire, "should be after you hold the game") if expire <= start_holding
     end
   end
 
