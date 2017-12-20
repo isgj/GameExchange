@@ -39,7 +39,7 @@ class DesiresController < ApplicationController
     authorize! :destroy, @desire
     @desire.destroy
     if params[:game_id]
-      redirect_to game_path(params[:game_id]), notice: 'Your request was successfully destroyed'
+      redirect_to game_path(params[:game_id]), notice: 'The request was successfully destroyed'
     else
       redirect_to desires_path, notice: 'Your request was successfully destroyed'
     end

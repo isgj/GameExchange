@@ -21,4 +21,4 @@ Feature: User can handle requests
     Given I am on the "game" page of "two"
     When I click the "Delete" "link"
     Then I should be on the "game" page of "two"
-    And I should see the "Your request was successfully destroyed"
+    And I should see the "The request was successfully destroyed"
