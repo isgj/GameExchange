@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :rent_back]
   before_action :authenticate_user!, except: [:index]
   before_action :set_title, only: [:new, :create]
 
@@ -81,6 +81,25 @@ class GamesController < ApplicationController
     authorize! :destroy, @game
     @game.destroy
     redirect_to gamer_url(current_user), notice: 'Game was successfully destroyed'
+  end
+
+  def rent_back
+    authorize! :rent_back, @game
+    expire = @game.expire
+    new_params = {
+      holder: @game.owner,
+      start_holding: Time.now,
+      expire: nil,
+      state: 0,
+      note: 'Back from rent'
+    }
+    if @game.update(new_params)
+      @game.owner.add_point 5
+      current_user.add_point Time.now > expire ? 2 : 5
+      redirect_to @game, notice: 'The game was returned'
+    else
+      redirect_to @game, alert: 'Some errors occured while returning the game'
+    end
   end
 
   private

@@ -121,4 +121,10 @@ class User < ApplicationRecord
   def friends?(other_user)
     self.friends.find_by_friended_id(other_user) != nil || self.friends.find_by_friender_id(other_user) != nil
   end
+
+  # Add point to the user
+  def add_point(p)
+    self.points += p
+    self.save
+  end
 end

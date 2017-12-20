@@ -50,6 +50,10 @@ class Ability
         game.owner_id == user.id && game.state != 4
       end
 
+      can :rent_back, Game do |game|
+        game.holder_id == user.id && game.state == 4
+      end
+      
       can :update, Desire do |desire|
         desire.user == user
       end

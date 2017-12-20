@@ -51,7 +51,7 @@ class GamesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update game" do
     patch game_url(@game), xhr: true, params: { game: {state: 3} }
-    assert_equal 3, Game.last.state
+    assert_equal 3, Game.find(@game.id).state
   end
 
   test "should destroy game" do
