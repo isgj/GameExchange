@@ -8,4 +8,4 @@ one:
 two:
   user: two
   game: one
-  statuses: [1]
+  statuses: [1, 2, 3]

@@ -28,6 +28,7 @@ $( document ).on('turbolinks:load', function() {
     hover: false,
     gutter: 1
   });
+  $('ul.tabs').tabs();
 });
 
 $(document).on('turbolinks:load', function(){

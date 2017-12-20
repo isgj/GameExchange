@@ -66,3 +66,7 @@ end
 When("I check {string}") do |check_box|
   check check_box
 end
+
+When("I choose {string}") do |radio|
+  choose radio
+end

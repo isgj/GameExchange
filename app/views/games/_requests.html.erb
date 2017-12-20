@@ -1,4 +1,8 @@
 <% my_desire = nil %>
+<% is_owner = false %>
+<% if can? :accept_request, @game  %>
+  <% is_owner = true %>
+<% end %>
 <div class="row">
   <% if @desires.any? %>
     <% req = [] %>
@@ -16,21 +20,33 @@
       </ul>
       <% for i in 0..2 %>
         <div id="status-<%= i + 1 %>" class="col s12">
-          <% req[i].each do |r| %>
-            <% r.user == current_user ? my_desire = r : nil %>
-            <div class="chip">
-              <% if r.user.photo.blank? %>
-                <%= image_tag "no_photo.jpg" %>
-              <% else %>
-                <img src="<%= r.user.photo %>" alt="Profile photo">
-              <% end %>
-              <a href= "<%= gamer_path(r.user) %>">
-                <%= cap_name(r.user) %>
-              </a>
-            </div>
-          <% end %>
           <% if req[i].empty? %>
             <div class="center-align"><h5>No <%= tabs[i] %> to show</h5></div>
+          <% else %>
+            <ul class="collection">
+              <% req[i].each do |r| %>
+                <% r.user == current_user ? my_desire = r : nil %>
+                  <li class="collection-item">
+                    <div>
+                      <div class="chip">
+                        <% if r.user.photo.blank? %>
+                          <%= image_tag "no_photo.jpg" %>
+                        <% else %>
+                          <img src="<%= r.user.photo %>" alt="Profile photo">
+                        <% end %>
+                        <a href= "<%= gamer_path(r.user) %>">
+                          <%= cap_name(r.user) %>
+                        </a>
+                      </div>
+                      <% if is_owner %>
+                        <%= link_to desire_path(r), class: 'secondary-content' do %>
+                          <i class="material-icons">send</i>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </li>
+              <% end %>
+            </ul>
           <% end %>
         </div>
       <% end %>
