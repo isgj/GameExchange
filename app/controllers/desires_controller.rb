@@ -64,6 +64,8 @@ class DesiresController < ApplicationController
     end
 
     if @game.update(new_params)
+      @desire.user.add_point 5
+      current_user.add_point 5
       @desire.destroy
       redirect_to game_path(params[:game_id]), notice: 'The request was accepted'
     else

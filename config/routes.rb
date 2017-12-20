@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :desires, only: [:create, :update, :destroy] do
       patch :accept, on: :member
     end
+    patch :rent_back, on: :member
   end
   resources :desires, only: [:index, :destroy, :show]
   resources :titles, only: [:index, :show, :edit, :update]
