@@ -13,7 +13,7 @@ class Game < ApplicationRecord
   private
   def expire_after_hold
     if !expire.blank?
-      errors.add(:expire, "should be after you hold the game") if expire >= start_holding
+      errors.add(:expire, "should be after you hold the game") if expire <= start_holding
     end
   end
 

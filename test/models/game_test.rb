@@ -11,7 +11,7 @@ class GameTest < ActiveSupport::TestCase
   end
 
   test "should not expire before holding" do
-    @g.expire = 1.day.after
+    @g.expire = 1.day.before
     @g.state = 4
     assert_not @g.save
   end
