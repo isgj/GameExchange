@@ -1,0 +1,30 @@
+<% caption_align = ['center-align', 'left-align', 'right-align'] %>
+
+<div class="row center-align">
+  <h4><em>Lastest games added</em></h4>
+</div>
+
+<div class="slider">
+ <ul class="slides">
+  <% for game in @games %>
+    <li>
+      <% if game.game_info.cover.blank? %>
+        <%= image_tag "game_no_cover.jpg"%>
+      <% else %>
+        <img src="<%= game.game_info.cover.gsub(/t_thumb/, 't_720p') %>" alt="Photo of the game"/>
+      <% end %>
+      <div style="opacity: 0.8">
+        <div class="caption card-panel grey lighten-1 <%= caption_align[1+rand(3)] %>">
+          <h3 class="grey-text text-darken-2"><em><%= game.game_info.name %></em></h3>
+          <% if can? :read, game %>
+            <h5 class="light blue-text text-darken-3"><%= link_to 'Show the game', game_path(game) %></h5>
+          <% else %>
+            <h5 class="light blue-text text-darken-3"><%= link_to 'Signin for more', new_user_session_path %></h5>
+          <% end %>
+        </div>
+
+      </div>
+    </li>
+   <% end %>
+  </ul>
+</div>
