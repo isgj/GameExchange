@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
     end
 
     def get_games
-      @games = Game.order("id DESC").limit(6)
+      @games = Game.order("id DESC").limit(6).includes(:game_info)
     end
 
     def get_titles

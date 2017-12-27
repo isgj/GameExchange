@@ -45,6 +45,11 @@ class Ability
       can :read, User do
         !user.id.blank?
       end
+
+      #Title permissions
+      can :read, GameInfo do
+        !user.id.blank?
+      end
     end
   end
 end

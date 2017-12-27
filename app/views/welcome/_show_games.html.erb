@@ -15,7 +15,7 @@
       <% end %>
       <div style="opacity: 0.8">
         <div class="caption card-panel grey lighten-1 <%= caption_align[1+rand(3)] %>">
-          <h3 class="grey-text text-darken-2"><em><%= game.game_info.name %></em></h3>
+          <h3 class="black-text"><em><%= game.game_info.name %></em></h3>
           <% if can? :read, game %>
             <h5 class="light blue-text text-darken-3"><%= link_to 'Show the game', game_path(game) %></h5>
           <% else %>
