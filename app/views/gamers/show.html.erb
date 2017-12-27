@@ -45,6 +45,16 @@
   <div class="row">
     <%= link_to 'Show your game requests', desires_path %>
   </div>
+<% else %>
+  <% if @gamer.admin? %>
+    <div class="row right-align"><div class="btn">Administrator</div></div>
+  <% end %>
+<% end %>
+
+<% if !@gamer.admin? && can?(:promote, @gamer) %>
+  <div class="row right-align">
+    <%= link_to 'Promote to admin', promote_gamer_path(@gamer), {method: :patch, class: 'btn wave-effect wave-light'} %>
+  </div>
 <% end %>
 
 <div class="row">

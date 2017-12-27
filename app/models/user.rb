@@ -127,4 +127,10 @@ class User < ApplicationRecord
     self.points += p
     self.save
   end
+
+  # Promote to admin
+  def make_admin
+    self.admin = true
+    self.save
+  end
 end
