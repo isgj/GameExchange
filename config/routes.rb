@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :gamers, only: [:index, :show, :update, :edit]
   resources :gamers do
     resources :comments
+    patch :promote, on: :member
   end
 
   resources :platforms, only: [:show, :edit, :update]

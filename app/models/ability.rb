@@ -53,7 +53,7 @@ class Ability
       can :rent_back, Game do |game|
         game.holder_id == user.id && game.state == 4
       end
-      
+
       can :update, Desire do |desire|
         desire.user == user
       end
@@ -64,6 +64,10 @@ class Ability
 
       can :read, User do
         !user.id.blank?
+      end
+
+      can :promote, User do
+        user.admin?
       end
     end
   end
