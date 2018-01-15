@@ -31,7 +31,7 @@ Then("I should see the {string}") do |content|
 end
 
 Then("I should see {string} button") do |content|
-  page.has_button?(content)
+  page.has_button?(content, visible: true)
 end
 
 Then("I should not see the {string}") do |content|

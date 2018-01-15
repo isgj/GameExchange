@@ -83,10 +83,8 @@
   </div>
 
     <div class="col s12 l6">
-        <div class="row center-align">
+        <div class="row">
           <%= render 'shared/stats' %>
-        </div>
-        <div class="row center-align">
           <% if current_user == @gamer %>
             <%= render 'shared/blocked_stats' %>
           <% end %>
