@@ -1,22 +1,23 @@
   <% same_user = user_signed_in? && @gamer.id == current_user.id %>
+  <% frnd = @gamer.friends?(current_user) %>
 
 
 <div class="USER z-depth-1 col row">
   <div class="INFO_AND_PHOTO row">
     <table style="margin-left: 10px;">
-      <% if same_user || @gamer.visibility %>
+
       <td>
         <table>
 <!-- non si puo mettere edit name con link edit profile quando non e impostato??? -->
-          <tr><td><i class="material-icons prefix">face</i></td><td><b>Name:</b></td><td><%= @gamer.name.blank? ? "______" : @gamer.name.split.map(&:capitalize).join(" ") %></td></tr>
-          <tr><td><i class="material-icons prefix">cake</i></td><td><b>Age:</b></td><td><%= @gamer.age.blank? ? "_" : @gamer.age %></td></tr>
-          <tr><td><i class="material-icons prefix">wc</i></td><td><b>Gender:</b></td><td><%= @gamer.gender.blank? ? "_" : @gamer.gender == "m" ? "Male" : "Female" %></td></tr>
-          <tr><td><i class="material-icons prefix">location_city</i></td><td><b>City:</b></td><td><%= @gamer.city.blank? ? "______" : @gamer.city.split.map(&:capitalize).join(" ")%></td></tr>
-          <tr><td><i class="material-icons prefix">local_phone</i></td><td><b>Cell:</b></td><td><%= @gamer.phone.blank? ? "_________" : @gamer.phone %></td></tr>
-          <tr><td><i class="material-icons prefix">email</i></td><td><b>E-mail:</b></td><td><%= @gamer.email %></td></tr>
+          <tr><td><i class="material-icons prefix">face</i></td><td><b>Name:</b></td><td><%= cap_name_i(@gamer, frnd) %></td></tr>
+          <tr><td><i class="material-icons prefix">cake</i></td><td><b>Age:</b></td><td><%= cap_age(@gamer, frnd) %></td></tr>
+          <tr><td><i class="material-icons prefix">wc</i></td><td><b>Gender:</b></td><td><%= cap_gender(@gamer, frnd) %></td></tr>
+          <tr><td><i class="material-icons prefix">location_city</i></td><td><b>City:</b></td><td><%= cap_city_i(@gamer, frnd) %></td></tr>
+          <tr><td><i class="material-icons prefix">local_phone</i></td><td><b>Cell:</b></td><td><%= cap_phone_i(@gamer, frnd) %></td></tr>
+          <tr><td><i class="material-icons prefix">email</i></td><td><b>E-mail:</b></td><td><%= cap_email_i(@gamer, frnd) %></td></tr>
         </table>
       </td>
-      <% end %>
+
       <td>
         <div class="col s3 l5">
           <img class="responsive-img" src="<%= @gamer.photo %>"/>

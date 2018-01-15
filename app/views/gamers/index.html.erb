@@ -30,23 +30,23 @@
           </a>
         </div>
         <span class="card-title activator white-text darken-3">
-          <%= (hideProfile || gamer.name.blank?) ? "Anomymous" : gamer.name.split.map(&:capitalize).join(" ") %>
+          <%= cap_name(gamer) %>
         </span>
-        <p><%= hideProfile ? "_____" : gamer.email %></p>
-        <p><%= (hideProfile || gamer.city.blank?) ? "World" : gamer.city %></p>
+        <p><%= cap_email(gamer) %></p>
+        <p><%= cap_city(gamer) %></p>
       </div>
 
       <div class="card-reveal">
         <span class="card-title grey-text">
-          <%= (hideProfile || gamer.name.blank?) ? "Anomymous" : gamer.name.split.map(&:capitalize).join(" ") %>
+          <%= cap_name(gamer) %>
           <a class="btn-floating activator waves-effect waves-light darken-2 right">
             <i class="material-icons">expand_more</i>
           </a>
         </span>
-        <div class="valign-wrapper"><i class="material-icons">email</i> <%= hideProfile ? "_____" : gamer.email %> </div>
+        <div class="valign-wrapper"><i class="material-icons">email</i> <%= cap_email(gamer) %> </div>
         <div class="valign-wrapper">
           <i class="material-icons">phone</i>
-          <%= (hideProfile || gamer.phone.blank?) ? "_________" : gamer.phone %>
+          <%= cap_phone(gamer) %>
         </div>
         <div class="valign-wrapper">
           <i class="material-icons">star_half</i>

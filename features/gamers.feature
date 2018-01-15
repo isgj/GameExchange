@@ -37,4 +37,3 @@ Feature: Users can search
 
   Scenario: Search won't show private profile
     Then I should not see the "No name"
-    And I should not see the "Anonymous"
