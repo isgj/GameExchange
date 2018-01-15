@@ -11,10 +11,17 @@ Rails.application.routes.draw do
   resources :gamers, only: [:index, :show, :update, :edit]
   resources :gamers do
     resources :comments
+    patch :promote, on: :member
   end
 
   resources :platforms, only: [:show, :edit, :update]
-  resources :games
+  resources :games do
+    resources :desires, only: [:create, :update, :destroy] do
+      patch :accept, on: :member
+    end
+    patch :rent_back, on: :member
+  end
+  resources :desires, only: [:index, :destroy, :show]
   resources :titles, only: [:index, :show, :edit, :update]
   resources :queries, only: [:index, :show, :new, :create]
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

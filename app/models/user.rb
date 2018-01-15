@@ -40,6 +40,8 @@ class User < ApplicationRecord
   has_many :own_games, class_name: 'Game', foreign_key: 'owner_id', dependent: :destroy
   has_many :rented, -> { where("state = ?", 4) }, class_name: 'Game', foreign_key:'owner_id'
 
+  has_many :desires, dependent: :destroy
+
   def self.from_omniauth(auth)
    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
      user.email = auth.info.email
@@ -118,5 +120,17 @@ class User < ApplicationRecord
   #Returns true if the users are friends
   def friends?(other_user)
     self.friends.find_by_friended_id(other_user) != nil || self.friends.find_by_friender_id(other_user) != nil
+  end
+
+  # Add point to the user
+  def add_point(p)
+    self.points += p
+    self.save
+  end
+
+  # Promote to admin
+  def make_admin
+    self.admin = true
+    self.save
   end
 end

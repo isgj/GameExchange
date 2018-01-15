@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col s12 l6">
+    <div class="row">
+      <% if @game_info.cover.blank? %>
+        <%= image_tag "game_no_cover.jpg", class: "game-info-img" %>
+      <% else %>
+        <img src="<%= @game_info.cover.gsub(/t_thumb/, 't_cover_big') %>" alt="photo of the game" class="game-info-img">
+      <% end %>
+    </div>
+    <div class="row">
+      <h5> <%= @game_info.name %> </h5>
+    </div>
+  </div>
+  <div class="col s12 l6">
+    <div class="row centet-align"> <h6>Request from <em><%= cap_name(@desire.user) %></em></h6></div>
+    <% if @game.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@game.errors.count, "error") %> occured while accepting the request</h2>
+        <ul>
+          <% @game.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form_for(@desire, method: :patch, url: accept_game_desire_path(@desire.game, @desire)) do |f| %>
+      <%= f.label 'Choose one request to accept' %>
+      <div class="row">
+        <p>
+          <% st = ['Sale', 'Gift', 'Rent'] %>
+          <% for i in 1..3 %>
+            <%= radio_button_tag 'status', i, false, {class: 'with-gap', disabled: (@desire.statuses.include?(i) ? nil : 'disabled')} %>
+            <%= label_tag "status_#{i}", st[i-1], value: i %>
+          <% end %>
+        </p>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <i class="material-icons prefix">date_range</i>
+          <%= text_field_tag :expire, 1.day.after.strftime('%d %B, %Y'), {class: 'datepicker'} %>
+          <%= label_tag :expire %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="actions">
+          <%= f.submit "Accept", class: 'waves-effect waves-light btn' %>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <%= link_to game_desire_path(@desire.game, @desire), method: :delete, class: 'waves-effect waves-green btn red' do %>
+        Delete this request<i class='material-icons right'>delete_forever</i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var changeHandler = function() {
+    var checked = $('#status_3')[0];
+    var expire = $('#expire')
+    return function() {
+      if (checked.checked) {
+        expire.removeAttr('disabled')
+      } else {
+        expire.attr('disabled','disabled')
+      }
+    }
+  }
+
+  $(document).on('turbolinks:load', function() {
+    var fn = changeHandler();
+    fn();
+    $('input[type=radio][name=status]').on('change', fn);
+    var date = new Date();
+    var min = new Date();
+    var max = new Date();
+    min.setDate(date.getDate() + 1);
+    max.setFullYear(date.getFullYear() + 1)
+    $('.datepicker').pickadate({
+      selectMonths: true,
+      selectYears: 2,
+      min: min,
+      max: max,
+      today: '',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: false
+    });
+  })
+</script>

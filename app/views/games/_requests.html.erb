@@ -1,0 +1,63 @@
+<% my_desire = nil %>
+<% is_owner = false %>
+<% if can? :accept_request, @game  %>
+  <% is_owner = true %>
+<% end %>
+<div class="row">
+  <% if @desires.any? %>
+    <% req = [] %>
+    <% for i in 0..2 %>
+      <% req[i] = @desires.select{|r| r.statuses.include?(i+1)} %>
+    <% end %>
+
+    <h6>Total <em><%= pluralize(req.flatten.count, 'request') %></em></h6>
+    <div class="col s12 l9">
+      <ul id="tabs-swipe-demo" class="tabs tabs-fixed-width">
+        <% tabs = ['sales requests', 'gift requests', 'rent requests'] %>
+        <% for i in 0..2 %>
+          <li class="tab col s3"><a href="#status-<%= i + 1 %>"> <%= tabs[i] %>  (<%= req[i].length %>)</a></li>
+        <% end %>
+      </ul>
+      <% for i in 0..2 %>
+        <div id="status-<%= i + 1 %>" class="col s12">
+          <% if req[i].empty? %>
+            <div class="center-align"><h5>No <%= tabs[i] %> to show</h5></div>
+          <% else %>
+            <ul class="collection">
+              <% req[i].each do |r| %>
+                <% r.user == current_user ? my_desire = r : nil %>
+                  <li class="collection-item">
+                    <div>
+                      <div class="chip">
+                        <% if r.user.photo.blank? %>
+                          <%= image_tag "no_photo.jpg" %>
+                        <% else %>
+                          <img src="<%= r.user.photo %>" alt="Profile photo">
+                        <% end %>
+                        <a href= "<%= gamer_path(r.user) %>">
+                          <%= cap_name(r.user) %>
+                        </a>
+                      </div>
+                      <% if is_owner %>
+                        <%= link_to desire_path(r), class: 'secondary-content' do %>
+                          <i class="material-icons">send</i>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="col s12 l9">
+      <h5>No request for this game</h5>
+    </div>
+  <% end %>
+
+  <% if can? :desire, @game %>
+    <%= render 'req_form', desire: my_desire %>
+  <% end %>
+</div>

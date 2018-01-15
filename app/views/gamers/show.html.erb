@@ -1,55 +1,67 @@
   <% same_user = user_signed_in? && @gamer.id == current_user.id %>
 
-<div class="z-depth-1 col s8 row">
-  <div class="col s12 l6">
-      <div class="col s4">
-        <p>Name:</p>
-        <p>Age</p>
-        <p>Gender</p>
-        <p>City</p>
-        <p>Cell:</p>
-        <p>E-mail:</p>
-      </div>
-      <div class="col s8">
-        <% if same_user || @gamer.visibility %>
-          <p><%= @gamer.name.blank? ? "______" : @gamer.name.split.map(&:capitalize).join(" ") %></p>
-          <p><%= @gamer.age.blank? ? "_" : @gamer.age %></p>
-          <p><%= @gamer.gender.blank? ? "_" : @gamer.gender == "m" ? "Male" : "Female" %></p>
-          <p><%= @gamer.city.blank? ? "______" : @gamer.city.split.map(&:capitalize).join(" ")%></p>
-          <p><%= @gamer.phone.blank? ? "_________" : @gamer.phone %></p>
-          <p><%= @gamer.email %></p>
-        <% else %>
-          <p>_____</p>
-          <p>_</p>
-          <p>_</p>
-          <p>______</p>
-          <p>_________</p>
-          <p>_________</p>
-        <% end %>
-      </div>
 
-      <div class="col s5">
-        <p>Gamer Points:</p>
-        <p>Valutation:</p>
-      </div>
-      <div class="col s7">
-        <p><%= @gamer.points %></p>
-        <p><%= @gamer.votes %> pts</p>
-      </div>
+<div class="USER z-depth-1 col row">
+  <div class="INFO_AND_PHOTO row">
+    <table style="margin-left: 10px;">
+      <% if same_user || @gamer.visibility %>
+      <td>
+        <table>
+<!-- non si puo mettere edit name con link edit profile quando non e impostato??? -->
+          <tr><td><i class="material-icons prefix">face</i></td><td><b>Name:</b></td><td><%= @gamer.name.blank? ? "______" : @gamer.name.split.map(&:capitalize).join(" ") %></td></tr>
+          <tr><td><i class="material-icons prefix">cake</i></td><td><b>Age:</b></td><td><%= @gamer.age.blank? ? "_" : @gamer.age %></td></tr>
+          <tr><td><i class="material-icons prefix">wc</i></td><td><b>Gender:</b></td><td><%= @gamer.gender.blank? ? "_" : @gamer.gender == "m" ? "Male" : "Female" %></td></tr>
+          <tr><td><i class="material-icons prefix">location_city</i></td><td><b>City:</b></td><td><%= @gamer.city.blank? ? "______" : @gamer.city.split.map(&:capitalize).join(" ")%></td></tr>
+          <tr><td><i class="material-icons prefix">local_phone</i></td><td><b>Cell:</b></td><td><%= @gamer.phone.blank? ? "_________" : @gamer.phone %></td></tr>
+          <tr><td><i class="material-icons prefix">email</i></td><td><b>E-mail:</b></td><td><%= @gamer.email %></td></tr>
+        </table>
+      </td>
+      <% end %>
+      <td>
+        <div class="col s3 l5">
+          <img class="responsive-img" src="<%= @gamer.photo %>"/>
+        </div>
+      </td>
+    </table>
+    <div style="margin-left: 20px;">
+    <% if same_user %>
+      <%= link_to "Edit your profile", edit_gamer_url(current_user) ,class: "btn waves-effect waves-light"%>
+    <% end %>
+    </div>
   </div>
-  <div class="col s10 l5">
-      <img class="responsive-img s10 l5" src="<%= @gamer.photo %>"/>
+  <div class="VALUTATION row" style="margin-left: 10px;">
+
+    <table style="max-width: fit-content;">
+      <tr><td><i class="material-icons prefix">extension</i></td><td><b>Gamer Points:</b></td><td><%= @gamer.points %></td></tr>
+      <tr><td><i class="material-icons prefix">star</i></td><td><b>Valutation:</b></td><td><%= @gamer.avg_vote %> stars </td></tr>
+    </table>
+     <%= render "comments", same_user: same_user %>
   </div>
 </div>
+<% if same_user %>
+  <div class="row">
+    <%= link_to 'Show your game requests', desires_path %>
+  </div>
+<% else %>
+  <% if @gamer.admin? %>
+    <div class="row right-align"><div class="btn">Administrator</div></div>
+  <% end %>
+<% end %>
 
-<div class="row">
-  <div class="col s12 l6">
+<% if !@gamer.admin? && can?(:promote, @gamer) %>
+  <div class="row right-align">
+    <%= link_to 'Promote to admin', promote_gamer_path(@gamer), {method: :patch, class: 'btn wave-effect wave-light'} %>
+  </div>
+<% end %>
+
+<div class="GAMES-COMMENTS-FRIENDS z-depth-1 row">
+  <div class="col s12 l6" style="margin-left: 10px;">
     <% games = @gamer.hold_games.last(5) %>
     <% if games.blank? %>
       <div class="row">No games to show</div>
       <div class="row">
         <% if same_user %>
-          <%= link_to "Start adding a new game", titles_path %>
+          <%= link_to "Start adding a new game", titles_path ,class: "btn waves-effect waves-light"%>
         <% end %>
       </div>
     <% else %>
@@ -57,7 +69,7 @@
       <div class="row">
         <% games.each do |game| %>
           <a href="<%= game_path(game) %>">
-            <div class="chip col game-title">
+            <div class="chip col game-title" style="min-width: max-content;">
               <div class="truncate">
                 <%= game.game_info.name %>
               </div>
@@ -76,14 +88,15 @@
         </div>
       </div>
     <% end %>
-    <div class="row">
-       Comments:
-        <%= render "comments", same_user: same_user %>
-    </div>
   </div>
 
+<<<<<<< HEAD
     <div class="col s12 l6">
         <div class="row">
+=======
+    <div class="FRIENDS col s12 l6" style="margin-left: -10px;">
+        <div class="row center-align">
+>>>>>>> master
           <%= render 'shared/stats' %>
           <% if current_user == @gamer %>
             <%= render 'shared/blocked_stats' %>
@@ -100,3 +113,4 @@
         <%= render 'friends_show_min' %>
     </div>
   </div>
+</div>

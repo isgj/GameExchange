@@ -57,6 +57,22 @@
   max-width: 100%;
 }
 
+a {
+  color: #26A69A;
+}
+
 .game-info-img {
   max-width: 400px;
+}
+
+.toast-cookie-banner {
+  position: fixed;
+  top: initial;
+  word-break: initial;
+  bottom: 0;
+  z-index: 10;
+
+  button {
+    color: #eeff41;
+  }
 }
