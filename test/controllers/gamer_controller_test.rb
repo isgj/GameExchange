@@ -62,4 +62,21 @@ class GamerControllerTest < ActionDispatch::IntegrationTest
     get blocks_gamer_path(users(:one))
     assert_redirected_to new_user_session_path
   end
+
+  test "should delete user" do
+    sign_in users(:admin)
+    assert_difference('User.count', -1) do
+      delete gamer_url(users(:delete_me))
+    end
+
+    assert_redirected_to gamers_path
+  end
+
+  test "should not delete another admin" do
+    sign_in users(:admin)
+    assert_no_difference 'User.count' do
+      delete gamer_url(users(:delete_no))
+    end
+  end
+
 end

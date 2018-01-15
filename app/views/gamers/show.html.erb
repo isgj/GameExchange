@@ -51,6 +51,19 @@
 <% if !@gamer.admin? && can?(:promote, @gamer) %>
   <div class="row right-align">
     <%= link_to 'Promote to admin', promote_gamer_path(@gamer), {method: :patch, class: 'btn wave-effect wave-light'} %>
+    <button class="btn delete-user-button red">Delete this account</button>
+  </div>
+  <div id="delete-user-confirmation" class="modal">
+    <div class="modal-content red lighten-3">
+      <h4>Are you sure?</h4>
+      <p>If you press the DELETE button this gamer and all the resourses associated
+        with it will be deleted definitly from our databse and will be impossible to show them again.</p>
+    </div>
+    <div class="modal-footer red lighten-2">
+      <button type="button" class="modal-action modal-close waves-effect waves-green btn">Cancel</button>
+      <%= link_to "Delete", gamer_path(@gamer), method: :delete, class: 'modal-action modal-close waves-effect waves-green btn red' %>
+    </div>
+  </div>
   </div>
 <% end %>
 
@@ -111,3 +124,11 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+$(document).on('turbolinks:load', function() {
+  $('.delete-user-button').off('click').on('click', function() {
+    $('#delete-user-confirmation').modal('open');
+  });
+});
+</script>
