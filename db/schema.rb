@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211095323) do
+ActiveRecord::Schema.define(version: 20171218104128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20171211095323) do
     t.datetime "updated_at", null: false
     t.index ["commentator_id"], name: "index_comments_on_commentator_id"
     t.index ["commented_id"], name: "index_comments_on_commented_id"
+  end
+
+  create_table "desires", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "game_id"
+    t.integer "statuses", array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_desires_on_game_id"
+    t.index ["user_id", "game_id"], name: "index_desires_on_user_id_and_game_id", unique: true
+    t.index ["user_id"], name: "index_desires_on_user_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -130,11 +141,14 @@ ActiveRecord::Schema.define(version: 20171211095323) do
     t.boolean "visibility", default: true
     t.integer "age"
     t.string "gender", limit: 1
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "comments", "users", column: "commentator_id"
   add_foreign_key "comments", "users", column: "commented_id"
+  add_foreign_key "desires", "games"
+  add_foreign_key "desires", "users"
   add_foreign_key "games", "game_infos"
   add_foreign_key "games", "platforms"
   add_foreign_key "games", "users", column: "holder_id"

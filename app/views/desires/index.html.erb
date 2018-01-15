@@ -1,0 +1,22 @@
+<% if @desires.any? %>
+  <div class="row">Total <em><%= pluralize(@desires.size, 'request') %></em></div>
+  <ul class="collection">
+    <% @desires.each do |desire| %>
+    <li class="collection-item">
+      <div>
+        <%= link_to desire.game.game_info.name, game_path(desire.game) %>
+        <%= link_to desire_path(desire), {method: :delete, class: 'secondary-content red-text'} do %>
+          <i class="material-icons">delete_forever</i>
+        <% end %>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="row center-align">
+    <h5><em>No requests to show</em></h5>
+  </div>
+<% end %>
+<div class="row">
+  <%= link_to 'Back to your profile', gamer_path(current_user) %>
+</div>

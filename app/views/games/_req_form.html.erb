@@ -1,0 +1,47 @@
+<% desire.nil? ? desire = Desire.new : nil %>
+<% statuses = desire.statuses || [] %>
+<% has_desire = statuses.any? %>
+<div class="col s12 l3">
+  <div class="row"><h6> <%= has_desire ? 'Your request' : 'Make a new request' %></h6></div>
+  <%= form_with(model: [ @game, desire ], local: true) do |form| %>
+    <div class="row">
+      <div class="col s4">
+        <p>
+          <%= check_box_tag :status1, 1, statuses.include?(1), {class: 'filled-in'} %>
+          <%= label_tag :status1, "Sale" %>
+        </p>
+      </div>
+      <div class="col s4">
+        <p>
+          <%= check_box_tag :status2, 1, statuses.include?(2), {class: 'filled-in'} %>
+          <%= label_tag :status2, "Gift" %>
+        </p>
+      </div>
+      <div class="col s4">
+        <p>
+          <%= check_box_tag :status3, 1, statuses.include?(3), {class: 'filled-in'} %>
+          <%= label_tag :status3, "Rent" %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="actions">
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+          <% if has_desire %>
+            Update <i class="material-icons right">update</i>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <%= link_to game_desire_path(@game, desire), method: :delete, class: 'waves-effect waves-green btn red' do %>
+        Delete <i class='material-icons right'>delete_forever</i>
+      <% end %>
+    </div>
+          <% else %>
+            Save <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+          <% end %>
+  <% end %>
+</div>

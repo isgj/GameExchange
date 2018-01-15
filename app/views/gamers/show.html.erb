@@ -38,6 +38,21 @@
      <%= render "comments", same_user: same_user %>
   </div>
 </div>
+<% if same_user %>
+  <div class="row">
+    <%= link_to 'Show your game requests', desires_path %>
+  </div>
+<% else %>
+  <% if @gamer.admin? %>
+    <div class="row right-align"><div class="btn">Administrator</div></div>
+  <% end %>
+<% end %>
+
+<% if !@gamer.admin? && can?(:promote, @gamer) %>
+  <div class="row right-align">
+    <%= link_to 'Promote to admin', promote_gamer_path(@gamer), {method: :patch, class: 'btn wave-effect wave-light'} %>
+  </div>
+<% end %>
 
 <div class="GAMES-COMMENTS-FRIENDS z-depth-1 row">
   <div class="col s12 l6" style="margin-left: 10px;">
@@ -91,8 +106,8 @@
           <div class="col s6">
             <%= render 'block_form' %>
           </div>
-          <%= render 'friends_show_min' %>
         </div>
+        <%= render 'friends_show_min' %>
     </div>
   </div>
 </div>

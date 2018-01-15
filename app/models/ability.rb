@@ -30,8 +30,7 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     user ||= User.new # guest user (not logged in)
-    # TODO check if user.admin?
-    if user.points > 10000000
+    if user.admin?
       can :manage, :all
     else
       # Game permissions
@@ -41,6 +40,34 @@ class Ability
 
       can [:update, :destroy], Game do |game|
         game.holder_id == user.id
+      end
+
+      can :desire, Game do |game|
+        game.owner_id != user.id && game.holder_id != user.id
+      end
+
+      can :accept_request, Game do |game|
+        game.owner_id == user.id && game.state != 4
+      end
+
+      can :rent_back, Game do |game|
+        game.holder_id == user.id && game.state == 4
+      end
+
+      can :update, Desire do |desire|
+        desire.user == user
+      end
+
+      can :destroy, Desire do |desire|
+        desire.user_id == user.id || desire.game.owner_id == user.id
+      end
+
+      can :read, User do
+        !user.id.blank?
+      end
+
+      can :promote, User do
+        user.admin?
       end
     end
   end

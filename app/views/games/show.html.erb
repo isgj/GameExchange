@@ -16,11 +16,13 @@
   </div>
 </div>
 
+<%= render 'requests' %>
+
 <script type="text/javascript">
   var switchFn = function() {
     var select = $('select');
-    var state = $('form input[name="state"]');
-    var btn = $('form .btn');
+    var state = $('#up-form input[name="state"]');
+    var btn = $('#up-form .btn');
     return function () {
       if (select.val() == state.val()) {
         btn.addClass('disabled');
@@ -35,8 +37,8 @@
     fn();
     $('select').on('change', fn);
     $('form').on('submit', (function() {
-      var input = $('form input[name="commit"]');
-      var btn = $('form .btn');
+      var input = $('#up-form input[name="commit"]');
+      var btn = $('#up-form .btn');
       return function() {
         input.val('Updating ...')
         btn.addClass('disabled');

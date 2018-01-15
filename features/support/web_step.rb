@@ -18,11 +18,11 @@ module NavigationHelpers
       gamers_url
     when /edit account/
       edit_user_registration_url
-    when /queries/
+    when /^queries$/
       queries_url
-    when /new query/
+    when /^new query$/
       new_query_url
-    when /last query/
+    when /^last query$/
       query_url(Query.last)
     when /titles/
       titles_url
@@ -32,6 +32,8 @@ module NavigationHelpers
       new_game_url(params: {game_info: game_infos(:one).id})
     when /^last game$/
       game_url(Game.last)
+    when /^requests$/
+      desires_url
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -64,7 +66,7 @@ module NavigationHelpers
       query_url(queries(model.to_sym))
     when /^game$/
       game_url(games(model.to_sym))
-    when /title/
+    when /^title$/
       title_url(game_infos(model.to_sym))
     when /gamer comments/
       gamer_comments_url(users(model.to_sym))
@@ -76,6 +78,14 @@ module NavigationHelpers
       gamer_comment_url(users(model.to_sym),Comment.last)
     when /gamer edit comment/
       edit_gamer_comment_url(users(model.to_sym),Comment.last)
+    when /^platform$/
+      platform_url(platforms(model.to_sym))
+    when /^edit platform$/
+      edit_platform_url(platforms(model.to_sym))
+    when /^edit title$/
+      edit_title_url(game_infos(model.to_sym))
+    when /^desire$/
+      desire_url(desires(model.to_sym))
     end
   end
 

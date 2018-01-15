@@ -26,3 +26,13 @@ three:
   state: 2
   start_holding: 2017-11-27
   note: MyString
+
+rented:
+  game_info: one
+  owner: two
+  holder: one
+  platform: one
+  state: 4
+  start_holding: 2017-12-20
+  expire: 2017-12-25
+  note: Rented

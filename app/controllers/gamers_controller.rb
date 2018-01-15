@@ -40,6 +40,12 @@ class GamersController < ApplicationController
     render 'show_block'
   end
 
+  def promote
+    authorize! :promote, @gamer
+    @gamer.make_admin
+    redirect_to gamer_path(@gamer), notice: 'This user is now administrator'
+  end
+
   private
 
     def gamer_params

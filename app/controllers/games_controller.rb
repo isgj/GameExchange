@@ -1,8 +1,8 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :rent_back]
   before_action :authenticate_user!, except: [:index]
-  # GET /games
-  # GET /games.json
+  before_action :set_title, only: [:new, :create]
+
   def index
     name = params[:name_of_the_game]
     city = params[:city]
@@ -16,11 +16,8 @@ class GamesController < ApplicationController
       @games = Game.all.includes(:game_info, :platform, :holder)
       @games = @games.joins(:holder).where('lower(users.city) ~ ?', city.downcase) unless city.blank?
     else
-      if !user_signed_in?
-        redirect_to new_user_session_path, alert: 'Please sign in'
-        return
-      end
       @gamer = User.find_by_id(params[:gamer])
+      authorize! :read, @gamer
       if @gamer.blank?
         redirect_to games_path, alert: 'Gamer not found'
         return
@@ -37,33 +34,19 @@ class GamesController < ApplicationController
     @games = @games.joins(:game_info).where('lower(game_infos.name) ~ ?', name.downcase) unless name.blank?
   end
 
-  # GET /games/1
-  # GET /games/1.json
+
   def show
-    redirect_to games_path, alert: 'Game doesn\'t exist' if @game.blank?
+    @desires = @game.desires.includes(:user)
   end
 
-  # GET /games/new
   def new
-    @g_i = GameInfo.find_by_id(params[:game_info])
-    if @g_i.nil?
-      redirect_to titles_path, alert: 'Please select a title'
-      return
-    end
     @game = Game.new
     @platforms = Platform.where("api_id IN (?)", @g_i.platforms)
     @new = true
   end
 
-  # POST /games
-  # POST /games.json
   def create
     @game = Game.new(new_game_params)
-    @g_i = GameInfo.find_by_id(params[:game_info])
-    if @g_i.nil?
-      redirect_to titles_path, alert: 'Please select a title'
-      return
-    end
     init_game
 
     begin
@@ -100,10 +83,30 @@ class GamesController < ApplicationController
     redirect_to gamer_url(current_user), notice: 'Game was successfully destroyed'
   end
 
+  def rent_back
+    authorize! :rent_back, @game
+    expire = @game.expire
+    new_params = {
+      holder: @game.owner,
+      start_holding: Time.now,
+      expire: nil,
+      state: 0,
+      note: 'Back from rent'
+    }
+    if @game.update(new_params)
+      @game.owner.add_point 5
+      current_user.add_point Time.now > expire ? 2 : 5
+      redirect_to @game, notice: 'The game was returned'
+    else
+      redirect_to @game, alert: 'Some errors occured while returning the game'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game
       @game = Game.find_by_id(params[:id])
+      redirect_to games_path, alert: 'Game doesn\'t exist' unless @game
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -113,6 +116,11 @@ class GamesController < ApplicationController
 
     def state_game_params
       params.require(:game).permit(:state)
+    end
+
+    def set_title
+      @g_i = GameInfo.find_by_id(params[:game_info])
+      redirect_to titles_path, alert: 'Please select a title' unless @g_i
     end
 
     def init_game

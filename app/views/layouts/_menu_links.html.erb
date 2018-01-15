@@ -1,3 +1,6 @@
+<% if user_signed_in? %>
+  <li><%= link_to 'Titles', titles_path %></li>
+<% end %>
 <li><%= link_to 'Games', games_path %></li>
 <li><%= link_to 'Gamers', gamers_path %></li>
 <% if user_signed_in? %>
