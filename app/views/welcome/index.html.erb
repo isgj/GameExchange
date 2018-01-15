@@ -1,4 +1,75 @@
-<h2>Show some content</h2>
-<% if user_signed_in? %>
-  Hello <strong><%= current_user.email%></strong>
-<% end %>
+
+<h2 class="center-align">
+  <% if user_signed_in? && current_user.name? %>
+    Welcome <%= current_user.name.split[0]%>!
+  <% else %>
+    Welcome to GameExchange!
+  <% end %>
+</h2>
+
+<div class="row">
+  <div class="col s12">
+    <div class="row">
+      <% if @games.blank? %>
+      <div class="row center-align">
+        <h4><em>No games to show</em></h4>
+      </div>
+      <% else %>
+        <%= render "show_games" %>
+        <div class="row">
+          <div class="col s12 center-align" style="margin-top: 16px">
+            <%= link_to 'Show all games catalog', games_path, class: 'waves-effect waves-light btn-large' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <% if @titles.blank? %>
+      <div class="row center-align">
+        <h4><em>No title to show</em></h4>
+      </div>
+      <% else %>
+        <%= render "show_titles" %>
+        <div class="row">
+          <div class="col s12 center-align" style="margin-top: 16px">
+            <%= link_to 'Show all titles', titles_path, class: 'waves-effect waves-light btn-large' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <% if @gamers.blank? %>
+      <div class="row center-align">
+          <em><h4>No gamers to show</h4></em>
+      </div>
+      <% else %>
+      <div class="row center-align">
+        <h4><em>Lastest gamers</em></h4>
+      </div>
+        <%= render "show_gamers" %>
+        <div class="col s12 center-align">
+          <%= link_to 'Show all gamers', gamers_path, class: 'waves-effect waves-light btn-large' %>
+        </div>
+      <% end %>
+    </div>
+
+<!--
+  </div>
+  <div class="col s4">
+    <% if @gamers.blank? %>
+      <div class="row center-align">
+        <em><h4>No gamers to show</h4></em>
+      </div>
+    <% else %>
+      <div class="row center-align">
+        <h4><em>Lastest gamers</em></h4>
+      </div>
+      <%= render "show_gamers" %>
+      <div class="col s12 center-align">
+        <%= link_to 'Show all gamers', gamers_path, class: 'waves-effect waves-light btn-large' %>
+      </div>
+    <% end %>
+  </div>
+-->
+</div>

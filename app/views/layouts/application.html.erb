@@ -41,6 +41,15 @@
       </div>
     </main>
 
+    <%= render 'layouts/footer' %>
+
+    <script type="text/javascript">
+    $(document).on('turbolinks:load', function(){
+      setTimeout(function(){
+        $('.alert').remove();
+      }, 5000);
+     })
+    </script>
     <% if cookies && cookies[:eat_cookie] != 'gnam' %>
       <div class="toast toast-cookie-banner">
         <div>

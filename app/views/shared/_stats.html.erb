@@ -1,13 +1,19 @@
 <% @gamer ||= current_user %>
-<div class="stats">
+
+<% if @gamer.requests.count != 0 %>
+<div class="col s6 card-panel green center-align">
   <a href="<%= friends_gamer_path(@gamer) %>">
-    <strong id="friends" class="stat">
-      <%= @gamer.friends.count %>
+    <strong id="requests">
+      <span class="blue-grey-text text-darken-4"><%= @gamer.requests.count %> requests</span>
     </strong>
-    friends and
-    <strong id="requests" class="stat">
-      <%= @gamer.requests.count %>
-    </strong>
-    pending requests
   </a>
 </div>
+<% else %>
+<div class="col s6 card-panel blue center-align">
+  <a href="<%= friends_gamer_path(@gamer) %>">
+    <strong id="friends">
+      <span class="blue-grey-text text-darken-4"><%= @gamer.friends.count %> friends</span>
+    </strong>
+  </a>
+</div>
+<% end %>
