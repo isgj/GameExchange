@@ -1,10 +1,12 @@
+<div class="container" style="margin-left: 12px;">
 <% if same_user %>
-  <div class="row"><%= link_to 'My comments', gamer_comments_path(current_user) %></div>
+  <div class="row"><%= link_to 'My comments', gamer_comments_path(current_user) ,class: "btn waves-effect waves-light"%></div>
 <% else %>
-  <div class="row"><%= link_to 'User\'s comments', gamer_comments_path(@gamer) %></div>
+  <div class="row"><%= link_to 'User\'s comments', gamer_comments_path(@gamer) ,class: "btn waves-effect waves-light"%></div>
   <% if @have_commented.any? %>
-    <div class="row"><%= link_to 'Show review', gamer_comment_path(@gamer,@have_commented.first) %></div>
+    <div class="row"><%= link_to 'Show review', gamer_comment_path(@gamer,@have_commented.first) ,class: "btn waves-effect waves-light"%></div>
   <% else %>
-    <div class="row"><%= link_to 'Review user', new_gamer_comment_path(@gamer) %></div>
+    <div class="row"><%= link_to 'Review user', new_gamer_comment_path(@gamer) ,class: "btn waves-effect waves-light"%></div>
   <% end %>
 <% end %>
+</div>

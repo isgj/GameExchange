@@ -22,6 +22,15 @@
     right: 30px;
   }
 }
+.col-container-ion {
+    display: table; /* Make the container element behave like a table */
+    width: 100%; /* Set full-width to expand the whole page */
+}
+
+.col-ion {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+    min-width: 102px;
+}
 
 .card-reveal {
 

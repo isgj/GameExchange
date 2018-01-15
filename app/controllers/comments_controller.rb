@@ -32,6 +32,7 @@ class CommentsController < ApplicationController
     @comment.commentator_id = current_user.id
 
     if @comment.save
+      #call update_vote
       redirect_to gamer_comments_path, notice: 'Comment was successfully created.'
     else
       render :new
@@ -40,6 +41,8 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
+                #call
+      update_vote
       redirect_to gamer_path(params[:gamer_id]), notice: 'Comment was successfully updated.'
     else
       render :edit, alert: 'Errore editing comment.'
@@ -61,5 +64,13 @@ private
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
       params.require(:comment).permit(:mark, :review)
+    end
+
+    def update_vote
+      logger.debug "i was here"
+      @v=Comment.where("commented_id=?",@comment.commented_id).pluck('mark')
+      @u=User.find_by_id(@comment.commented_id)
+      @u.avg_vote=((@v.sum+@v.size)/(@v.size.to_f))
+      @u.save
     end
 end

@@ -41,10 +41,11 @@
 
       <div class="row">
         <p>
-          <%= f.radio_button 'gender', 'f', class: 'with-gap' %>
-          <%= f.label :gender, "Female", value: 'f' %>
+          <i class="material-icons prefix">wc</i>
           <%= f.radio_button 'gender', 'm' , class: 'with-gap'%>
           <%= f.label :gender, "Male", value: 'm'%>
+          <%= f.radio_button 'gender', 'f', class: 'with-gap' %>
+          <%= f.label :gender, "Female", value: 'f' %>
         </p>
       </div>
 

@@ -68,6 +68,16 @@ module NavigationHelpers
       game_url(games(model.to_sym))
     when /^title$/
       title_url(game_infos(model.to_sym))
+    when /gamer comments/
+      gamer_comments_url(users(model.to_sym))
+    when /gamer new comment/
+      new_gamer_comment_url(users(model.to_sym))
+    when /gamer comment/
+      gamer_comment_url(users(model.to_sym),comments(model.to_sym))
+    when /show review/
+      gamer_comment_url(users(model.to_sym),Comment.last)
+    when /gamer edit comment/
+      edit_gamer_comment_url(users(model.to_sym),Comment.last)
     when /^platform$/
       platform_url(platforms(model.to_sym))
     when /^edit platform$/

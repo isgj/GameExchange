@@ -15,8 +15,11 @@
     <%= form.text_field :mark, id: :comment_mark %>
   </div>
 -->
-
-<div class="container">
+<div align="center">
+<div class="chip" style="min-width: max-content;" >
+  <img src="<%=User.find_by_id(params[:gamer_id]).photo %>" alt="Contact Person"><%= User.find_by_id(params[:gamer_id]).name %>
+</div></div>
+<div>
 <!-- star rating system -->
       <div class="star-rating edit-rating" align="center">
         <i class="material-icons fa" data-rating="0">star_border</i>
@@ -35,11 +38,13 @@
 
   <div class="field s12 l6" align="center"  >
     <%= form.label :review do %> <b style="color:#ee6e73">Review:</b> <% end %>
-    <%= form.text_field :review, id: :comment_review %>
+    <%= form.text_area(:review, id: :comment_review, rows:10, style: "height:auto!important;text-align: justify;padding: 10px;") %>
+    <!-- <%= form.text_field :review, id: :comment_review %> -->
   </div>
 
   <div class="actions" align="center">
-    <%= form.submit 'Create Comment' ,class: "btn waves-effect waves-light"%>
+    <%= form.submit 'Create Comment' ,class: "btn waves-effect waves-light"%> |
+    <%= link_to 'Back', gamer_path(params[:gamer_id]),class: "btn waves-effect waves-light"%>
   </div>
 </div>
 
