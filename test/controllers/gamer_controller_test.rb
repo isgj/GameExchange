@@ -79,4 +79,19 @@ class GamerControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "should promote user" do
+    sign_in users(:admin)
+    prom_user = users(:two)
+    patch promote_gamer_url(prom_user)
+
+    assert_redirected_to gamer_path(prom_user)
+    assert User.find_by_id(prom_user.id).admin
+  end
+
+  test "should not promote another admin" do
+    sign_in users(:admin)
+    patch promote_gamer_url(users(:delete_no))
+
+    assert_redirected_to root_path
+  end
 end

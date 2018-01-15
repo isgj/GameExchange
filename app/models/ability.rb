@@ -37,6 +37,10 @@ class Ability
         u.admin?
       end
 
+      cannot :promote, User do |u|
+        u.admin?
+      end
+
     else
       # Game permissions
       can :read, Game do
@@ -71,9 +75,6 @@ class Ability
         !user.id.blank?
       end
 
-      can :promote, User do
-        user.admin?
-      end
     end
   end
 end

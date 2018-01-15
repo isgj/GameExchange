@@ -48,10 +48,10 @@
   <% end %>
 <% end %>
 
-<% if !@gamer.admin? && can?(:promote, @gamer) %>
+<% if can?(:promote, @gamer) %>
   <div class="row right-align">
-    <%= link_to 'Promote to admin', promote_gamer_path(@gamer), {method: :patch, class: 'btn wave-effect wave-light'} %>
     <button class="btn delete-user-button red">Delete this account</button>
+    <button class="btn promote-user-button">Promote to admin</button>
   </div>
   <div id="delete-user-confirmation" class="modal">
     <div class="modal-content red lighten-3">
@@ -64,6 +64,16 @@
       <%= link_to "Delete", gamer_path(@gamer), method: :delete, class: 'modal-action modal-close waves-effect waves-green btn red' %>
     </div>
   </div>
+  <div id="promote-user-confirmation" class="modal">
+    <div class="modal-content green lighten-3">
+      <h4>Are you sure?</h4>
+      <p>If you press Promote this user will become administrator and it can perform
+        action that can delete or modify resources.</p>
+    </div>
+    <div class="modal-footer green lighten-2">
+      <button type="button" class="modal-action modal-close waves-effect waves-green btn">Cancel</button>
+      <%= link_to 'Promote', promote_gamer_path(@gamer), {method: :patch, class: 'btn wave-effect wave-light'} %>
+    </div>
   </div>
 <% end %>
 
@@ -129,6 +139,9 @@
 $(document).on('turbolinks:load', function() {
   $('.delete-user-button').off('click').on('click', function() {
     $('#delete-user-confirmation').modal('open');
+  });
+  $('.promote-user-button').off('click').on('click', function() {
+    $('#promote-user-confirmation').modal('open');
   });
 });
 </script>

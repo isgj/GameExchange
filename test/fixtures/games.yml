@@ -36,3 +36,11 @@ rented:
   start_holding: 2017-12-20
   expire: 2017-12-25
   note: Rented
+
+uniq:
+  game_info: uniq
+  owner: delete_no
+  holder: one
+  state: 0
+  start_holding: 2017-12-20
+  note: MyString

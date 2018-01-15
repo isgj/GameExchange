@@ -5,12 +5,12 @@ Feature: Games search
     And I am on the "games" page
 
   Scenario: User can search game by name and visit game
-    When I fill in "Name" with "super"
+    When I fill in "Name" with "uniq game"
     And I click the "Search" "button"
-    Then I should see the "Super game 1"
+    Then I should see the "This is a uniq game"
     And I should not see the "Funny play"
     When I click the "Show the game" "link"
-    Then I should be on the "game" page of "one"
+    Then I should be on the "game" page of "uniq"
     And I should see the "Delete"
 
   Scenario: User can search game by status
