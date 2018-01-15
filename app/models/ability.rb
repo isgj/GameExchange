@@ -66,14 +66,13 @@ class Ability
         !user.id.blank?
       end
 
-<<<<<<< HEAD
       #Title permissions
       can :read, GameInfo do
         !user.id.blank?
-=======
+      end
+
       can :promote, User do
         user.admin?
->>>>>>> master
       end
     end
   end
