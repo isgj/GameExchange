@@ -35,3 +35,12 @@ delete:
   platforms: [2]
   release_date: 2017-11-26
   cover: MyString
+
+uniq:
+  api_id: 5
+  name: "This is a uniq game"
+  url: MyString
+  summary: "Info of play"
+  platforms: [2]
+  release_date: 2017-11-26
+  cover: MyString

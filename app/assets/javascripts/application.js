@@ -19,6 +19,7 @@
 $( document ).on('turbolinks:load', function() {
   $('select').material_select();
   $(".button-collapse").sideNav();
+  $('.modal').modal();
   $(".dropdown-button").dropdown({
     belowOrigin: true,
     alignment: 'left',

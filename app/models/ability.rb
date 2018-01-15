@@ -32,6 +32,15 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.admin?
       can :manage, :all
+
+      cannot :destroy, User do |u|
+        u.admin?
+      end
+
+      cannot :promote, User do |u|
+        u.admin?
+      end
+
     else
       # Game permissions
       can :read, Game do
@@ -66,14 +75,12 @@ class Ability
         !user.id.blank?
       end
 
+
       #Title permissions
       can :read, GameInfo do
         !user.id.blank?
       end
 
-      can :promote, User do
-        user.admin?
-      end
     end
   end
 end

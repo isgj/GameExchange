@@ -29,6 +29,12 @@ class GamersController < ApplicationController
     end
   end
 
+  def destroy
+    authorize! :destroy, @gamer
+    @gamer.destroy
+    redirect_to gamers_path, notice: 'The gamer I forgot the name was deleted'
+  end
+
   def friends
     @friends = @gamer.friends
     @requests = @gamer.requests

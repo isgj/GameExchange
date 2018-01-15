@@ -62,4 +62,36 @@ class GamerControllerTest < ActionDispatch::IntegrationTest
     get blocks_gamer_path(users(:one))
     assert_redirected_to new_user_session_path
   end
+
+  test "should delete user" do
+    sign_in users(:admin)
+    assert_difference('User.count', -1) do
+      delete gamer_url(users(:delete_me))
+    end
+
+    assert_redirected_to gamers_path
+  end
+
+  test "should not delete another admin" do
+    sign_in users(:admin)
+    assert_no_difference 'User.count' do
+      delete gamer_url(users(:delete_no))
+    end
+  end
+
+  test "should promote user" do
+    sign_in users(:admin)
+    prom_user = users(:two)
+    patch promote_gamer_url(prom_user)
+
+    assert_redirected_to gamer_path(prom_user)
+    assert User.find_by_id(prom_user.id).admin
+  end
+
+  test "should not promote another admin" do
+    sign_in users(:admin)
+    patch promote_gamer_url(users(:delete_no))
+
+    assert_redirected_to root_path
+  end
 end

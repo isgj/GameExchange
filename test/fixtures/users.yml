@@ -37,3 +37,10 @@ private:
 admin:
   email: admin@mail.com
   admin: t
+
+delete_me:
+  email: "Pessimist"
+
+delete_no:
+  email: "another_admin"
+  admin: t
