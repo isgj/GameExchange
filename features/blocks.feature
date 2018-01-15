@@ -4,7 +4,6 @@ Feature: User can block and unblock
 
   Scenario: Show blocked user list
     Given I am on the "gamer" "one" page
-    Then open the page
     When I click the "blocked users" "link"
     Then I should be on the "blocks" page of "one"
     And I should see the "Pierus"
