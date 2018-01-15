@@ -1,10 +1,11 @@
 Feature: User can block and unblock
   Background:
-  Given I am the user "one"
+    Given I am the user "one"
 
   Scenario: Show blocked user list
     Given I am on the "gamer" "one" page
-    When I click the "blocks" "link"
+    Then open the page
+    When I click the "blocked users" "link"
     Then I should be on the "blocks" page of "one"
     And I should see the "Pierus"
 
