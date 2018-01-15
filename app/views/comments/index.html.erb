@@ -1,48 +1,50 @@
 <div>
-<h1 align="center">Comments</h1>
+  <h2 align="center">Comments</h2>
 
-<table>
-  <thead>
-    <tr style="color:#ee6e73;">
-      <th>Commentator Name</th>
-      <th>Mark</th>
-      <th>Review</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-      <!--  <td><%= comment.commentator_id %></td> -->
-        <td>
-          <div class="chip" style="min-width: max-content;">
-            <img src="<%=comment.commentator.photo %>" alt="Contact Person"><%= comment.commentator.name %>
-          </div>
-
-        <td>
-          <!-- star rating system -->
-                <div class="star-rating" >
-                  <i class="material-icons fa" data-rating="0">star_border</i>
-                  <i class="material-icons fa" data-rating="1">star_border</i>
-                  <i class="material-icons fa" data-rating="2">star_border</i>
-                  <i class="material-icons fa" data-rating="3">star_border</i>
-                  <i class="material-icons fa" data-rating="4">star_border</i>
-                  <i class="material-icons fa" data-rating="5">star_border</i>
-                  <i class="material-icons fa" data-rating="6">star_border</i>
-                  <i class="material-icons fa" data-rating="7">star_border</i>
-                  <i class="material-icons fa" data-rating="8">star_border</i>
-                  <i class="material-icons fa" data-rating="9">star_border</i>
-                  <input type="hidden" name="comment[mark]" class="rating-value" value="<%= comment.mark %>">
-                </div>
-          <!-- End star rating system-->
-        </td>
-        <td width="45%"><%= comment.review %></td>
+  <table>
+    <thead>
+      <tr style="color:#ee6e73;">
+        <th>Commentator Name</th>
+        <th>Mark</th>
+        <th>Review</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-  <%= link_to 'Back', gamer_path(params[:gamer_id]),class: "btn waves-effect waves-light"%>
+    </thead>
 
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <!-- <td><%= comment.commentator_id %></td> -->
+          <td>
+            <div class="chip" style="min-width: max-content;">
+              <img src="<%=comment.commentator.photo %>" alt="Contact Person"><%= comment.commentator.name %>
+            </div>
+
+            <td>
+              <!-- star rating system -->
+              <div class="star-rating">
+                <i class="material-icons fa" data-rating="0">star_border</i>
+                <i class="material-icons fa" data-rating="1">star_border</i>
+                <i class="material-icons fa" data-rating="2">star_border</i>
+                <i class="material-icons fa" data-rating="3">star_border</i>
+                <i class="material-icons fa" data-rating="4">star_border</i>
+                <i class="material-icons fa" data-rating="5">star_border</i>
+                <i class="material-icons fa" data-rating="6">star_border</i>
+                <i class="material-icons fa" data-rating="7">star_border</i>
+                <i class="material-icons fa" data-rating="8">star_border</i>
+                <i class="material-icons fa" data-rating="9">star_border</i>
+                <input type="hidden" name="comment[mark]" class="rating-value" value="<%= comment.mark %>">
+              </div>
+              <!-- End star rating system-->
+            </td>
+            <td width="45%"><%= comment.review %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to gamer_path(params[:gamer_id]),class: "btn waves-effect waves-light" do %>
+    Back
+    <i class='material-icons right'>backspace</i>
+  <% end %>
 
 </div>
