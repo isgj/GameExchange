@@ -31,7 +31,7 @@ class GamersController < ApplicationController
 
   def friends
     @friends = @gamer.friends
-    @requests = @gamer.requests
+    @requests = @gamer.requests.includes(:applier)
     render 'show_friend'
   end
 

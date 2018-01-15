@@ -18,10 +18,10 @@
 
 <div class="row">
 <% for friend in @friends %>
-  <% if params[:id].to_i == friend.friender_id %>
-    <% friend = User.find_by_id(friend.friended_id) %>
+  <% if current_user == friend.friender %>
+    <% friend = friend.friended %>
   <% else %>
-    <% friend = User.find_by_id(friend.friender_id) %>
+    <% friend = friend.friender %>
   <% end %>
 
 <div class="col s12 l4">

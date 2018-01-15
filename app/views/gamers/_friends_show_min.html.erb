@@ -12,10 +12,10 @@
   </em>
 </div>
   <% for friends in @gamer.friends.last(10) %>
-    <% if @gamer.id == friends.friender_id %>
-      <% friend = User.find_by_id(friends.friended_id) %>
+    <% if @gamer.id == friends.friender %>
+      <% friend = friends.friended %>
     <% else %>
-      <% friend = User.find_by_id(friends.friender_id) %>
+      <% friend = friends.friender %>
     <% end %>
 
     <div class="chip">

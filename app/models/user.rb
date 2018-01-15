@@ -98,7 +98,7 @@ class User < ApplicationRecord
 
 #Friendship methods
   def friends
-     Friendship.where("friender_id = ? or friended_id = ?", self.id, self.id)
+     Friendship.all.includes(:friender, :friended).where("friender_id = ? or friended_id = ?", self.id, self.id)
   end
 
   #Add a friend
