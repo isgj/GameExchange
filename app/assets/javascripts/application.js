@@ -28,6 +28,16 @@ $( document ).on('turbolinks:load', function() {
     hover: false,
     gutter: 1
   });
+  $('ul.tabs').tabs();
+
+  setTimeout(function(){
+    $('.alert').parent().fadeOut();
+  }, 5000);
+
+  $('#accept-cookie').on('click', function() {
+    document.cookie = 'eat_cookie=gnam';
+    $('.toast-cookie-banner').fadeOut();
+  });
 });
 
 $(document).on('turbolinks:load', function(){
