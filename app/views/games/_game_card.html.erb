@@ -1,3 +1,4 @@
+
 <% card_color = ['green darken-3', 'teal darken-2', 'pink lighten-1', 'blue-grey darken-1', 'orange darken-4'] %>
 
 <% games.each do |game| %>
@@ -24,7 +25,7 @@
         <% if can? :read, game %>
           <%= link_to 'Show the game', game_path(game) %>
         <% else %>
-          <%= link_to 'Signin for more', new_user_session_path %>  
+          <%= link_to 'Signin for more', new_user_session_path %>
         <% end %>
       </div>
       <div class="card-reveal">
