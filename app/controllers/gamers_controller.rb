@@ -16,6 +16,7 @@ class GamersController < ApplicationController
   def show
     @comments = Comment.where("commented_id = ?",@gamer).limit(3)
     @have_commented = Comment.where("commented_id = ? AND commentator_id = ?",@gamer,current_user)
+    @friends = @gamer.friends
   end
 
   def edit
@@ -30,8 +31,8 @@ class GamersController < ApplicationController
   end
 
   def friends
-    @friends = @gamer.friends
     @requests = @gamer.requests.includes(:applier)
+    @friends = @gamer.friends
     render 'show_friend'
   end
 

@@ -108,18 +108,19 @@ class User < ApplicationRecord
 
   #Remove a friend
   def unfriend(other_user)
-    @friendship = Friendship.find_by_friender_id(self) && Friendship.find_by_friended_id(other_user)
-    if @friendship == nil
-      @friendship = Friendship.find_by_friender_id(other_user) && Friendship.find_by_friended_id(self)
+    @friendship = Friendship.where("friender_id = ? and friended_id = ?", self, other_user)
+    if @friendship.blank?
+      @friendship = Friendship.where("friender_id = ? and friended_id = ?", other_user, self)
     end
-    if @friendship != nil
-      Friendship.delete(@friendship.id)
+    if !@friendship.blank?
+      Friendship.delete(@friendship.ids)
     end
   end
 
   #Returns true if the users are friends
   def friends?(other_user)
-    self.friends.find_by_friended_id(other_user) != nil || self.friends.find_by_friender_id(other_user) != nil
+    !Friendship.where("friender_id = ? and friended_id = ?", self, other_user).blank? ||
+    !Friendship.where("friender_id = ? and friended_id = ?", other_user, self).blank?
   end
 
   # Add point to the user

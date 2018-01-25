@@ -6,7 +6,7 @@
   <em>
     <h4>
       <% if @friends.blank? %>
-      No friends
+      No friends to show
     </h4>
   </em>
 </div>
@@ -18,10 +18,10 @@
 
 <div class="row">
 <% for friend in @friends %>
-  <% if current_user == friend.friender %>
-    <% friend = friend.friended %>
-  <% else %>
+  <% if current_user == friend.friended %>
     <% friend = friend.friender %>
+  <% else %>
+    <% friend = friend.friended %>
   <% end %>
 
 <div class="col s12 l4">

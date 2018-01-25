@@ -1,7 +1,7 @@
 <div class="row center-align">
   <em>
     <h4>
-      <% if @gamer.friends.blank? %>
+      <% if @friends.blank? %>
       No friends to show
     </h4>
   </em>
@@ -11,11 +11,11 @@
     </h4>
   </em>
 </div>
-  <% for friends in @gamer.friends.last(10) %>
-    <% if @gamer.id == friends.friender %>
-      <% friend = friends.friended %>
+  <% for friend in @friends.last(10) %>
+    <% if @gamer == friend.friended %>
+      <% friend = friend.friender %>
     <% else %>
-      <% friend = friends.friender %>
+      <% friend = friend.friended %>
     <% end %>
 
     <div class="chip">
