@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.where("commented_id=?",params[:gamer_id])
+    @comments = Comment.where("commented_id=?",params[:gamer_id]).includes(:commentator)
   end
 
   def show

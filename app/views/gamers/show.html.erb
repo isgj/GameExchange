@@ -20,7 +20,11 @@
 
       <td>
         <div class="col s3 l5">
-          <img class="responsive-img" src="<%= @gamer.photo %>"/>
+          <% if @gamer.photo.blank? %>
+            <%= image_tag "no_photo.jpg" , class: "responsive-img"%>
+          <% else %>
+            <img class="responsive-img" src="<%= @gamer.photo %>"/>
+          <% end %>
         </div>
       </td>
     </table>
