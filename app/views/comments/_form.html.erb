@@ -17,7 +17,11 @@
 -->
 <div align="center">
 <div class="chip" style="min-width: max-content;" >
-  <img src="<%=User.find_by_id(params[:gamer_id]).photo %>" alt="Contact Person"><%= User.find_by_id(params[:gamer_id]).name %>
+  <% if User.find_by_id(params[:gamer_id]).photo.blank? %>
+    <%= image_tag "no_photo.jpg" %><%= cap_name(User.find_by_id(params[:gamer_id])) %>
+  <% else %>
+    <img src="<%=User.find_by_id(params[:gamer_id]).photo %>" alt="Contact Person"><%= cap_name(User.find_by_id(params[:gamer_id])) %>
+  <% end %>
 </div></div>
 <div>
 <!-- star rating system -->

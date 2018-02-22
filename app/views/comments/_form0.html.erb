@@ -14,7 +14,11 @@
   <div align="center">
 
     <div class="chip" style="min-width: max-content;">
-      <img src="<%=@comment.commented.photo %>" alt="Contact Person"><%= @comment.commented.name %>
+      <% if @comment.commented.photo.blank? %>
+        <%= image_tag "no_photo.jpg" %><%= cap_name(@comment.commented) %>
+      <% else %>
+        <img src="<%=@comment.commented.photo %>" alt="Contact Person"><%= cap_name(@comment.commented) %>
+      <% end %>
     </div>
     <!-- star rating system -->
     <div class="star-rating edit-rating" align="center">

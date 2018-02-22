@@ -17,7 +17,11 @@
           <!-- <td><%= comment.commentator_id %></td> -->
           <td>
             <div class="chip" style="min-width: max-content;">
-              <img src="<%=comment.commentator.photo %>" alt="Contact Person"><%= comment.commentator.name %>
+              <% if comment.commentator.photo.blank? %>
+                <%= image_tag "no_photo.jpg" %><%= cap_name(comment.commentator) %>
+              <% else %>
+                <img src="<%=comment.commentator.photo %>" alt="Person"><%= cap_name(comment.commentator) %>
+              <% end %>
             </div>
 
             <td>
