@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
   def my_action
@@ -40,8 +41,8 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update(comment_params)
-                #call
+    if @comment.commentator_id==current_user.id
+      @comment.update(comment_params)
       update_vote
       redirect_to gamer_path(params[:gamer_id]), notice: 'Comment was successfully updated.'
     else
@@ -67,7 +68,6 @@ private
     end
 
     def update_vote
-      logger.debug "i was here"
       @v=Comment.where("commented_id=?",@comment.commented_id).pluck('mark')
       @u=User.find_by_id(@comment.commented_id)
       @u.avg_vote=((@v.sum+@v.size)/(@v.size.to_f))
