@@ -31,12 +31,15 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.commented_id = params[:gamer_id]
     @comment.commentator_id = current_user.id
+    if(@comment.commented_id != @comment.commentator_id)
+      if @comment.save
 
-    if @comment.save
-      #call update_vote
-      redirect_to gamer_comments_path, notice: 'Comment was successfully created.'
+        redirect_to gamer_comments_path, notice: 'Comment was successfully created.'
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to gamer_path(params[:gamer_id]), notice: 'You are not authorized'
     end
   end
 
@@ -51,8 +54,12 @@ class CommentsController < ApplicationController
   end
 
 def destroy
-    @comment.destroy
-    redirect_to gamer_path(params[:gamer_id]), notice: 'Comment was successfully destroyed.'
+    if @comment.commentator_id==current_user.id
+      @comment.destroy
+      redirect_to gamer_path(params[:gamer_id]), notice: 'Comment was successfully destroyed.'
+    else
+      redirect_to gamer_path(params[:gamer_id]), notice: 'You are not authorized to destroy this comment!'
+    end
 end
 
 

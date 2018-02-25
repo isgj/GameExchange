@@ -21,10 +21,10 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create comment" do
     assert_difference('Comment.count') do
-      post gamer_comments_url(@u.id), params: { comment: { commentator_id: @u.id, commented_id: @u1.id, mark: @comment.mark, review: @comment.review } }
+      post gamer_comments_url(@u1.id), params: { comment: { commentator_id: @u1.id, commented_id: @u.id, mark: @comment.mark, review: @comment.review } }
     end
 
-    assert_redirected_to gamer_comments_url(@u)
+    assert_redirected_to gamer_comments_url(@u1)
   end
 
   test "should show comment" do
