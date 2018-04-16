@@ -41,6 +41,10 @@ class Ability
         u.admin?
       end
 
+      cannot :desire, Game do |game|
+        game.owner_id == user.id || game.holder_id == user.id
+      end
+
     else
       # Game permissions
       can :read, Game do
