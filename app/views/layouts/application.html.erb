@@ -14,26 +14,26 @@
   <body>
     <%= render 'layouts/header' %>
 
+    <div class="row">
+      <div>
     <% if notice %>
-      <div class="row">
         <div class="alert">
           <div class="chip green white-text z-depth-3">
             <%= notice %>
             <i class="close material-icons">close</i>
           </div>
         </div>
-      </div>
     <% end %>
     <% if alert %>
-      <div class="row">
         <div class="alert">
           <div class="chip red white-text z-depth-3">
             <%= alert %>
             <i class="close material-icons">close</i>
           </div>
         </div>
-      </div>
     <% end %>
+      </div>
+    </div>
 
     <main>
       <div class="container">

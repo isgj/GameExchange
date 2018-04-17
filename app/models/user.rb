@@ -124,8 +124,7 @@ class User < ApplicationRecord
 
   # Add point to the user
   def add_point(p)
-    self.points += p
-    self.save
+    self.increment!(:points, p)
   end
 
   # Promote to admin
