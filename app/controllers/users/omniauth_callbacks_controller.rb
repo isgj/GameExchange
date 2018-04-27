@@ -9,12 +9,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         set_flash_message(:notice, :success, :kind => provider.capitalize) if is_navigational_format?
       rescue => e
         logger.error "Rescued from #{e.inspect}, authentication from #{provider}"
-        set_flash_message(:notice, :success, :kind => "Error while authenticating")
+        set_flash_message(:alert, :failure,  :kind => "Error while authenticating", reason: "email already exists")
         redirect_to new_user_registration_url
       end
     else
       session["devise.#{provider}_data"] = request.env["omniauth.auth"]
-      set_flash_message(:notice, :success, :kind => "Error while authenticating")
+      set_flash_message(:alert, :failure,  :kind => "Error while authenticating", reason: "email already exists")
       redirect_to new_user_registration_url
     end
   end
